@@ -9,7 +9,7 @@
 }
 
 body {
-    /* wes bos 02 test von grid, weil background so schön, nochmals überarbeiten*/
+    /* wes bos 02 test von grid*/
     background-image: url("./assets/images/topography.svg"),
     linear-gradient(110deg, var(--rosered), var(--grayblue), var(--bluegreen));
     background-size: 340px, auto;
