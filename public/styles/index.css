@@ -1,3 +1,30 @@
+:root {
+    --grayblue: #6b6b83;
+    --bluegreen: #3b8d99;
+    --rosered: #aa4b6b;
+}
+
 * {
     box-sizing: border-box;
+}
+
+body {
+    /* wes bos 02 test von grid, weil background so schön, nochmals überarbeiten*/
+    background-image: url("./assets/images/topography.svg"),
+    linear-gradient(110deg, var(--rosered), var(--grayblue), var(--bluegreen));
+    background-size: 340px, auto;
+    min-height: calc(100vh - 100px);
+    margin: 50px;
+    /* background: white; */
+    background-attachment: fixed;
+    letter-spacing: -1px;
+}
+
+.container {
+    display: flex;
+}
+
+.item {
+    border: 5px solid black;
+    margin: 10px;
 }
