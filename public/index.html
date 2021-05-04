@@ -1,21 +1,52 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
   <meta charset="UTF-8">
   <title>Note App</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js" integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
+    integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
   <script src="scripts/index.js" type="module"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/index.css">
 </head>
 
 <body>
-<h1>Note App</h1>
-<h2>This will become a note app</h2>
-<div class="container">
-  <div class="item">By finish date</div>
-  <div class="item">By create date</div>
-  <div class="item">By importance</div>
-  <div class="item">Show finished</div>
-</div>
+  <h1>Note App</h1>
+  <section class="options">
+    <div class="container">
+      <div class="create item">
+        <button class="btn">Create new note</button>
+      </div>
+
+      <div class="theme item">
+        <button class="btn" onclick="toggleDarkMode()">Toggle theme</button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="item sort">Sort by finish date</div>
+      <div class="item sort">Sorty by create date</div>
+      <div class="item sort">Sort by importance</div>
+      <div class="item finished">
+        <input type="checkbox" id="finisheditems" name="finisheditems" value="finished">
+        <label for="finisheditems">Show finished</label>
+      </div>
+    </div>
+  </section>
+  <section class="notes">
+    <div class="notes">
+      <div class="note"></div>
+      <div class="note"></div>
+      <div class="note"></div>
+    </div>
+  </section>
+  <script>
+    function toggleDarkMode() {
+      const element = document.body;
+      element.classList.toggle("dark-mode");
+    }
+  </script>
 </body>
+
 </html>
