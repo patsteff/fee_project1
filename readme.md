@@ -1,3 +1,5 @@
+Github Pages für eine Demo: https://patsteff.github.io/fee_project1/
+
 Die Vorlage beinhaltet CSS/HTML/JS-Linter. Diese sind konfiguriert. 
 
 Getting Started
