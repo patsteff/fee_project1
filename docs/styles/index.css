@@ -11,7 +11,7 @@
 body {
     /* wes bos 02 test von grid*/
     background-image: url("./assets/images/topography.svg"),
-    linear-gradient(110deg, var(--rosered), var(--grayblue), var(--bluegreen));
+        linear-gradient(110deg, var(--rosered), var(--grayblue), var(--bluegreen));
     background-size: 340px, auto;
     min-height: calc(100vh - 100px);
     margin: 50px;
@@ -23,7 +23,7 @@ body {
 
 .dark-mode {
     background-image: url("./assets/images/topography.svg"),
-    linear-gradient(110deg, black, darkgrey);
+        linear-gradient(110deg, black, darkgrey);
 }
 
 .btn {
@@ -31,27 +31,40 @@ body {
     background-color: white;
     border-radius: 10px;
     border: none;
+    width: 250px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.btn-top {
+    width: 100%;
+    margin-right: 20px;
 }
 
 .container {
     display: flex;
-    border: 2px solid grey;
+    margin-bottom: 20px;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .item {
-    border: 2px solid black;
+    display: flex;
     flex: 1;
-    color: white;
-    font-size: 2rem;
-    text-shadow: 4px 4px 0 rgba(0,0,0,0.1);
-    padding: 10px;
 }
 
-.sort {
-    flex: 2;
+.finished {
+    height: 100%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: auto;
+    text-align: center;
 }
 
 .notes {
     height: 200px;
-    background-color: rgba(255,255,255,0.2);
+    background-color: rgba(255, 255, 255, 0.2);
 }
