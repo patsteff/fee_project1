@@ -1,70 +1,72 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Note App</title>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
-      integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU="
-      crossorigin="anonymous"
-      defer
-    ></script>
-    <script src="scripts/index.js" type="module"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles/index.css" />
-  </head>
 
-  <body>
-    <h1>Note App</h1>
-    <section class="options">
-      <div class="container">
-        <div class="create item">
-          <button class="btn btn-top">Create new note</button>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <title>Note App</title>
+  <link rel="shortcut icon" type="svg" href="/docs/styles/assets/images/bug-droid.svg"/>
+  <script src="https://unpkg.com/phosphor-icons"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
+    integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
+  <script src="scripts/index.js" type="module"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/index.css" />
+</head>
 
-        <div class="theme item">
-          <button class="btn btn-top" onclick="toggleDarkMode()">Toggle theme</button>
+<body>
+  <h1>Note App</h1>
+  <section class="options">
+    <div class="actions">
+        <button class="btn btn-top">Create new note</button>
+        <button class="btn btn-top" onclick="toggleDarkMode()">Toggle theme</button>
+        <button class="btn btn-top" onclick="addBorder()">Add border</button>
+    </div>
+    <div class="sort">
+      <button class="btn">Sort by finish date</button>
+      <button class="btn">Sorty by create date</button>
+      <button class="btn">Sort by importance</button>
+      <div class="finished">
+        <input type="checkbox" id="finisheditems" name="finisheditems" value="finished" />
+        <label for="finisheditems">Show finished</label>
+      </div> 
+    </div>
+    </div>
+  </section>
+  <section class="notes-list">
+    <div class="notes">
+      <div class="note">
+        <div class="note-sections">
+          <input type="checkbox" id="finisheditems1" value="finished" checked />
+          <label for="finisheditems1">Finished</label>
+          <h2>Title of this task</h2>
+          <div>Created on 01.05.2021</div>
+          <div>Finished on 05.05.2021</div>
+          <p>Please select priority</p>
+          <input type="radio" id="high" name="prio" value="high">
+          <label for="high">High <i class="ph-warning-octagon"></i></label>
+          <input type="radio" id="normal" name="prio" value="normal">
+          <label for="normal">Normal</label>
+          <input type="radio" id="low" name="prio" value="low">
+          <label for="low">Low</label>
+          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
         </div>
+        
       </div>
-        <div class="container">
-        <div class="item sort">
-          <button class="btn">Sort by finish date</button>
-        </div>
+      <div class="note">Zweiter</div>
+      <div class="note">Dritter</div>
+    </div>
+  </section>
+  <footer>This is my footer</footer>
+  <script>
+    function toggleDarkMode() {
+      const element = document.body;
+      element.classList.toggle("dark-mode");
+    }
+    function addBorder() {
+      console.log("I wand to add border");
+    }
+  </script>
+</body>
 
-        <div class="item sort">
-          <button class="btn">Sorty by create date</button>
-        </div>
-        <div class="item sort">
-          <button class="btn">Sort by importance</button>
-        </div>
-        <div class="item finished">
-          <input
-            type="checkbox"
-            id="finisheditems"
-            name="finisheditems"
-            value="finished"
-          />
-          <label for="finisheditems">Show finished</label>
-        </div>
-      </div>
-    </section>
-    <section class="notes">
-      <div class="notes">
-        <div class="note"></div>
-        <div class="note"></div>
-        <div class="note"></div>
-      </div>
-    </section>
-    <footer>This is my footer</footer>
-    <script>
-      function toggleDarkMode() {
-        const element = document.body;
-        element.classList.toggle("dark-mode");
-      }
-    </script>
-  </body>
 </html>
