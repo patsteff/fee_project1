@@ -26,4 +26,6 @@ let notesList = {};
 fetch("/scripts/notes.json")
     .then(blob => blob.json())
     .then(data => notesList = data)
-    .catch((err) => console.error(err))
+
+
+setTimeout(function(){console.log(notesList)}, 1000);
