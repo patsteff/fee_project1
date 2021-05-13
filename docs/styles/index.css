@@ -1,84 +1,100 @@
 :root {
-    --grayblue: #6b6b83;
-    --bluegreen: #3b8d99;
-    --rosered: #aa4b6b;
+  --grayblue: #6b6b83;
+  --bluegreen: #3b8d99;
+  --rosered: #aa4b6b;
+  --buttoncolor: white;
+  --buttonfontcolor: black;
+  --notesbackgroundcolor: rgba(255, 255, 255, 0.2);
+  --notebackgroundcolor: rgba(255, 255, 255, 0.6);
+  --notefontcolor: black;
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    /* wes bos 02 test von grid*/
-    background-image: url("./assets/images/topography.svg"),
-        linear-gradient(110deg, var(--rosered), var(--grayblue), var(--bluegreen));
-    background-size: 340px, auto;
-    min-height: calc(100vh - 100px);
-    margin: 50px;
-    background-attachment: fixed;
-    letter-spacing: -1px;
-    font-family: 'Roboto', sans-serif;
-    color: white;
+  /* wes bos 02 test von grid*/
+  background-image: url("./assets/images/topography.svg"),
+    linear-gradient(110deg, var(--rosered), var(--grayblue), var(--bluegreen));
+  background-size: 340px, auto;
+  min-height: calc(100vh - 100px);
+  margin: 50px;
+  background-attachment: fixed;
+  letter-spacing: -1px;
+  font-family: "Roboto", sans-serif;
+  color: white;
 }
 
-.dark-mode {
-    background-image: url("./assets/images/topography.svg"),
-        linear-gradient(110deg, black, darkgrey);
+h2,
+h3 {
+  font-weight: 400;
+}
+
+body.dark-mode {
+  --grayblue: #202027;
+  --bluegreen: #23545b;
+  --rosered: #441e2a;
+  --buttoncolor: #6f6f6f;
+  --buttonfontcolor: white;
+  --notesbackgroundcolor: rgba(111, 111, 111, 0.2);
+  --notebackgroundcolor: rgba(111, 111, 111, 0.6);
+  --notefontcolor: white;
 }
 
 .btn {
-    height: 100%;
-    background-color: white;
-    border-radius: 10px;
-    border: none;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 1.2rem;
-    cursor: pointer;
-    margin-right: 20px;
+  height: 100%;
+  background-color: var(--buttoncolor);
+  color: var(--buttonfontcolor);
+  border-radius: 10px;
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-right: 20px;
 }
 
 .actions {
-    display: flex;
-    margin-bottom: 20px;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .sort {
-    display: flex;
-    margin-bottom: 20px;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .finished {
-    height: 100%;
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: auto;
-    text-align: center;
+  height: 100%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: auto;
+  text-align: center;
 }
 
 .notes {
-    min-height: 90vh;
-    background-color: rgba(255, 255, 255, 0.2);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  min-height: 90vh;
+  background-color: var(--notesbackgroundcolor);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .note {
-    background-color: rgba(255, 255, 255, 0.6);
-    width: 100%;
-    height: auto;
-    color: black;
-    padding: 2.5%;
-    line-height: 1.5;
+  background-color: var(--notebackgroundcolor);
+  width: 100%;
+  height: auto;
+  color: var(--notefontcolor);
+  padding: 2.5%;
+  line-height: 1.5;
 }
 
 .add-border {
-    border: 5px solid seagreen;
+  border: 5px solid seagreen;
 }
-

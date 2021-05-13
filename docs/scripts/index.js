@@ -21,11 +21,20 @@ function toggleBorder() {
 
 note.forEach(note => note.addEventListener("click", toggleBorder));
 
-// import external notes
-let notesList = {};
+// fetch external notes
+let notesList = [];
 fetch("/scripts/notes.json")
     .then(blob => blob.json())
     .then(data => notesList = data)
 
+//
+setTimeout(
+    function() {
+        console.log(notesList);
+        console.log(typeof notesList);
+        console.log(notesList.title);
+        const titleNote = document.querySelector(".titleNote");
+        titleNote.innerHTML = notesList.title;
 
-setTimeout(function(){console.log(notesList)}, 1000);
+    }
+    , 2000);
