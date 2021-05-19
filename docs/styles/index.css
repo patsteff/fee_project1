@@ -9,6 +9,7 @@
   --notefontcolor: black;
   --formbackgroundcolor: white;
   --formfontcolor: black;
+  --standardmargin: 15px;
 }
 
 * {
@@ -68,14 +69,14 @@ body.dark-mode {
 /*top menu*/
 .actions {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: var(--standardmargin);
   justify-content: space-between;
   flex-wrap: wrap;
 }
 
 .sort {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: var(--standardmargin);
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
@@ -101,7 +102,7 @@ body.dark-mode {
 }
 
 .note:not(:last-of-type) {
-  margin-bottom: 20px;
+  margin-bottom: var(--standardmargin);
 }
 
 i {
@@ -163,7 +164,7 @@ i {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-top: 20px;
+  margin-top: var(--standardmargin);
   padding: 15px;
   background-color: var(--formbackgroundcolor);
   color: var(--formfontcolor);
@@ -194,7 +195,7 @@ i {
 .create-form-textarea,
 .create-form-select {
   flex: 0 0 80%;
-  margin-bottom: 10px;
+  margin-bottom: var(--standardmargin);
 }
 
 .btn-form {
@@ -202,7 +203,7 @@ i {
   width: 150px;
   height: 60px;
   padding: 10px;
-  margin-bottom: 20px;
+  margin-bottom: var(--standardmargin);
   background-color: var(--grayblue);
   color: var(--formfontcolor);
   border-radius: 10px;
@@ -214,5 +215,5 @@ i {
 }
 
 footer {
-  margin: 20px 0;
+  margin: var(--standardmargin) 0;
 }
