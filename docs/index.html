@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Note App</title>
-  <link rel="shortcut icon" type="svg" href="/styles/assets/images/bug-droid.svg"/>
+  <link rel="shortcut icon" type="svg" href="/styles/assets/images/bug-droid.svg" />
   <script src="https://unpkg.com/phosphor-icons"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
     integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
@@ -14,50 +14,117 @@
 </head>
 
 <body>
-  <h1>Note App</h1>
+  <h1>My Note App</h1>
   <section class="options">
     <div class="actions">
-        <button class="btn btn-top">Create new note</button>
-        <button class="btn btn-top theme-toggle">Toggle theme</button>
-  
+      <button class="btn btn-top">Create new note</button>
+      <select class="btn btn-top theme-toggle">
+        <option selected>Light theme</option>
+        <option>Dark theme</option>
+      </select>
+
+
     </div>
     <div class="sort">
       <button class="btn">Sort by finish date</button>
       <button class="btn">Sorty by create date</button>
       <button class="btn">Sort by importance</button>
-      <div class="finished">
+      <button class="btn">
         <input type="checkbox" id="finisheditems" name="finisheditems" value="finished" />
         <label for="finisheditems">Show finished</label>
-      </div> 
+      </button>
     </div>
     </div>
   </section>
   <section class="notes-list">
-    <div class="notes">
-      <div class="note">
-        <div class="note-sections">
-          <input type="checkbox" id="finisheditems1" value="finished" checked />
-          <label for="finisheditems1">Finished</label>
-          <h2 class="titleNote">Title of this task</h2>
-          <div>Created on 01.05.2021</div>
-          <div>Finished on 05.05.2021</div>
-          <p>Priority:</p>
-          <input type="radio" id="high" name="prio" value="high">
-          <label for="high">High <i class="ph-warning-octagon"></i></label>
-          <input type="radio" id="normal" name="prio" value="normal">
-          <label for="normal">Normal</label>
-          <input type="radio" id="low" name="prio" value="low">
-          <label for="low">Low</label>
-          <h3>Description</h3>
-          <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-        </div>
-        
+
+    <div class="note">
+      <div class="note-sections due-date">
+        <p>19.05.2021</p>
       </div>
-      <div class="note get-border">Zweiter</div>
-      <div class="note get-border">Dritter</div>
+
+      <div class="note-sections project-title">
+        <p>Selbststudium / Projektaufgabe</p>
+      </div>
+
+      <div class="note-sections priority">
+        <p><i class="ph-lightning"></i><i class="ph-lightning"></i><i class="ph-lightning"></i></p>
+      </div>
+
+      <div class="note-sections finished">
+        <input type="checkbox" id="finisheditems1" value="finished" checked />Finished
+      </div>
+
+      <div class="note-sections description">
+        <textarea class="text-area" type="text" name="descrption"></textarea>
+      </div>
+
+      <div class="note-sections edit">
+        <button class="btn-small"><i class="ph-pencil"></i> Edit</button>
+      </div>
     </div>
+
+    <div class="note">
+      <div class="note-sections due-date">
+        <p>10.05.2021</p>
+      </div>
+
+      <div class="note-sections project-title">
+        <p>Testing</p>
+      </div>
+
+      <div class="note-sections priority">
+        <p><i class="ph-lightning"></i><i class="ph-lightning"></i><i class="ph-lightning"></i></p>
+      </div>
+
+      <div class="note-sections finished">
+        <input type="checkbox" id="finisheditems1" value="finished" checked />Finished
+      </div>
+
+      <div class="note-sections description">
+        <textarea class="text-area" type="text" name="descrption"></textarea>
+      </div>
+
+      <div class="note-sections edit">
+        <button class="btn-small"><i class="ph-pencil"></i> Edit</button>
+      </div>
+    </div>
+
   </section>
-  <footer>This is my footer</footer>
+
+  <section class="create-new-note">
+    <form class="create-form" id="form" action="./index.html" action="POST">
+      <div class="form-display">
+        <label class="create-form-label" for="title">Title:</label>
+        <input class="create-form-input" id="title" type="text" name="title" />
+
+        <label class="create-form-label" for="description">Description:</label>
+        <textarea class="create-form-textarea" id="description" name="description"></textarea>
+
+        <label class="create-form-label" for="prio">Priority:</label>
+
+        <select class="create-form-select" name="prio" id="prio">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <label class="create-form-label" for="duedate">Duedate:</label>
+        <input class="create-form-input" id="duedate" type="date" name="duedate" />
+      </div>
+
+      <div class="button-display">
+        <button class="btn-form" type="submit">Save</button>
+        <button class="btn-form" type="submit">Cancel</button>
+      </div>
+
+    </form>
+
+  </section>
+
+  <footer>&copy; Patricia Steffen - OST CAS FEE 2021 - Project 1</footer>
   <script src="scripts/index.js" type="module"></script>
 </body>
 
