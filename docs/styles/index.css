@@ -56,6 +56,10 @@ body.dark-mode {
   margin-right: 20px;
 }
 
+.btn:hover {
+  background-color: var(--bluegreen);
+}
+
 .actions {
   display: flex;
   margin-bottom: 20px;
