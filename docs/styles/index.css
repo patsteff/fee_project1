@@ -10,6 +10,7 @@
   --formbackgroundcolor: white;
   --formfontcolor: black;
   --standardmargin: 15px;
+  --createbuttoncolor: #d3d3d3;
 }
 
 * {
@@ -38,18 +39,19 @@ body.dark-mode {
   --grayblue: #202027;
   --bluegreen: #23545b;
   --rosered: #441e2a;
-  --buttoncolor: #6f6f6f;
+  --buttoncolor: black;
   --buttonfontcolor: white;
   --notesbackgroundcolor: rgba(111, 111, 111, 0.2);
-  --notebackgroundcolor: rgba(111, 111, 111, 0.6);
+  --notebackgroundcolor: rgba(111, 111, 111, 0.2);
   --notefontcolor: white;
   --formbackgroundcolor: black;
   --formfontcolor: white;
+  --createbuttoncolor: #717171;
 }
 
 .btn {
   height: 100%;
-  width: 240px;
+  width: 250px;
   background-color: var(--buttoncolor);
   color: var(--buttonfontcolor);
   border-radius: 10px;
@@ -62,8 +64,10 @@ body.dark-mode {
   margin: 5px;
 }
 
-.btn:hover {
-  background-color: var(--rosered);
+.btn:hover,
+.btn-small:hover,
+.btn-form:hover {
+  font-weight: 700;
 }
 
 /*top menu*/
@@ -112,7 +116,7 @@ i {
 .btn-small {
   width: 150px;
   height: 40px;
-  background-color: var(--notebackgroundcolor);
+  background-color: var(--buttoncolor);
   color: var(--buttonfontcolor);
   border-radius: 10px;
   border: none;
@@ -134,15 +138,19 @@ i {
   flex: 0 0 20%;
 }
 
+.titel-prio-flex {
+  display: flex;
+  flex: 0 0 60%;
+  justify-content: space-between;
+}
+
 .project-title {
-  flex: 0 0 50%;
   font-weight: 800;
   letter-spacing: 1.1px;
 }
 
-.priority {
-  flex: 0 0 30%;
-  text-align: start;
+.placeholder {
+  flex: 0 0 20%;
 }
 
 .description {
@@ -165,7 +173,8 @@ i {
   flex-wrap: wrap;
   align-items: center;
   margin-top: var(--standardmargin);
-  padding: 15px;
+  padding-left: 15px;
+  padding-top: var(--standardmargin);
   background-color: var(--formbackgroundcolor);
   color: var(--formfontcolor);
   font-size: 1.2rem;
@@ -188,13 +197,14 @@ i {
 }
 
 .create-form-label {
-  flex: 0 0 20%;
+  flex: 0 0 25%;
+  height: 50px;
 }
 
 .create-form-input,
 .create-form-textarea,
 .create-form-select {
-  flex: 0 0 80%;
+  flex: 0 0 75%;
   margin-bottom: var(--standardmargin);
 }
 
@@ -204,7 +214,7 @@ i {
   height: 60px;
   padding: 10px;
   margin-bottom: var(--standardmargin);
-  background-color: var(--grayblue);
+  background-color: var(--createbuttoncolor);
   color: var(--formfontcolor);
   border-radius: 10px;
   border: none;
