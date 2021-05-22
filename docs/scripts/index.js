@@ -1,7 +1,3 @@
-console.log("Hello World");
-
-const patricia = "das ist ein test";
-
 // toggleDarkMode on click of button
 function toggleDarkMode() {
   const element = document.body;
