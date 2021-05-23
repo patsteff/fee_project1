@@ -18,7 +18,7 @@
 }
 
 body {
-  /* wes bos 02 test von grid*/
+  /* wes bos 02 test von grid */
   background-image: url("./assets/images/topography.svg"),
     linear-gradient(110deg, var(--rosered), var(--grayblue), var(--bluegreen));
   background-size: 340px, auto;
@@ -33,6 +33,7 @@ body {
 h2,
 h3 {
   font-weight: 400;
+  font-size: 24px;
 }
 
 body.dark-mode {
@@ -64,13 +65,7 @@ body.dark-mode {
   margin: 5px;
 }
 
-.btn:hover,
-.btn-small:hover,
-.btn-form:hover {
-  font-weight: 700;
-}
-
-/*top menu*/
+/* top menu */
 .actions {
   display: flex;
   margin-bottom: var(--standardmargin);
@@ -164,15 +159,16 @@ i {
   align-items: center;
 }
 
-/*create new note */
+/* create new note */
 
-/*layout*/
+/* layout */
 
 .create-form {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   margin-top: var(--standardmargin);
+  margin-bottom: var(--standardmargin);
   padding-left: 15px;
   padding-top: var(--standardmargin);
   background-color: var(--formbackgroundcolor);
@@ -222,6 +218,12 @@ i {
   text-decoration: none;
   font-size: 1.2rem;
   cursor: pointer;
+}
+
+.btn:hover,
+.btn-small:hover,
+.btn-form:hover {
+  font-weight: 700;
 }
 
 footer {

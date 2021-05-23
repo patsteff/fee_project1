@@ -1,8 +1,8 @@
 {
-    "title": "Do Homework",
-    "createDate": "05. Mai 2011",
-    "finishedDate": "",
-    "checked": 1,
-    "priority": 1,
-    "description": "potato"
-  }
+  "title": "Do Homework",
+  "createDate": "05. Mai 2011",
+  "finishedDate": "",
+  "checked": true,
+  "priority": 1,
+  "description": "potato"
+}
