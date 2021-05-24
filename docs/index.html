@@ -33,7 +33,7 @@
         </select>
       </div>
       <div class="sort">
-        <button class="btn">Sort by finish date</button>
+        <button class="btn">Sort by due date</button>
         <button class="btn">Sorty by create date</button>
         <button class="btn" id="sort-by-prio">Sort by priority</button>
         <div class="btn">
@@ -43,7 +43,7 @@
             name="finisheditems"
             value="finished"
           />
-          <label for="finisheditems">Show finished</label>
+          <label for="finisheditems">Show completed</label>
         </div>
       </div>
     </section>
@@ -90,7 +90,9 @@
         </div>
 
         <div class="button-display">
-          <button class="btn-form submitnote" type="submit">Save</button>
+          <button class="btn-form submitnote" type="submit" id="save-note">
+            Save
+          </button>
           <button class="btn-form" type="reset">Reset</button>
         </div>
       </form>

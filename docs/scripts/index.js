@@ -14,34 +14,42 @@ fetch("/scripts/notes.json")
   .then((data) => (notesList = data));
  */
 
+// create note from formData
 const formElem = document.querySelector("#form");
 const notesArray = [];
 
 formElem.onsubmit = async (e) => {
+  function formatDate(date) {
+    let month = "" + (date.getMonth() + 1),
+      day = "" + date.getDate(),
+      year = date.getFullYear();
+
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+
+    return [year, month, day].join("-");
+  }
+
   e.preventDefault();
 
   const formData = new FormData(formElem);
+  const createDate = formatDate(new Date());
+  const completed = false;
+  const completeDate = "";
+  formData.set("createdate", createDate);
+  formData.set("completed", completed);
+  formData.set("completeDate", completeDate);
   notesArray.push(JSON.parse(JSON.stringify(Object.fromEntries(formData))));
 
-  console.log(typeof notesArray);
   console.log(notesArray);
+
   renderNotes();
-  /* let response = await fetch("/article/formdata/post/user", {
-    method: "POST",
-    body: new FormData(formElem),
-
-    "createDate" +
-      `${new Date()}` +
-      JSON.stringify(Object.fromEntries(formData)) 
-  });*/
-
-  //let result = await response.json();
 };
 
 // create html elements (create html)
 const notesListElement = document.querySelector("#notes-list");
 
-function createNoteHtml() {
+function createNoteHtml(notesArray) {
   return notesArray
     .map(
       (note) => `
@@ -66,14 +74,14 @@ function createNoteHtml() {
                 class="note-form-input"
                 type="date"
                 name="createdate"
-                value="${2021 - 05 - 24}"
+                value="${note.createdate}"
                 readonly
                 />   
             </div>             
               
             <div class="inside-padding">
               <input type="checkbox" name="complete">
-              <label for="complete">Finish</label>
+              <label for="complete">Completed</label>
             </div>
           
           </div>  
@@ -92,6 +100,8 @@ function createNoteHtml() {
               name="description"
               value="${note.description}"
               >${note.description}</textarea>
+
+              <p>${note.prio}</p>
           </div>
 
           <div class="note-row row-third">
@@ -106,19 +116,16 @@ function createNoteHtml() {
 }
 
 function renderNotes() {
-  const noteHtml = createNoteHtml(notesArray);
-  notesListElement.innerHTML = noteHtml;
+  notesListElement.innerHTML = createNoteHtml(sortByPrio());
 }
 
-// add finish date "false", create date, labels for display
-
 // sort by priority
-
 function sortByPrio() {
-  console.log("test");
-  console.log(notesArray);
   return [...notesArray].sort((a, b) => parseInt(a.prio) - parseInt(b.prio));
-  renderNotes();
+}
+
+function createDate() {
+  return notesArray;
 }
 
 // add event listener to sort by prio
@@ -126,9 +133,14 @@ document.querySelector("#sort-by-prio").addEventListener("click", sortByPrio);
 
 // hide create note
 const createSection = document.querySelector("#create-new-note");
+function hideNoteSection() {
+  createSection.hidden = !createSection.hidden;
+}
+
+// event listeners
 document
   .querySelector("#btn-create-note")
-  .addEventListener(
-    "click",
-    () => (createSection.hidden = !createSection.hidden)
-  );
+  .addEventListener("click", hideNoteSection);
+
+// hide create note after "Save", comment for testing (add animation?)
+// document.querySelector("#save-note").addEventListener("click", hideNoteSection);
