@@ -16,7 +16,7 @@ fetch("/scripts/notes.json")
 
 // create note from formData
 const formElem = document.querySelector("#form");
-const notesArray = [];
+let notesArray = [];
 
 formElem.onsubmit = async (e) => {
   function formatDate(date) {
@@ -36,9 +36,11 @@ formElem.onsubmit = async (e) => {
   const createDate = formatDate(new Date());
   const completed = false;
   const completeDate = "";
+
   formData.set("createdate", createDate);
   formData.set("completed", completed);
   formData.set("completeDate", completeDate);
+
   notesArray.push(JSON.parse(JSON.stringify(Object.fromEntries(formData))));
 
   console.log(notesArray);
@@ -91,7 +93,7 @@ function createNoteHtml(notesArray) {
               class="note-form-input"
               type="text"
               name="title"
-              value = ${note.title}
+              value = "${note.title}"
               readonly
               />
 
@@ -116,20 +118,45 @@ function createNoteHtml(notesArray) {
 }
 
 function renderNotes() {
-  notesListElement.innerHTML = createNoteHtml(sortByPrio());
+  notesListElement.innerHTML = createNoteHtml(notesArray);
 }
 
 // sort by priority
 function sortByPrio() {
-  return [...notesArray].sort((a, b) => parseInt(a.prio) - parseInt(b.prio));
+  const sortedArrayPrio = [...notesArray].sort(
+    (a, b) => parseInt(a.prio) - parseInt(b.prio)
+  );
+  notesArray = sortedArrayPrio;
+  renderNotes();
 }
 
-function createDate() {
-  return notesArray;
+function sortByCreateDate() {
+  const sortedArrayCreateDate = [...notesArray].sort(
+    (a, b) => parseInt(a.createdate) - parseInt(b.createdate)
+  );
+  notesArray = sortedArrayCreateDate;
+  renderNotes();
+}
+
+function sortByDueDate() {
+  console.log(notesArray);
+  const sortedArrayDueDate = [...notesArray].sort(
+    (a, b) => parseInt(a.duedate) - parseInt(b.duedate)
+  );
+  notesArray = sortedArrayDueDate;
+  console.log(notesArray);
+  renderNotes();
+  console.log("rendered");
 }
 
 // add event listener to sort by prio
 document.querySelector("#sort-by-prio").addEventListener("click", sortByPrio);
+document
+  .querySelector("#sort-by-create-date")
+  .addEventListener("click", sortByCreateDate);
+document
+  .querySelector("#sort-by-due-date")
+  .addEventListener("click", sortByDueDate);
 
 // hide create note
 const createSection = document.querySelector("#create-new-note");
