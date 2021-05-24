@@ -12,19 +12,7 @@ themeToggle.addEventListener("change", toggleDarkMode);
 fetch("/scripts/notes.json")
   .then((blob) => blob.json())
   .then((data) => (notesList = data));
-
-//
-setTimeout(function () {
-  console.log(notesList);
-  console.log(typeof notesList);
-  console.log(notesList.title);
-  const titleNote = document.querySelector(".titleNote");
-  titleNote.innerHTML = notesList.title;
-}, 2000); */
-
-function submitNote(e) {
-  e.preventDefault();
-}
+ */
 
 const formElem = document.querySelector("#form");
 const notesArray = [];
@@ -50,7 +38,7 @@ formElem.onsubmit = async (e) => {
   //let result = await response.json();
 };
 
-// create html elements (create, text content = xx)
+// create html elements (create html)
 const notesListElement = document.querySelector("#notes-list");
 
 function createNoteHtml() {
@@ -58,42 +46,61 @@ function createNoteHtml() {
     .map(
       (note) => `
   
-  <div class="note">
-        <div class="note-sections due-date">
-          <p>${note.duedate}</p>
-        </div>
+  
+        <form class="note">
+          <div class="note-row row-first">
+            <div>
+              <label class="note-form-label" for="duedate">Duedate:</label>
+              <input
+                class="note-form-input"
+                type="date"
+                name="duedate"
+                value=${note.duedate}
+                readonly
+                />
+            </div>
+            
+            <div class="inside-padding">
+              <label class="note-form-label" for="createdate">Create date:</label>
+              <input
+                class="note-form-input"
+                type="date"
+                name="createdate"
+                value="${2021 - 05 - 24}"
+                readonly
+                />   
+            </div>             
+              
+            <div class="inside-padding">
+              <input type="checkbox" name="complete">
+              <label for="complete">Finish</label>
+            </div>
+          
+          </div>  
 
-        <div class="titel-prio-flex">
-          <div class="note-sections project-title">
-            <p>${note.title}</p>
+          <div class="note-row row-second">
+              <input
+              class="note-form-input"
+              type="text"
+              name="title"
+              value = ${note.title}
+              readonly
+              />
+
+              <textarea
+              class="note-form-textarea"
+              name="description"
+              value="${note.description}"
+              >${note.description}</textarea>
           </div>
 
-          <div class="note-sections">
-            <p>
-              <i class="ph-lightning"></i><i class="ph-lightning"></i
-              ><i class="ph-lightning"></i>${note.prio}
-            </p>
+          <div class="note-row row-third">
+            <button>Edit</button>
+            <button>Cancel</button>
           </div>
-        </div>
-
-        <div class="placeholder"></div>
-
-        <div class="note-sections finished">
-          <input
-            type="checkbox"
-            id="finisheditems1"
-            value="finished"
-          />Finished
-        </div>
-
-        <div class="note-sections description">
-          <textarea class="text-area" name="descrption">${note.description}</textarea>
-        </div>
-
-        <div class="note-sections edit">
-          <button class="btn-small"><i class="ph-pencil"></i> Edit</button>
-        </div>
-      </div>`
+            
+        </form>
+    `
     )
     .join("");
 }
@@ -104,3 +111,24 @@ function renderNotes() {
 }
 
 // add finish date "false", create date, labels for display
+
+// sort by priority
+
+function sortByPrio() {
+  console.log("test");
+  console.log(notesArray);
+  return [...notesArray].sort((a, b) => parseInt(a.prio) - parseInt(b.prio));
+  renderNotes();
+}
+
+// add event listener to sort by prio
+document.querySelector("#sort-by-prio").addEventListener("click", sortByPrio);
+
+// hide create note
+const createSection = document.querySelector("#create-new-note");
+document
+  .querySelector("#btn-create-note")
+  .addEventListener(
+    "click",
+    () => (createSection.hidden = !createSection.hidden)
+  );

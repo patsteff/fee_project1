@@ -24,7 +24,9 @@
     <section class="options">
       <h2>Option Section</h2>
       <div class="actions">
-        <button class="btn btn-top">Create new note</button>
+        <button class="btn btn-top" id="btn-create-note">
+          Create new note
+        </button>
         <select class="btn btn-top theme-toggle">
           <option selected>Light theme</option>
           <option>Dark theme</option>
@@ -33,7 +35,7 @@
       <div class="sort">
         <button class="btn">Sort by finish date</button>
         <button class="btn">Sorty by create date</button>
-        <button class="btn">Sort by importance</button>
+        <button class="btn" id="sort-by-prio">Sort by priority</button>
         <div class="btn">
           <input
             type="checkbox"
@@ -46,7 +48,7 @@
       </div>
     </section>
 
-    <section class="create-new-note">
+    <section class="create-new-note" id="create-new-note" hidden>
       <h2>Create New Note</h2>
       <form class="create-form" id="form">
         <div class="form-display">
@@ -78,13 +80,12 @@
             <option value="5">5</option>
           </select>
 
-          <label class="create-form-label" for="duedate">Duedate: *</label>
+          <label class="create-form-label" for="duedate">Due date: *</label>
           <input
             class="create-form-input"
             id="duedate"
             type="date"
             name="duedate"
-            required
           />
         </div>
 
@@ -95,8 +96,10 @@
       </form>
     </section>
 
-    <section class="notes-list">
-      <div id="notes-list">You don't have any notes yet</div>
+    <section>
+      <div class="notes-list-section" id="notes-list">
+        You don't have any notes yet
+      </div>
     </section>
 
     <footer>&copy; Patricia Steffen - OST CAS FEE 2021 - Project 1</footer>
