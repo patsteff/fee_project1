@@ -140,13 +140,13 @@ function sortByCreateDate() {
 
 function sortByDueDate() {
   console.log(notesArray);
-  const sortedArrayDueDate = [...notesArray].sort(
-    (a, b) => parseInt(a.duedate) - parseInt(b.duedate)
-  );
+  const sortedArrayDueDate = [...notesArray].sort((a, b) => {
+    let dateA = new Date(a.duedate);
+    let dateB = new Date(b.duedate);
+    return dateA - dateB;
+  });
   notesArray = sortedArrayDueDate;
-  console.log(notesArray);
   renderNotes();
-  console.log("rendered");
 }
 
 // add event listener to sort by prio
