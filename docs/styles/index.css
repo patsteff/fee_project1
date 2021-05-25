@@ -230,6 +230,44 @@ body.dark-mode {
   font-weight: 700;
 }
 
+/*styling star rating*/
+.rating {
+  border: none;
+  flex: 0 0 75%;
+}
+
+.rating > input {
+  display: none;
+}
+
+.rating > label:before {
+  content: "\f005";
+  font-family: "Font Awesome 5 Free", sans-serif;
+  margin: 5px;
+  font-size: 1.5rem;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.rating > label {
+  color: #ddd;
+  float: right;
+  cursor: pointer;
+}
+
+.rating > input:checked ~ label,
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: #fec821;
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label,
+.rating > input:checked ~ label:hover ~ label {
+  color: #fec821;
+}
+
 footer {
   margin: var(--standardmargin) 0;
 }
