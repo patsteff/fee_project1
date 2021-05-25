@@ -110,18 +110,18 @@ body.dark-mode {
 
 .row-first {
   flex: 0 0 20%;
+  justify-content: space-between;
 }
 
 .row-second {
   flex: 0 0 60%;
+  justify-content: space-between;
 }
 
 .row-third {
   flex: 0 0 20%;
-}
-
-.inside-padding {
-  padding-top: var(--standardmargin);
+  justify-content: center;
+  align-items: center;
 }
 
 .note-form-textarea {
@@ -131,6 +131,21 @@ body.dark-mode {
 /* layout */
 
 /* create new note */
+.note-form-label,
+.note-form-title {
+  font-weight: 600;
+}
+
+.note-form-input,
+.note-form-textarea {
+  border: none;
+  font-family: inherit;
+  font-size: 1.2rem;
+}
+
+.note-form-input {
+  background-color: transparent;
+}
 
 /* layout */
 
@@ -145,6 +160,7 @@ body.dark-mode {
   background-color: var(--formbackgroundcolor);
   color: var(--formfontcolor);
   font-size: 1.2rem;
+  font-family: inherit;
 }
 
 .form-display {
@@ -173,6 +189,7 @@ body.dark-mode {
 .create-form-select {
   flex: 0 0 75%;
   margin-bottom: var(--standardmargin);
+  font-family: inherit;
 }
 
 .btn-form {
@@ -182,6 +199,22 @@ body.dark-mode {
   padding: 10px;
   margin-bottom: var(--standardmargin);
   background-color: var(--createbuttoncolor);
+  color: var(--formfontcolor);
+  border-radius: 10px;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.btn-note {
+  flex: 0 0 10%;
+  width: 150px;
+  height: 60px;
+  padding: 10px;
+  margin-bottom: var(--standardmargin);
+  background-color: var(--rosered);
   color: var(--formfontcolor);
   border-radius: 10px;
   border: none;

@@ -18,7 +18,7 @@ fetch("/scripts/notes.json")
 const formElem = document.querySelector("#form");
 let notesArray = [];
 
-formElem.onsubmit = async (e) => {
+formElem.addEventListener("submit", async (e) => {
   function formatDate(date) {
     let month = "" + (date.getMonth() + 1),
       day = "" + date.getDate(),
@@ -46,7 +46,9 @@ formElem.onsubmit = async (e) => {
   console.log(notesArray);
 
   renderNotes();
-};
+
+  // formElem.reset();
+});
 
 // create html elements (create html)
 const notesListElement = document.querySelector("#notes-list");
@@ -60,7 +62,7 @@ function createNoteHtml(notesArray) {
         <form class="note">
           <div class="note-row row-first">
             <div>
-              <label class="note-form-label" for="duedate">Duedate:</label>
+              <label class="note-form-label" for="duedate">Due date:</label>
               <input
                 class="note-form-input"
                 type="date"
@@ -70,7 +72,7 @@ function createNoteHtml(notesArray) {
                 />
             </div>
             
-            <div class="inside-padding">
+            <div class="">
               <label class="note-form-label" for="createdate">Create date:</label>
               <input
                 class="note-form-input"
@@ -81,7 +83,7 @@ function createNoteHtml(notesArray) {
                 />   
             </div>             
               
-            <div class="inside-padding">
+            <div class="">
               <input type="checkbox" name="complete">
               <label for="complete">Completed</label>
             </div>
@@ -90,7 +92,7 @@ function createNoteHtml(notesArray) {
 
           <div class="note-row row-second">
               <input
-              class="note-form-input"
+              class="note-form-input note-form-title"
               type="text"
               name="title"
               value = "${note.title}"
@@ -107,8 +109,8 @@ function createNoteHtml(notesArray) {
           </div>
 
           <div class="note-row row-third">
-            <button>Edit</button>
-            <button>Cancel</button>
+            <button class="btn-note btn-edit">Edit</button>
+            <button class="btn-note btn-cancel">Cancel</button>
           </div>
             
         </form>
@@ -147,6 +149,11 @@ function sortByDueDate() {
   });
   notesArray = sortedArrayDueDate;
   renderNotes();
+}
+
+function editNoteMode() {
+  e.preventDefault();
+  console.log("remove readonly");
 }
 
 // add event listener to sort by prio
