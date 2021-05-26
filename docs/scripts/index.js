@@ -18,11 +18,20 @@ fetch("/scripts/notes.json")
 const formElem = document.querySelector("#form");
 let notesArray = [];
 
+// event handler registriern auch div #notes-list
+document.querySelector("#notes-list").addEventListener("click", (e) => {
+  if (e.target.dataset.action === "edit") {
+    console.log(e.target.dataset);
+    e.target.dataset.action = "save";
+    e.target.innerText = "Save";
+  }
+});
+
 formElem.addEventListener("submit", async (e) => {
   function formatDate(date) {
-    let month = "" + (date.getMonth() + 1),
-      day = "" + date.getDate(),
-      year = date.getFullYear();
+    let month = "" + (date.getMonth() + 1);
+    let day = "" + date.getDate();
+    const year = date.getFullYear();
 
     if (month.length < 2) month = "0" + month;
     if (day.length < 2) day = "0" + day;
@@ -36,12 +45,14 @@ formElem.addEventListener("submit", async (e) => {
   const createDate = formatDate(new Date());
   const completed = false;
   const completeDate = "";
+  const id = notesArray.length;
 
   formData.set("createdate", createDate);
   formData.set("completed", completed);
   formData.set("completeDate", completeDate);
+  formData.set("id", id);
 
-  notesArray.push(JSON.parse(JSON.stringify(Object.fromEntries(formData))));
+  notesArray.push(Object.fromEntries(formData));
 
   console.log(notesArray);
 
@@ -109,7 +120,7 @@ function createNoteHtml(notesArray) {
           </div>
 
           <div class="note-row row-third">
-            <button class="btn-note btn-edit">Edit</button>
+            <button class="btn-note btn-edit" data-action="edit" data-id="todo">Edit</button>
             <button class="btn-note btn-cancel">Cancel</button>
           </div>
             
@@ -119,8 +130,16 @@ function createNoteHtml(notesArray) {
     .join("");
 }
 
+function editNoteMode(e) {
+  e.preventDefault();
+  console.log("remove readonly from html elements");
+}
+
 function renderNotes() {
   notesListElement.innerHTML = createNoteHtml(notesArray);
+  document
+    .querySelectorAll(".btn-edit")
+    .forEach((button) => button.addEventListener("click", editNoteMode));
 }
 
 // sort by priority
@@ -151,12 +170,7 @@ function sortByDueDate() {
   renderNotes();
 }
 
-function editNoteMode() {
-  e.preventDefault();
-  console.log("remove readonly");
-}
-
-// add event listener to sort by prio
+// add event listener to sort buttons
 document.querySelector("#sort-by-prio").addEventListener("click", sortByPrio);
 document
   .querySelector("#sort-by-create-date")
@@ -171,12 +185,12 @@ function hideNoteSection() {
   createSection.hidden = !createSection.hidden;
 }
 
-// event listeners
+// event listeners to button create note
 document
   .querySelector("#btn-create-note")
   .addEventListener("click", hideNoteSection);
 
-// hide create note after "Save", comment for testing (add animation?)
+// hide create note after "Save", comment out for testing (add animation?)
 // document.querySelector("#save-note").addEventListener("click", hideNoteSection);
 
 // star rating

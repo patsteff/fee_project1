@@ -141,10 +141,12 @@ body.dark-mode {
   border: none;
   font-family: inherit;
   font-size: 1.2rem;
+  color: inherit;
 }
 
 .note-form-input {
   background-color: transparent;
+  color: inherit;
 }
 
 /* layout */
