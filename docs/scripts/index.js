@@ -1,11 +1,11 @@
 // toggleDarkMode on click of button
 function toggleDarkMode() {
   const element = document.body;
-  element.classList.toggle("dark-mode");
+  element.classList.toggle('dark-mode');
 }
 
-const themeToggle = document.querySelector(".theme-toggle");
-themeToggle.addEventListener("change", toggleDarkMode);
+const themeToggle = document.querySelector('.theme-toggle');
+themeToggle.addEventListener('change', toggleDarkMode);
 
 // fetch external notes
 /* let notesList = [];
@@ -15,28 +15,28 @@ fetch("/scripts/notes.json")
  */
 
 // create note from formData
-const formElem = document.querySelector("#form");
+const formElem = document.querySelector('#form');
 let notesArray = [];
 
 // event handler registriern auch div #notes-list
-document.querySelector("#notes-list").addEventListener("click", (e) => {
-  if (e.target.dataset.action === "edit") {
+document.querySelector('#notes-list').addEventListener('click', (e) => {
+  if (e.target.dataset.action === 'edit') {
     console.log(e.target.dataset);
-    e.target.dataset.action = "save";
-    e.target.innerText = "Save";
+    e.target.dataset.action = 'save';
+    e.target.innerText = 'Save';
   }
 });
 
-formElem.addEventListener("submit", async (e) => {
+formElem.addEventListener('submit', async (e) => {
   function formatDate(date) {
-    let month = "" + (date.getMonth() + 1);
-    let day = "" + date.getDate();
+    let month = `${date.getMonth() + 1}`;
+    let day = `${date.getDate()}`;
     const year = date.getFullYear();
 
-    if (month.length < 2) month = "0" + month;
-    if (day.length < 2) day = "0" + day;
+    if (month.length < 2) month = `0${month}`;
+    if (day.length < 2) day = `0${day}`;
 
-    return [year, month, day].join("-");
+    return [year, month, day].join('-');
   }
 
   e.preventDefault();
@@ -44,13 +44,13 @@ formElem.addEventListener("submit", async (e) => {
   const formData = new FormData(formElem);
   const createDate = formatDate(new Date());
   const completed = false;
-  const completeDate = "";
+  const completeDate = '';
   const id = notesArray.length;
 
-  formData.set("createdate", createDate);
-  formData.set("completed", completed);
-  formData.set("completeDate", completeDate);
-  formData.set("id", id);
+  formData.set('createdate', createDate);
+  formData.set('completed', completed);
+  formData.set('completeDate', completeDate);
+  formData.set('id', id);
 
   notesArray.push(Object.fromEntries(formData));
 
@@ -62,7 +62,7 @@ formElem.addEventListener("submit", async (e) => {
 });
 
 // create html elements (create html)
-const notesListElement = document.querySelector("#notes-list");
+const notesListElement = document.querySelector('#notes-list');
 
 function createNoteHtml(notesArray) {
   return notesArray
@@ -125,27 +125,27 @@ function createNoteHtml(notesArray) {
           </div>
             
         </form>
-    `
+    `,
     )
-    .join("");
+    .join('');
 }
 
 function editNoteMode(e) {
   e.preventDefault();
-  console.log("remove readonly from html elements");
+  console.log('remove readonly from html elements');
 }
 
 function renderNotes() {
   notesListElement.innerHTML = createNoteHtml(notesArray);
   document
-    .querySelectorAll(".btn-edit")
-    .forEach((button) => button.addEventListener("click", editNoteMode));
+    .querySelectorAll('.btn-edit')
+    .forEach((button) => button.addEventListener('click', editNoteMode));
 }
 
 // sort by priority
 function sortByPrio() {
   const sortedArrayPrio = [...notesArray].sort(
-    (a, b) => parseInt(a.prio) - parseInt(b.prio)
+    (a, b) => parseInt(a.prio) - parseInt(b.prio),
   );
   notesArray = sortedArrayPrio;
   renderNotes();
@@ -153,7 +153,7 @@ function sortByPrio() {
 
 function sortByCreateDate() {
   const sortedArrayCreateDate = [...notesArray].sort(
-    (a, b) => parseInt(a.createdate) - parseInt(b.createdate)
+    (a, b) => parseInt(a.createdate) - parseInt(b.createdate),
   );
   notesArray = sortedArrayCreateDate;
   renderNotes();
@@ -162,8 +162,8 @@ function sortByCreateDate() {
 function sortByDueDate() {
   console.log(notesArray);
   const sortedArrayDueDate = [...notesArray].sort((a, b) => {
-    let dateA = new Date(a.duedate);
-    let dateB = new Date(b.duedate);
+    const dateA = new Date(a.duedate);
+    const dateB = new Date(b.duedate);
     return dateA - dateB;
   });
   notesArray = sortedArrayDueDate;
@@ -171,24 +171,24 @@ function sortByDueDate() {
 }
 
 // add event listener to sort buttons
-document.querySelector("#sort-by-prio").addEventListener("click", sortByPrio);
+document.querySelector('#sort-by-prio').addEventListener('click', sortByPrio);
 document
-  .querySelector("#sort-by-create-date")
-  .addEventListener("click", sortByCreateDate);
+  .querySelector('#sort-by-create-date')
+  .addEventListener('click', sortByCreateDate);
 document
-  .querySelector("#sort-by-due-date")
-  .addEventListener("click", sortByDueDate);
+  .querySelector('#sort-by-due-date')
+  .addEventListener('click', sortByDueDate);
 
 // hide create note
-const createSection = document.querySelector("#create-new-note");
+const createSection = document.querySelector('#create-new-note');
 function hideNoteSection() {
   createSection.hidden = !createSection.hidden;
 }
 
 // event listeners to button create note
 document
-  .querySelector("#btn-create-note")
-  .addEventListener("click", hideNoteSection);
+  .querySelector('#btn-create-note')
+  .addEventListener('click', hideNoteSection);
 
 // hide create note after "Save", comment out for testing (add animation?)
 // document.querySelector("#save-note").addEventListener("click", hideNoteSection);

@@ -19,7 +19,8 @@
 
 body {
   /* wes bos 02 test von grid */
-  background-image: url("./assets/images/topography.svg"),
+  background-image:
+    url("./assets/images/topography.svg"),
     linear-gradient(110deg, var(--rosered), var(--grayblue), var(--bluegreen));
   background-size: 340px, auto;
   min-height: calc(100vh - 100px);
@@ -232,7 +233,7 @@ body.dark-mode {
   font-weight: 700;
 }
 
-/*styling star rating*/
+/* styling star rating */
 .rating {
   border: none;
   flex: 0 0 75%;
