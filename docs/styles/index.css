@@ -11,6 +11,7 @@
   --formfontcolor: black;
   --standardmargin: 15px;
   --createbuttoncolor: #d3d3d3;
+  --standardfontsize: 1.1rem;
 }
 
 * {
@@ -61,7 +62,7 @@ body.dark-mode {
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: var(--standardfontsize);
   cursor: pointer;
   margin: 5px;
 }
@@ -84,7 +85,7 @@ body.dark-mode {
 
 /* note section */
 .notes-list-section {
-  font-size: 1.2rem;
+  font-size: var(--standardfontsize);
   background-color: var(--notesbackgroundcolor);
   width: 100%;
   display: flex;
@@ -99,7 +100,7 @@ body.dark-mode {
   margin-bottom: var(--standardmargin);
   padding-left: var(--standardmargin);
   padding-top: var(--standardmargin);
-  font-size: 1.2rem;
+  font-size: var(--standardfontsize);
   color: var(--notefontcolor);
 }
 
@@ -141,7 +142,7 @@ body.dark-mode {
 .note-form-textarea {
   border: none;
   font-family: inherit;
-  font-size: 1.2rem;
+  font-size: var(--standardfontsize);
   color: inherit;
 }
 
@@ -162,7 +163,7 @@ body.dark-mode {
   padding-top: var(--standardmargin);
   background-color: var(--formbackgroundcolor);
   color: var(--formfontcolor);
-  font-size: 1.2rem;
+  font-size: var(--standardfontsize);
   font-family: inherit;
 }
 
@@ -207,7 +208,7 @@ body.dark-mode {
   border: none;
   text-align: center;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: var(--standardfontsize);
   cursor: pointer;
 }
 
@@ -223,7 +224,7 @@ body.dark-mode {
   border: none;
   text-align: center;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: var(--standardfontsize);
   cursor: pointer;
 }
 
