@@ -1,0 +1,18 @@
+{
+    "window.zoomLevel": 1,
+    "workbench.colorTheme": "GitHub Dark",
+    "[javascript]": {
+        "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    },
+    "git.autofetch": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "editor.formatOnSave": true,
+    "editor.mouseWheelZoom": true,
+    "eslint.format.enable": true,
+    "eslint.codeAction.showDocumentation": {
+        "enable": true
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    }
+}

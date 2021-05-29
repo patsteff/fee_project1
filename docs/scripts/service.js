@@ -1,14 +1,12 @@
 function editNoteMode(e) {
-    const toggleWhater = e.target.dataset.id;
-
     const inputAttributesToUpdate = document.querySelectorAll(`input[data-id='${e.target.dataset.id}']`);
     const textareaAttributesToUpdate = document.querySelectorAll(`textarea[data-id='${e.target.dataset.id}']`);
     inputAttributesToUpdate.forEach((input) => input.removeAttribute('readonly'));
     textareaAttributesToUpdate.forEach((input) => input.removeAttribute('readonly'));
   }
 
-function getNoteById() {
-    console.log('nothing');
+function updateNote() {
+  console.log('test');
 }
 
 function sortByCreateDate() {
@@ -30,3 +28,11 @@ function sortByDueDate() {
     notesArray = sortedArrayDueDate;
     renderNotes();
   }
+
+let notesList = [];
+fetch('https://60b15dae62ab150017ae0d8b.mockapi.io/notes')
+  .then((blob) => blob.json())
+  .then((data) => {
+	notesList = data;
+	console.log(notesList);
+});
