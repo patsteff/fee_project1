@@ -53,8 +53,8 @@ function createNoteHtml(notesArray) {
             </div>             
               
             <div class="">
-              <input type="checkbox" name="complete"  ${note.completed ? 'checked' : ''}>
-              <label for="complete">Completed</label>
+              <input type="checkbox" name="complete" id="checkboxid${note.id}" ${note.completed ? 'checked' : ''}>
+              <label for="checkboxid${note.id}">Completed</label>
             </div>
           
           </div>  
@@ -91,7 +91,7 @@ function createNoteHtml(notesArray) {
           </div>
 
           <div class="note-row row-third">
-            <button class="btn-note btn-edit" data-action="edit" data-id="${note.id}"><i class="ph-pencil"></i> Edit</button>
+            <button class="btn-note btn-edit" type="submit" data-action="edit" data-id="${note.id}"><i class="ph-pencil"></i> Edit</button>
             <button class="btn-note btn-cancel"><i class="ph-x"></i> Cancel</button>
           </div>
             
@@ -100,8 +100,6 @@ function createNoteHtml(notesArray) {
     )
     .join('');
 }
-
-// ${note.rating === value ? 'checked' : ''}
 
 function renderNotes() {
   notesListElement.innerHTML = createNoteHtml(notesArray);
@@ -151,7 +149,7 @@ formElem.addEventListener('submit', async (e) => {
 
   renderNotes();
 
-  // formElem.reset();
+// formElem.reset();
 });
 
 // create html elements (create html)

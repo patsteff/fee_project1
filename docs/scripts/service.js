@@ -5,9 +5,21 @@ function editNoteMode(e) {
     textareaAttributesToUpdate.forEach((input) => input.removeAttribute('readonly'));
   }
 
-function updateNote() {
-  console.log('test');
-}
+function updateNote(e) {
+  console.log('you need to update');
+
+  const form = e.target.parentNode.parentNode;
+  const childrenForm = form.children;
+  const createDate = childrenForm[0].children;
+  console.log(childrenForm.);
+
+  const inputAttributesToUpdate = document.querySelectorAll(`input[data-id='${e.target.dataset.id}']`);
+    const textareaAttributesToUpdate = document.querySelectorAll(`textarea[data-id='${e.target.dataset.id}']`);
+    inputAttributesToUpdate.forEach((input) => { input.readOnly = true; });
+    textareaAttributesToUpdate.forEach((input) => { input.readOnly = true; });
+
+  // formElem.reset();
+  }
 
 function sortByCreateDate() {
     const sortedArrayCreateDate = [...notesArray].sort((a, b) => {
