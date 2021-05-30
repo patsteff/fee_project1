@@ -20,39 +20,35 @@ const notesListElement = document.querySelector('#notes-list');
 
 function createNoteHtml(notesArray) {
   return notesArray
-    .map(
-      (note) => `
+    .map((note, i) => `
   
   
-        <form class="note"">
+        <form class="note" data-index=${i}>
           <div class="note-row row-first">
             <div>
               <label class="note-form-label" for="duedate">Due date:</label>
               <input
-                class="note-form-input"
+                class="note-form-input note-form-duedate note-form-edit"
                 type="date"
                 name="duedate"
-                value=${note.duedate}
-                data-id="${note.id}"
+                value=${note.duedate}                           
                 readonly
                 
                 />
             </div>
             
-            <div class="">
+            <div class="note-row row-first">
               <label class="note-form-label" for="createdate">Create date:</label>
               <input
                 class="note-form-input"
                 type="date"
                 name="createdate"
-                value="${note.createdate}"
-                data-id="${note.id}"
-                
+                value="${note.createdate}"                
                 readonly
                 />   
             </div>             
               
-            <div class="">
+            <div class="note-row row-first">
               <input type="checkbox" name="complete" id="checkboxid${note.id}" ${note.completed ? 'checked' : ''}>
               <label for="checkboxid${note.id}">Completed</label>
             </div>
@@ -61,19 +57,17 @@ function createNoteHtml(notesArray) {
 
           <div class="note-row row-second">
               <input
-              class="note-form-input note-form-title"
+              class="note-form-input note-form-title note-form-edit"
               type="text"
               name="title"
               value = "${note.title}"
-              data-id="${note.id}"
+              data-index=${i}
               readonly
-              
               />
 
               <textarea
-              class="note-form-textarea"
+              class="note-form-textarea note-form-edit"
               name="description"
-              data-id="${note.id}"
               readonly
               value="${note.description}"
               >${note.description}</textarea>
@@ -88,16 +82,15 @@ function createNoteHtml(notesArray) {
               </div>
               
               <p>${note.rating}</p>
-          </div>
+            </div>
 
           <div class="note-row row-third">
-            <button class="btn-note btn-edit" type="submit" data-action="edit" data-id="${note.id}"><i class="ph-pencil"></i> Edit</button>
-            <button class="btn-note btn-cancel"><i class="ph-x"></i> Cancel</button>
+            <button class="btn-note btn-edit" type="submit" data-action="edit"><i class="ph-pencil"></i> Edit</button>
+            <button class="btn-note btn-delete" data-action="delete"><i class="ph-x"></i> Delete</button>
           </div>
             
         </form>
-    `,
-    )
+    `)
     .join('');
 }
 
@@ -106,6 +99,7 @@ function renderNotes() {
 }
 
 // event handler registriern auch div #notes-list
+
 document.querySelector('#notes-list').addEventListener('click', (e) => {
   e.preventDefault();
   if (e.target.dataset.action === 'edit') {
@@ -116,6 +110,8 @@ document.querySelector('#notes-list').addEventListener('click', (e) => {
     updateNote(e);
     e.target.dataset.action = 'edit';
     e.target.innerHTML = '<i class="ph-pencil"></i> Edit';
+  } else if (e.target.dataset.action === 'delete') {
+    deleteNote(e);
   }
 });
 
@@ -135,14 +131,13 @@ formElem.addEventListener('submit', async (e) => {
 
   const formData = new FormData(formElem);
   const createDate = formatDate(new Date());
-  const completed = false;
   const completeDate = '';
   const id = notesArray.length;
 
-  formData.set('createdate', createDate);
-  formData.set('completed', completed);
-  formData.set('completeDate', completeDate);
-  formData.set('id', id);
+  formData.append('createdate', createDate);
+  formData.append('completed', false);
+  formData.append('completeDate', completeDate);
+  formData.append('id', id);
 
   notesArray.push(Object.fromEntries(formData));
   console.log(notesArray);

@@ -1,25 +1,35 @@
+/* getNote(orderBy, filterBy) // Notes aus dem Storage abrufen
+addNote(note) // neues Note in den Storage einfügen
+updateNote(note) // Note im Storage aktualiseren
+getNoteById(id)  // Gezielt ein Note aus dem Storage abrufen */
+
 function editNoteMode(e) {
-    const inputAttributesToUpdate = document.querySelectorAll(`input[data-id='${e.target.dataset.id}']`);
-    const textareaAttributesToUpdate = document.querySelectorAll(`textarea[data-id='${e.target.dataset.id}']`);
-    inputAttributesToUpdate.forEach((input) => input.removeAttribute('readonly'));
-    textareaAttributesToUpdate.forEach((input) => input.removeAttribute('readonly'));
+  const form = e.target.parentNode.parentNode;
+  const {index} = form.dataset;
+  const inputAttributesToUpdate = form.querySelectorAll('.note-form-edit');
+  inputAttributesToUpdate.forEach((input) => input.removeAttribute('readonly'));
   }
 
 function updateNote(e) {
-  console.log('you need to update');
-
   const form = e.target.parentNode.parentNode;
-  const childrenForm = form.children;
-  const createDate = childrenForm[0].children;
-  console.log(childrenForm.);
+  const {index} = form.dataset;
+  const formTitle = form.querySelector('.note-form-title');
+  notesArray[index].title = formTitle.value;
+  const formDuedate = form.querySelector('.note-form-duedate');
+  notesArray[index].duedate = formDuedate.value;
+  const formDescription = form.querySelector('.note-form-textarea');
+  notesArray[index].description = formDescription.value;
 
-  const inputAttributesToUpdate = document.querySelectorAll(`input[data-id='${e.target.dataset.id}']`);
-    const textareaAttributesToUpdate = document.querySelectorAll(`textarea[data-id='${e.target.dataset.id}']`);
-    inputAttributesToUpdate.forEach((input) => { input.readOnly = true; });
-    textareaAttributesToUpdate.forEach((input) => { input.readOnly = true; });
-
-  // formElem.reset();
+  const inputAttributesToUpdate = form.querySelectorAll('.note-form-edit');
+  inputAttributesToUpdate.forEach((input) => { input.readOnly = true; });
   }
+
+function deleteNote(e) {
+  const form = e.target.parentNode.parentNode;
+  const {index} = form.dataset;
+  notesArray.splice(index, 1);
+  renderNotes();
+}
 
 function sortByCreateDate() {
     const sortedArrayCreateDate = [...notesArray].sort((a, b) => {
@@ -45,6 +55,6 @@ let notesList = [];
 fetch('https://60b15dae62ab150017ae0d8b.mockapi.io/notes')
   .then((blob) => blob.json())
   .then((data) => {
-	notesList = data;
-	console.log(notesList);
+notesList = data;
+console.log(notesList);
 });
