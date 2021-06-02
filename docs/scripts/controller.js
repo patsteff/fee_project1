@@ -83,8 +83,8 @@ function createNoteHtml(notesArray) {
             </div>
 
           <div class="note-row row-third">
-            <button class="btn-note btn-edit" type="submit" data-action="edit"><i class="ph-pencil"></i> Edit</button>
-            <button class="btn-note btn-delete" data-action="delete"><i class="ph-x"></i> Delete</button>
+            <button class="btn-note btn-edit" type="button" data-action="edit"><i class="ph-pencil"></i> Edit</button>
+            <button class="btn-note btn-delete" type="button" data-action="delete"><i class="ph-x"></i> Delete</button>
           </div>
             
         </form>
@@ -155,6 +155,14 @@ formElem.addEventListener('submit', async (e) => {
 
   notesArray.push(formData);
 
+  formData.append('createdate', createDate);
+  // Frage: das false wird als String in formData angefügt.. und darum ist es nachher immer true.
+  formData.append('completeDate', completeDate);
+  formData.append('id', id);
+  const x = Object.fromEntries(formData);
+  x.completed = false;
+  notesArray.push(Object.fromEntries(x));
+  console.log(notesArray);
   renderNotes();
 
 // formElem.reset();
