@@ -10,11 +10,9 @@ function toggleDarkMode() {
 // create note from formData
 
 const formElem = document.querySelector('#form');
-let notesArray = [
-  {completeDate: '', completed: false, createdate: '2021-04-28', description: 'Woche 4 und 5', duedate: '2021-06-06', id: '0', prio: '4', rating: '4', title: 'Hausaufgaben machen'},
-  {completeDate: '', completed: false, createdate: '2021-02-20', description: 'Wasserleitung', duedate: '2021-11-11', id: '1', prio: '2', rating: '2', title: 'Sanitär anrufen'},
-  {completeDate: '', completed: true, createdate: '2021-10-12', description: 'Lorem ipsum', duedate: '2020-10-25', id: '2', prio: '3', rating: '3', title: 'Geburtstag feiern'},
-  {completeDate: '', completed: false, createdate: '2019-09-25', description: 'Some description', duedate: '2021-09-09', id: '3', prio: '1', rating: '1', title: 'Stern Rating machen'}];
+const noteList = new NoteService();
+console.log(noteList);
+let notesArray = [];
 
 const notesListElement = document.querySelector('#notes-list');
 
@@ -147,32 +145,16 @@ function createNoteHtml(notesArray) {
 });
 
 formElem.addEventListener('submit', async (e) => {
-  function formatDate(date) {
-    let month = `${date.getMonth() + 1}`;
-    let day = `${date.getDate()}`;
-    const year = date.getFullYear();
-
-    if (month.length < 2) month = `0${month}`;
-    if (day.length < 2) day = `0${day}`;
-
-    return [year, month, day].join('-');
-  }
-
   e.preventDefault();
 
-  const formData = new FormData(formElem);
-  const createDate = formatDate(new Date());
-  const completeDate = '';
-  const id = notesArray.length;
+  const title = document.querySelector('.title').value;
+  const description = document.querySelector('.description').value;
+  const rating = document.querySelector('.rating').value;
+  const duedate = document.querySelector('.duedate').value;
+  const formData = NoteService.addNote(title, description, rating, duedate);
 
-  formData.append('createdate', createDate);
-  // Frage: das false wird als String in formData angefügt.. und darum ist es nachher immer true.
-  formData.append('completed', false);
-  formData.append('completeDate', completeDate);
-  formData.append('id', id);
+  notesArray.push(formData);
 
-  notesArray.push(Object.fromEntries(formData));
-  console.log(notesArray);
   renderNotes();
 
 // formElem.reset();

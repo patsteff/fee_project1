@@ -8,7 +8,6 @@ class NoteService {
     }
 
     createTestNotes() {
-        this.notes = [];
         const note1 = new Note('Hausaufgaben machen', 'Woche 4 und 5', '4', '2021-06-06');
         const note2 = new Note('Einkauf erledigen', 'Einkaufsliste schreiben', '1', '2021-07-12');
         this.notes.push(note1, note2);
