@@ -19,6 +19,9 @@ function updateNote(e) {
   notesArray[index].duedate = formDuedate.value;
   const formDescription = form.querySelector('.note-form-textarea');
   notesArray[index].description = formDescription.value;
+  const formRating = form.querySelectorAll('input[type=radio]');
+  console.log(formRating);
+  formRating.forEach((rating) => console.log(rating.attributes.value.nodeValue));
 
   const inputAttributesToUpdate = form.querySelectorAll('.note-form-edit');
   inputAttributesToUpdate.forEach((input) => { input.readOnly = true; });

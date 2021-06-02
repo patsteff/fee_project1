@@ -49,7 +49,7 @@ function createNoteHtml(notesArray) {
             </div>             
               
             <div class="note-row row-first">
-              <input type="checkbox" name="complete" id="checkboxid${note.id}" ${note.completed ? 'checked' : ''}>
+              <input type="checkbox" name="complete" data-action = "togglecheckbox" id="checkboxid${note.id}" ${note.completed ? 'checked' : ''}>
               <label for="checkboxid${note.id}">Completed</label>
             </div>
           
@@ -94,23 +94,50 @@ function createNoteHtml(notesArray) {
     .join('');
 }
 
-function renderNotes() {
+ function renderNotes() {
   notesListElement.innerHTML = createNoteHtml(notesArray);
+  // console.log(document.querySelectorAll('#notes-list input[type=checkbox]'));
+ /* document.querySelectorAll('#notes-list input[type=checkbox]').forEach((input) => input.addEventListener('click', (e) => {
+     // e.preventDefault();
+     if (e.target.checked) {
+      e.target.checked = false;
+    } else {
+      e.target.checked = true;
+    }
+     console.log(e.target.checked);
+  })); */
 }
 
 // event handler registriern auch div #notes-list
+ document.querySelector('#notes-list').addEventListener('click', (e) => {
+  if (e.target.type === 'checkbox') {
+    // updateNote(e);
+    return;
+  }
 
-document.querySelector('#notes-list').addEventListener('click', (e) => {
+  if (e.target.nextElementSibling.type === 'radio') {
+    console.log('radio');
+    console.log(e.target.nextElementSibling.type.value);
+    // updateNote(e);
+    return;
+  }
+
   e.preventDefault();
   if (e.target.dataset.action === 'edit') {
     e.target.dataset.action = 'save';
     e.target.innerHTML = '<i class="ph-check"></i> Save';
     editNoteMode(e);
-  } else if (e.target.dataset.action === 'save') {
+    return;
+  }
+
+  if (e.target.dataset.action === 'save') {
     updateNote(e);
     e.target.dataset.action = 'edit';
     e.target.innerHTML = '<i class="ph-pencil"></i> Edit';
-  } else if (e.target.dataset.action === 'delete') {
+    return;
+  }
+
+  if (e.target.dataset.action === 'delete') {
     deleteNote(e);
   }
 });
@@ -141,7 +168,6 @@ formElem.addEventListener('submit', async (e) => {
 
   notesArray.push(Object.fromEntries(formData));
   console.log(notesArray);
-
   renderNotes();
 
 // formElem.reset();
