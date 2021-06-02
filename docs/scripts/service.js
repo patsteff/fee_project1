@@ -1,8 +1,3 @@
-/* getNote(orderBy, filterBy) // Notes aus dem Storage abrufen
-addNote(note) // neues Note in den Storage einfügen
-updateNote(note) // Note im Storage aktualiseren
-getNoteById(id)  // Gezielt ein Note aus dem Storage abrufen */
-
 function editNoteMode(e) {
   const form = e.target.parentNode.parentNode;
   const {index} = form.dataset;
@@ -75,10 +70,10 @@ function filterByCompleted(e) {
 }
 
 // test mockapi, just load it from there
-let notesList = [];
+/* let notesListAPI = [];
 fetch('https://60b15dae62ab150017ae0d8b.mockapi.io/notes')
   .then((blob) => blob.json())
   .then((data) => {
-notesList = data;
-console.log(notesList);
-});
+notesListAPI = data;
+console.log(notesListAPI);
+}); */

@@ -49,8 +49,8 @@ function createNoteHtml(notesArray) {
             </div>             
               
             <div class="note-row row-first">
-              <input type="checkbox" name="complete" data-action = "togglecheckbox" id="checkboxid${note.id}" ${note.completed ? 'checked' : ''}>
-              <label for="checkboxid${note.id}">Completed</label>
+              <input type="checkbox" name="complete" data-action = "togglecheckbox" id="checkboxid${i}" ${note.completed ? 'checked' : ''}>
+              <label for="checkboxid${i}">Completed</label>
             </div>
           
           </div>  
@@ -108,19 +108,21 @@ function createNoteHtml(notesArray) {
   })); */
 }
 
-// event handler registriern auch div #notes-list
+// register event handler in div #notes-list
  document.querySelector('#notes-list').addEventListener('click', (e) => {
-   console.log(e.target);
-   console.log(e.target.firstElementChild);
   if (e.target.type === 'checkbox') {
     updateCheckbox(e);
     return;
+    // Frage: warum preventDefault nicht mögilch?
   }
 
- if (e.target.firstElementChild.type === 'radio') {
+  console.log(e.target);
+  // console.log(e.target.firstElementChild);
+  // Frage: wie komme ich an den Value vom Radiobutton? Wird vom Label "überschattet"
+ if (e.target.nextElementSibling === 'radio') {
     const radio = e.target.nextElementSibling;
-    console.log(radio.value);
-      // updateNote(e);
+    console.log('this is a radio button');
+    // updateNote(e);
     return;
   }
 
@@ -164,6 +166,7 @@ formElem.addEventListener('submit', async (e) => {
   const id = notesArray.length;
 
   formData.append('createdate', createDate);
+  // Frage: das false wird als String in formData angefügt.. und darum ist es nachher immer true.
   formData.append('completed', false);
   formData.append('completeDate', completeDate);
   formData.append('id', id);
@@ -174,8 +177,6 @@ formElem.addEventListener('submit', async (e) => {
 
 // formElem.reset();
 });
-
-// create html elements (create html)
 
 // add event listener to sort buttons
 document.querySelector('#sort-by-prio').addEventListener('click', sortByPrio);
@@ -196,7 +197,7 @@ function hideNoteSection() {
   createSection.hidden = !createSection.hidden;
 }
 
-// event listeners to button create note
+// event listener to button create note
 document
   .querySelector('#btn-create-note')
   .addEventListener('click', hideNoteSection);
