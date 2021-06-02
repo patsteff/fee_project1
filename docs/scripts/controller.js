@@ -167,11 +167,11 @@ formElem.addEventListener('submit', async (e) => {
 
   formData.append('createdate', createDate);
   // Frage: das false wird als String in formData angefügt.. und darum ist es nachher immer true.
-  formData.append('completed', false);
   formData.append('completeDate', completeDate);
   formData.append('id', id);
-
-  notesArray.push(Object.fromEntries(formData));
+  const x = Object.fromEntries(formData);
+  x.completed = false;
+  notesArray.push(Object.fromEntries(x));
   console.log(notesArray);
   renderNotes();
 
