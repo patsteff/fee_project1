@@ -85,8 +85,8 @@ function createNoteHtml(notesArray) {
             </div>
 
           <div class="note-row row-third">
-            <button class="btn-note btn-edit" type="submit" data-action="edit"><i class="ph-pencil"></i> Edit</button>
-            <button class="btn-note btn-delete" data-action="delete"><i class="ph-x"></i> Delete</button>
+            <button class="btn-note btn-edit" type="button" data-action="edit"><i class="ph-pencil"></i> Edit</button>
+            <button class="btn-note btn-delete" type="button" data-action="delete"><i class="ph-x"></i> Delete</button>
           </div>
             
         </form>
