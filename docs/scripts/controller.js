@@ -73,11 +73,11 @@ function createNoteHtml(notesArray) {
               >${note.description}</textarea>
               
               <div class="rating"> 
-                <input type="radio" id="star${note.id + 5}+${note.id + 5}" name="rating" value="5" ${note.rating === 'value' ? 'checked' : 'not'} /><label for="star${note.id + 5}+${note.id + 5}" class="full"></label>
-                <input type="radio" id="star${note.id + 4}+${note.id + 4}" name="rating" value="4" ${note.rating === 'value' ? 'checked' : 'not'} /><label for="star${note.id + 4}+${note.id + 4}" class="full"></label>
-                <input type="radio" id="star${note.id + 3}+${note.id + 3}" name="rating" value="3" ${note.rating === 'value' ? 'checked' : 'not'} /><label for="star${note.id + 3}+${note.id + 3}" class="full"></label>
-                <input type="radio" id="star${note.id + 2}+${note.id + 2}" name="rating" value="2" ${note.rating === 'value' ? 'checked' : 'not'} /><label for="star${note.id + 2}+${note.id + 2}" class="full"></label>
-                <input type="radio" id="star${note.id + 1}+${note.id + 1}" name="rating" value="1" ${note.rating === 'value' ? 'checked' : 'not'} /><label for="star${note.id + 1}+${note.id + 1}" class="full"></label>
+                <label class="full" <input type="radio" name="rating" value="5" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}></label>
+                <label class="full" <input type="radio" name="rating" value="4" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}></label>
+                <label class="full" <input type="radio" name="rating" value="3" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}></label>
+                <label class="full" <input type="radio" name="rating" value="2" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}></label>
+                <label class="full" <input type="radio" name="rating" value="1" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}></label>
       
               </div>
               
@@ -110,15 +110,17 @@ function createNoteHtml(notesArray) {
 
 // event handler registriern auch div #notes-list
  document.querySelector('#notes-list').addEventListener('click', (e) => {
+   console.log(e.target);
+   console.log(e.target.firstElementChild);
   if (e.target.type === 'checkbox') {
-    // updateNote(e);
+    updateCheckbox(e);
     return;
   }
 
-  if (e.target.nextElementSibling.type === 'radio') {
-    console.log('radio');
-    console.log(e.target.nextElementSibling.type.value);
-    // updateNote(e);
+ if (e.target.firstElementChild.type === 'radio') {
+    const radio = e.target.nextElementSibling;
+    console.log(radio.value);
+      // updateNote(e);
     return;
   }
 
@@ -183,6 +185,10 @@ document
 document
   .querySelector('#sort-by-due-date')
   .addEventListener('click', sortByDueDate);
+
+  document
+  .querySelector('#finisheditems')
+  .addEventListener('click', filterByCompleted);
 
 // hide create note
 const createSection = document.querySelector('#create-new-note');
