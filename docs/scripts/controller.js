@@ -73,11 +73,16 @@ function createNoteHtml(noteList) {
               >${note.description}</textarea>
               
               <div class="rating"> 
-                <input type="radio" name="rating" value="5" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}>
-                <input type="radio" name="rating" value="4" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}>
-                <input type="radio" name="rating" value="3" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}>
-                <input type="radio" name="rating" value="2" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}>
-                <input type="radio" name="rating" value="1" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}>
+                <input type="radio" id="light5+${i}" name="rating" value="5" ${note.rating === '5' ? 'checked' : ''} disabled />
+                <label for="light5+${i}"><i class="ph-lightning"></i></label>
+                <input type="radio" id="light4+${i}" name="rating" value="4" ${note.rating === '4' ? 'checked' : ''} disabled/>
+                <label for="light4+${i}"><i class="ph-lightning"></i></label>
+                <input type="radio" id="light3+${i}" name="rating" value="3" ${note.rating === '3' ? 'checked' : ''} disabled/>
+                <label for="light3+${i}"><i class="ph-lightning"></i></label>
+                <input type="radio" id="light2+${i}" name="rating" value="2" ${note.rating === '2' ? 'checked' : ''} disabled/>
+                <label for="light2+${i}"><i class="ph-lightning"></i></label>
+                <input type="radio" id="light1+${i}" name="rating" value="1" ${note.rating === '1' ? 'checked' : ''} disabled/>
+                <label for="light1+${i}"><i class="ph-lightning"></i></label>
       
               </div>
               

@@ -235,11 +235,25 @@ body.dark-mode {
   font-weight: 700;
 }
 
-/* styling star rating *//* 
 .rating {
   border: none;
-  flex: 0 0 75%;
+  transform: rotate(180deg);
 }
+
+input[type=radio] {
+  display: none;
+}
+
+.rating > input[type=radio]:checked ~ label {
+  color: orangered;
+  
+}
+.rating label {
+  font-size: 30px;
+  
+}
+
+/* styling star rating *//* 
 
 .rating > input {
   display: none;
