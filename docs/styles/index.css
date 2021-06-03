@@ -190,7 +190,8 @@ body.dark-mode {
 
 .create-form-input,
 .create-form-textarea,
-.create-form-select {
+.create-form-select, 
+.rating {
   flex: 0 0 75%;
   margin-bottom: var(--standardmargin);
   font-family: inherit;
@@ -234,7 +235,7 @@ body.dark-mode {
   font-weight: 700;
 }
 
-/* styling star rating */
+/* styling star rating *//* 
 .rating {
   border: none;
   flex: 0 0 75%;
@@ -270,7 +271,7 @@ body.dark-mode {
 .rating > label:hover ~ input:checked ~ label,
 .rating > input:checked ~ label:hover ~ label {
   color: #fec821;
-}
+} */
 
 footer {
   margin: var(--standardmargin) 0;

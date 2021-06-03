@@ -11,13 +11,15 @@ function toggleDarkMode() {
 
 const formElem = document.querySelector('#form');
 const noteList = new NoteService();
+noteList.createTestNotes();
 console.log(noteList);
 let notesArray = [];
 
 const notesListElement = document.querySelector('#notes-list');
 
-function createNoteHtml(notesArray) {
-  return notesArray
+function createNoteHtml(noteList) {
+  console.log(noteList);
+  return noteList
     .map((note, i) => `
   
   
@@ -71,11 +73,11 @@ function createNoteHtml(notesArray) {
               >${note.description}</textarea>
               
               <div class="rating"> 
-                <label class="full" <input type="radio" name="rating" value="5" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}></label>
-                <label class="full" <input type="radio" name="rating" value="4" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}></label>
-                <label class="full" <input type="radio" name="rating" value="3" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}></label>
-                <label class="full" <input type="radio" name="rating" value="2" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}></label>
-                <label class="full" <input type="radio" name="rating" value="1" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}></label>
+                <input type="radio" name="rating" value="5" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}>
+                <input type="radio" name="rating" value="4" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}>
+                <input type="radio" name="rating" value="3" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}>
+                <input type="radio" name="rating" value="2" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}>
+                <input type="radio" name="rating" value="1" data-action="radio" ${note.rating === 'value' ? 'checked' : 'not'}>
       
               </div>
               
@@ -93,17 +95,7 @@ function createNoteHtml(notesArray) {
 }
 
  function renderNotes() {
-  notesListElement.innerHTML = createNoteHtml(notesArray);
-  // console.log(document.querySelectorAll('#notes-list input[type=checkbox]'));
- /* document.querySelectorAll('#notes-list input[type=checkbox]').forEach((input) => input.addEventListener('click', (e) => {
-     // e.preventDefault();
-     if (e.target.checked) {
-      e.target.checked = false;
-    } else {
-      e.target.checked = true;
-    }
-     console.log(e.target.checked);
-  })); */
+  notesListElement.innerHTML = createNoteHtml(noteList.notes);
 }
 
 // register event handler in div #notes-list
@@ -124,7 +116,6 @@ function createNoteHtml(notesArray) {
     return;
   }
 
-  e.preventDefault();
   if (e.target.dataset.action === 'edit') {
     e.target.dataset.action = 'save';
     e.target.innerHTML = '<i class="ph-check"></i> Save';
@@ -146,23 +137,16 @@ function createNoteHtml(notesArray) {
 
 formElem.addEventListener('submit', async (e) => {
   e.preventDefault();
+  let rating = [];
+  const radios = document.querySelectorAll('input[type=radio]');
+  radios.forEach((a) => (a.checked ? rating.push(a) : ''));
+  rating = rating[0].value;
+  const title = document.querySelector('#title').value;
+  const description = document.querySelector('#description').value;
+  const duedate = document.querySelector('#duedate').value;
 
-  const title = document.querySelector('.title').value;
-  const description = document.querySelector('.description').value;
-  const rating = document.querySelector('.rating').value;
-  const duedate = document.querySelector('.duedate').value;
-  const formData = NoteService.addNote(title, description, rating, duedate);
+  const formData = noteList.addNote(title, description, rating, duedate);
 
-  notesArray.push(formData);
-
-  formData.append('createdate', createDate);
-  // Frage: das false wird als String in formData angefügt.. und darum ist es nachher immer true.
-  formData.append('completeDate', completeDate);
-  formData.append('id', id);
-  const x = Object.fromEntries(formData);
-  x.completed = false;
-  notesArray.push(Object.fromEntries(x));
-  console.log(notesArray);
   renderNotes();
 
 // formElem.reset();
@@ -197,7 +181,7 @@ document
   // sort by priority
   function sortByPrio() {
     const sortedArrayPrio = [...notesArray].sort(
-      (a, b) => Number(a.prio) - Number(b.prio),
+      (a, b) => Number(a.rating) - Number(b.rating),
     );
     notesArray = sortedArrayPrio;
     renderNotes();

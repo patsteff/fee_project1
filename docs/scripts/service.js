@@ -8,6 +8,7 @@ function editNoteMode(e) {
 function updateNote(e) {
   const form = e.target.parentNode.parentNode;
   const {index} = form.dataset;
+  console.log(form);
   const formTitle = form.querySelector('.note-form-title');
   notesArray[index].title = formTitle.value;
   const formDuedate = form.querySelector('.note-form-duedate');
