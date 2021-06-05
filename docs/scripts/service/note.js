@@ -10,7 +10,7 @@ function formatDate(date) {
     return [year, month, day].join('-');
   }
 
-class Note {
+export default class Note {
     constructor(title, description, rating, duedate, createdate = formatDate(new Date()), completed = false) {
         this.title = title;
         this.description = description;

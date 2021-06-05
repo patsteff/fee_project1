@@ -1,4 +1,6 @@
 // toggleDarkMode on click of button
+import NoteService from './service/note-service.js';
+
 function toggleDarkMode() {
     const element = document.body;
     element.classList.toggle('dark-mode');
@@ -10,7 +12,6 @@ function toggleDarkMode() {
 const formElem = document.querySelector('#form');
 const noteList = new NoteService();
 noteList.createTestNotes();
-const notesArray = [];
 
 const notesListElement = document.querySelector('#notes-list');
 
@@ -105,13 +106,6 @@ function createNoteHtml(noteList) {
     return;
   }
 
- if (e.target.nextElementSibling === 'radio') {
-    const radio = e.target.nextElementSibling;
-    console.log('this is a radio button');
-    // updateNote(e);
-    return;
-  }
-
   if (e.target.dataset.action === 'edit') {
     e.target.dataset.action = 'save';
     e.target.innerHTML = '<i class="ph-check"></i> Save';
@@ -170,8 +164,6 @@ function updateNote(e) {
   noteList.notes[index].description = formDescription.value;
   const rating = getRating();
   noteList.notes[index].rating = rating;
-  // const formRating = form.querySelectorAll('input[type=radio]');
-  // formRating.forEach((rating) => console.log(rating.attributes.value.nodeValue));
   const inputsToUpdate = form.querySelectorAll('.note-form-edit');
   inputsToUpdate.forEach((input) => { input.readOnly = true; });
   const ratingsToUpdate = form.querySelectorAll('input[type=radio]');

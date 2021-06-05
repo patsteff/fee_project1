@@ -3,7 +3,9 @@ addNote(note) // neues Note in den Storage einfügen
 updateNote(note) // Note im Storage aktualiseren
 getNoteById(id)  // Gezielt ein Note aus dem Storage abrufen */
 
-class NoteService {
+import Note from './note.js';
+
+export default class NoteService {
     constructor() {
         this.notes = [];
     }
@@ -48,14 +50,4 @@ class NoteService {
         });
         this.notes = sortedArrayDueDate;
       }
-
-/*     getTask(id) {
-        return this.taskList.find((task) => parseInt(id) === parseInt(task.id));
-    }
-
-    getNewId() {
-        return this.taskList.reduce((acc, task) => acc = acc > task.id ? acc : task.id, 0) + 1;
-    } */
 }
-
-// export const taskService = new TaskService();
