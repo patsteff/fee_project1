@@ -7,23 +7,19 @@ function toggleDarkMode() {
   const themeToggle = document.querySelector('.theme-toggle');
   themeToggle.addEventListener('change', toggleDarkMode);
 
-// create note from formData
-
 const formElem = document.querySelector('#form');
 const noteList = new NoteService();
 noteList.createTestNotes();
-console.log(noteList);
-let notesArray = [];
+const notesArray = [];
 
 const notesListElement = document.querySelector('#notes-list');
 
 function createNoteHtml(noteList) {
-  console.log(noteList);
   return noteList
     .map((note, i) => `
   
   
-        <form class="note" data-index=${i}>
+        <form class="note ${note.completed ? 'completed' : ''}" data-index=${i}>
           <div class="note-row row-first">
             <div>
               <label class="note-form-label" for="duedate">Due date:</label>
@@ -86,7 +82,6 @@ function createNoteHtml(noteList) {
       
               </div>
               
-              <p>${note.rating}</p>
             </div>
 
           <div class="note-row row-third">
@@ -108,12 +103,8 @@ function createNoteHtml(noteList) {
   if (e.target.type === 'checkbox') {
     updateCheckbox(e);
     return;
-    // Frage: warum preventDefault nicht mögilch?
   }
 
-  console.log(e.target);
-  // console.log(e.target.firstElementChild);
-  // Frage: wie komme ich an den Value vom Radiobutton? Wird vom Label "überschattet"
  if (e.target.nextElementSibling === 'radio') {
     const radio = e.target.nextElementSibling;
     console.log('this is a radio button');
@@ -140,15 +131,67 @@ function createNoteHtml(noteList) {
   }
 });
 
-formElem.addEventListener('submit', async (e) => {
-  e.preventDefault();
+function editNoteMode(e) {
+  const form = e.target.parentNode.parentNode;
+  const {index} = form.dataset;
+  const inputsToUpdate = form.querySelectorAll('.note-form-edit');
+  inputsToUpdate.forEach((input) => input.removeAttribute('readonly'));
+  const ratingsToUpdate = form.querySelectorAll('input[type=radio]');
+  ratingsToUpdate.forEach((rating) => rating.removeAttribute('disabled'));
+  }
+
+function updateCheckbox(e) {
+    const form = e.target.parentNode.parentNode.parentNode;
+    const {index} = form.dataset;
+    noteList.notes[index].completed = e.target.checked;
+    if (e.target.checked) {
+      form.classList.add('completed');
+    } else {
+    form.classList.remove('completed');
+  }
+}
+
+function deleteNote(e) {
+    const form = e.target.parentNode.parentNode;
+    const {index} = form.dataset;
+    noteList.notes.splice(index, 1);
+    renderNotes();
+  }
+
+// when click save, updateNote
+function updateNote(e) {
+  const form = e.target.parentNode.parentNode;
+  const {index} = form.dataset;
+  const formTitle = form.querySelector('.note-form-title');
+  noteList.notes[index].title = formTitle.value;
+  const formDuedate = form.querySelector('.note-form-duedate');
+  noteList.notes[index].duedate = formDuedate.value;
+  const formDescription = form.querySelector('.note-form-textarea');
+  noteList.notes[index].description = formDescription.value;
+  const rating = getRating();
+  noteList.notes[index].rating = rating;
+  // const formRating = form.querySelectorAll('input[type=radio]');
+  // formRating.forEach((rating) => console.log(rating.attributes.value.nodeValue));
+  const inputsToUpdate = form.querySelectorAll('.note-form-edit');
+  inputsToUpdate.forEach((input) => { input.readOnly = true; });
+  const ratingsToUpdate = form.querySelectorAll('input[type=radio]');
+  ratingsToUpdate.forEach((rating) => rating.disabled = true);
+}
+
+function getRating() {
   let rating = [];
   const radios = document.querySelectorAll('input[type=radio]');
   radios.forEach((a) => (a.checked ? rating.push(a) : ''));
   rating = rating[0].value;
+  return rating;
+}
+
+formElem.addEventListener('submit', async (e) => {
+  e.preventDefault();
   const title = document.querySelector('#title').value;
   const description = document.querySelector('#description').value;
   const duedate = document.querySelector('#duedate').value;
+  const rating = getRating();
 
   const formData = noteList.addNote(title, description, rating, duedate);
 
@@ -157,18 +200,36 @@ formElem.addEventListener('submit', async (e) => {
 // formElem.reset();
 });
 
+function showCompleted(e) {
+  const body = document.querySelector('body');
+  if (e.target.checked) {
+      body.classList.remove('showCompleted');
+    } else {
+      body.classList.add('showCompleted');
+    }
+  }
+
 // add event listener to sort buttons
-document.querySelector('#sort-by-prio').addEventListener('click', sortByPrio);
+document.querySelector('#sort-by-prio').addEventListener('click', () => {
+  noteList.sortByRating();
+  renderNotes();
+});
 document
   .querySelector('#sort-by-create-date')
-  .addEventListener('click', sortByCreateDate);
+  .addEventListener('click', () => {
+    noteList.sortByCreateDate();
+    renderNotes();
+  });
 document
   .querySelector('#sort-by-due-date')
-  .addEventListener('click', sortByDueDate);
+  .addEventListener('click', () => {
+    noteList.sortByDueDate();
+    renderNotes();
+  });
 
   document
   .querySelector('#finisheditems')
-  .addEventListener('click', filterByCompleted);
+  .addEventListener('click', showCompleted);
 
 // hide create note
 const createSection = document.querySelector('#create-new-note');
@@ -182,12 +243,3 @@ document
   .addEventListener('click', hideNoteSection);
 
   renderNotes();
-
-  // sort by priority
-  function sortByPrio() {
-    const sortedArrayPrio = [...notesArray].sort(
-      (a, b) => Number(a.rating) - Number(b.rating),
-    );
-    notesArray = sortedArrayPrio;
-    renderNotes();
-  }

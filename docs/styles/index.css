@@ -32,6 +32,10 @@ body {
   color: white;
 }
 
+body.showCompleted form.completed {
+  display: none;
+}
+
 h2,
 h3 {
   font-weight: 400;
@@ -245,7 +249,7 @@ input[type=radio] {
 }
 
 .rating > input[type=radio]:checked ~ label {
-  color: orangered;
+  color: #eda62b;
   
 }
 .rating label {

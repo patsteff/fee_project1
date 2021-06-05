@@ -11,14 +11,12 @@ function formatDate(date) {
   }
 
 class Note {
-    constructor(title, description, rating, duedate, completed = false) {
+    constructor(title, description, rating, duedate, createdate = formatDate(new Date()), completed = false) {
         this.title = title;
         this.description = description;
         this.rating = rating;
         this.duedate = duedate;
-        this.createdate = formatDate(new Date());
+        this.createdate = createdate;
         this.completed = completed;
-        let counter = 0;
-        this.id = ++counter;
     }
 }
