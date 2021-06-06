@@ -46,7 +46,7 @@ function createNoteHtml(noteList) {
             </div>             
               
             <div class="note-row row-first">
-              <input type="checkbox" name="complete" data-action = "togglecheckbox" id="checkboxid${i}" ${note.completed ? 'checked' : ''}>
+              <input type="checkbox" name="complete" data-action = "togglecheckbox" id="checkboxid${i}" ${note.completed ? 'checked' : ''} disabled>
               <label for="checkboxid${i}">Completed</label>
             </div>
           
@@ -96,7 +96,7 @@ function createNoteHtml(noteList) {
 }
 
  function renderNotes() {
-  notesListElement.innerHTML = createNoteHtml(noteList.notes);
+  notesListElement.innerHTML = createNoteHtml(noteList.getNotes());
 }
 
 // register event handler in div #notes-list
@@ -152,10 +152,9 @@ function deleteNote(e) {
     renderNotes();
   }
 
-// controller send note to model
-function updateThisNote(index, formTitle, formDescription, formRating, formDuedate, formCreatedate, formCompleted) {
-    const note = noteList.createNote(formTitle, formDescription, formRating, formDuedate, formCreatedate, formCompleted);
-  noteList.updateNote(index, note);
+// controller send note to model, part of prepareUpdateNote
+function updateThisNote(index, formArray) {
+  noteList.updateNote(index, formArray);
   console.log(noteList);
 }
 
@@ -169,7 +168,9 @@ function prepareUpdateNote(e) {
   const formDescription = form.querySelector('.note-form-textarea').value;
   const formRating = getRating();
   const formCompleted = form.querySelector('input[type=checkbox]').checked;
-  updateThisNote(index, formTitle, formDescription, formRating, formDuedate, formCreatedate, formCompleted);
+  const formArray = [];
+  formArray.push(formTitle, formDescription, formRating, formDuedate, formCreatedate, formCompleted);
+  updateThisNote(index, formArray);
   // update GUI to readonly
   const inputsToUpdate = form.querySelectorAll('.note-form-edit');
   inputsToUpdate.forEach((input) => { input.readOnly = true; });
@@ -193,7 +194,6 @@ formElem.addEventListener('submit', async (e) => {
   const rating = getRating();
 
   const formData = noteList.addNote(title, description, rating, duedate);
-  console.log(formData);
 
   renderNotes();
 

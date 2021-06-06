@@ -1,7 +1,7 @@
 // class to create note
 
 export default class Note {
-    constructor(title, description, rating, duedate, createdate, completed = false) {
+    constructor(title, description, rating, duedate, createdate, completed) {
         this.title = title;
         this.description = description;
         this.rating = rating;
