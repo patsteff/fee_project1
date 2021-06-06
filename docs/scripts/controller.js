@@ -153,9 +153,8 @@ function deleteNote(e) {
   }
 
 // controller send note to model
-function updateThisNote(array) {
-  const index = array[0];
-  const note = noteList.createNote(array[1], array[2], array[3], array[4], array[5], array[6]);
+function updateThisNote(index, formTitle, formDescription, formRating, formDuedate, formCreatedate, formCompleted) {
+    const note = noteList.createNote(formTitle, formDescription, formRating, formDuedate, formCreatedate, formCompleted);
   noteList.updateNote(index, note);
   console.log(noteList);
 }
@@ -170,9 +169,7 @@ function prepareUpdateNote(e) {
   const formDescription = form.querySelector('.note-form-textarea').value;
   const formRating = getRating();
   const formCompleted = form.querySelector('input[type=checkbox]').checked;
-  const array = [];
-  array.push(index, formTitle, formDescription, formRating, formDuedate, formCreatedate, formCompleted);
-  updateThisNote(array);
+  updateThisNote(index, formTitle, formDescription, formRating, formDuedate, formCreatedate, formCompleted);
   // update GUI to readonly
   const inputsToUpdate = form.querySelectorAll('.note-form-edit');
   inputsToUpdate.forEach((input) => { input.readOnly = true; });
@@ -196,6 +193,7 @@ formElem.addEventListener('submit', async (e) => {
   const rating = getRating();
 
   const formData = noteList.addNote(title, description, rating, duedate);
+  console.log(formData);
 
   renderNotes();
 

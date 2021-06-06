@@ -5,6 +5,16 @@ getNoteById(id)  // Gezielt ein Note aus dem Storage abrufen */
 
 import Note from './note.js';
 
+function formatDate(date) {
+  let month = `${date.getMonth() + 1}`;
+  let day = `${date.getDate()}`;
+  const year = date.getFullYear();
+
+  if (month.length < 2) month = `0${month}`;
+  if (day.length < 2) day = `0${day}`;
+
+  return [year, month, day].join('-');
+}
 export default class NoteService {
     constructor() {
         this.notes = [];
@@ -22,8 +32,10 @@ export default class NoteService {
       return createdNote;
     }
 
-    addNote(title, description, rating, duedate, createdate, completed) {
-        const addedNote = this.createNote();
+    addNote(title, description, rating, duedate) {
+        const createdate = formatDate(new Date());
+        const completed = false;
+        const addedNote = this.createNote(title, description, rating, duedate, createdate, completed);
         this.notes.push(addedNote);
     }
 
