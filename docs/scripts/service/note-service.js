@@ -17,9 +17,22 @@ export default class NoteService {
         this.notes.push(note1, note2, note3);
     }
 
-    addNote(title, description, rating, duedate, completed) {
-        const addednote = new Note(title, description, rating, duedate, completed);
-        this.notes.push(addednote);
+    createNote(title, description, rating, duedate, createdate, completed) {
+      const createdNote = new Note(title, description, rating, duedate, createdate, completed);
+      return createdNote;
+    }
+
+    addNote(title, description, rating, duedate, createdate, completed) {
+        const addedNote = this.createNote();
+        this.notes.push(addedNote);
+    }
+
+    updateNote(index, note) {
+        this.notes.splice(index, 1, note);
+    }
+
+    deleteNote(index) {
+      this.notes.splice(index, 1);
     }
 
     getTaskIndex(note) {

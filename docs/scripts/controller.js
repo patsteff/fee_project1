@@ -37,7 +37,7 @@ function createNoteHtml(noteList) {
             <div class="note-row row-first">
               <label class="note-form-label" for="createdate">Create date:</label>
               <input
-                class="note-form-input"
+                class="note-form-input note-form-createdate"
                 type="date"
                 name="createdate"
                 value="${note.createdate}"                
@@ -114,7 +114,7 @@ function createNoteHtml(noteList) {
   }
 
   if (e.target.dataset.action === 'save') {
-    updateNote(e);
+    prepareUpdateNote(e);
     e.target.dataset.action = 'edit';
     e.target.innerHTML = '<i class="ph-pencil"></i> Edit';
     return;
@@ -148,22 +148,32 @@ function updateCheckbox(e) {
 function deleteNote(e) {
     const form = e.target.parentNode.parentNode;
     const {index} = form.dataset;
-    noteList.notes.splice(index, 1);
+    noteList.deleteNote(index);
     renderNotes();
   }
 
-// when click save, updateNote
-function updateNote(e) {
+// controller send note to model
+function updateThisNote(array) {
+  const index = array[0];
+  const note = noteList.createNote(array[1], array[2], array[3], array[4], array[5], array[6]);
+  noteList.updateNote(index, note);
+  console.log(noteList);
+}
+
+// view collect update note
+function prepareUpdateNote(e) {
   const form = e.target.parentNode.parentNode;
   const {index} = form.dataset;
-  const formTitle = form.querySelector('.note-form-title');
-  noteList.notes[index].title = formTitle.value;
-  const formDuedate = form.querySelector('.note-form-duedate');
-  noteList.notes[index].duedate = formDuedate.value;
-  const formDescription = form.querySelector('.note-form-textarea');
-  noteList.notes[index].description = formDescription.value;
-  const rating = getRating();
-  noteList.notes[index].rating = rating;
+  const formTitle = form.querySelector('.note-form-title').value;
+  const formDuedate = form.querySelector('.note-form-duedate').value;
+  const formCreatedate = form.querySelector('.note-form-createdate').value;
+  const formDescription = form.querySelector('.note-form-textarea').value;
+  const formRating = getRating();
+  const formCompleted = form.querySelector('input[type=checkbox]').checked;
+  const array = [];
+  array.push(index, formTitle, formDescription, formRating, formDuedate, formCreatedate, formCompleted);
+  updateThisNote(array);
+  // update GUI to readonly
   const inputsToUpdate = form.querySelectorAll('.note-form-edit');
   inputsToUpdate.forEach((input) => { input.readOnly = true; });
   const ratingsToUpdate = form.querySelectorAll('input[type=radio]');
