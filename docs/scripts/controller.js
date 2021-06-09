@@ -46,7 +46,7 @@ function createNoteHtml(noteList) {
             </div>             
               
             <div class="note-row row-first">
-              <input type="checkbox" name="complete" data-action = "togglecheckbox" id="checkboxid${i}" ${note.completed ? 'checked' : ''} disabled>
+              <input type="checkbox" name="complete" id="checkboxid${i}" ${note.completed ? 'checked' : ''} disabled>
               <label for="checkboxid${i}">Completed</label>
             </div>
           
@@ -101,10 +101,10 @@ function createNoteHtml(noteList) {
 
 // register event handler in div #notes-list
  document.querySelector('#notes-list').addEventListener('click', (e) => {
-  if (e.target.type === 'checkbox') {
+  /* if (e.target.type === 'checkbox') {
     updateCheckbox(e);
     return;
-  }
+  } */
 
   if (e.target.dataset.action === 'edit') {
     e.target.dataset.action = 'save';
@@ -130,11 +130,11 @@ function editNoteMode(e) {
   const {index} = form.dataset;
   const inputsToUpdate = form.querySelectorAll('.note-form-edit');
   inputsToUpdate.forEach((input) => input.removeAttribute('readonly'));
-  const ratingsToUpdate = form.querySelectorAll('input[type=radio]');
+  const ratingsToUpdate = form.querySelectorAll('input[type=radio], input[type=checkbox]');
   ratingsToUpdate.forEach((rating) => rating.removeAttribute('disabled'));
   }
 
-function updateCheckbox(e) {
+/* function updateCheckbox(e) {
     const form = e.target.parentNode.parentNode.parentNode;
     const {index} = form.dataset;
     noteList.notes[index].completed = e.target.checked;
@@ -143,7 +143,7 @@ function updateCheckbox(e) {
     } else {
     form.classList.remove('completed');
   }
-}
+} */
 
 function deleteNote(e) {
     const form = e.target.parentNode.parentNode;
@@ -171,6 +171,12 @@ function prepareUpdateNote(e) {
   const formArray = [];
   formArray.push(formTitle, formDescription, formRating, formDuedate, formCreatedate, formCompleted);
   updateThisNote(index, formArray);
+  // add class to checkbox for filter
+  if (formCompleted) {
+    form.classList.add('completed');
+  } else {
+  form.classList.remove('completed');
+  }
   // update GUI to readonly
   const inputsToUpdate = form.querySelectorAll('.note-form-edit');
   inputsToUpdate.forEach((input) => { input.readOnly = true; });
@@ -193,7 +199,7 @@ formElem.addEventListener('submit', async (e) => {
   const duedate = document.querySelector('#duedate').value;
   const rating = getRating();
 
-  const formData = noteList.addNote(title, description, rating, duedate);
+  noteList.addNote(title, description, rating, duedate);
 
   renderNotes();
 
@@ -242,4 +248,4 @@ document
   .querySelector('#btn-create-note')
   .addEventListener('click', hideNoteSection);
 
-  renderNotes();
+renderNotes();
