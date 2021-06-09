@@ -24,6 +24,90 @@ function editNoteMode(e) {
   ratingsToUpdate.forEach((rating) => rating.removeAttribute('disabled'));
   }
 
+  function createNoteHtml(noteList) {
+    return noteList
+      .map((note, i) => `
+    
+    
+          <form class="note ${note.completed ? 'completed' : ''}" data-index=${i}>
+            <div class="note-row row-first">
+              <div>
+                <label class="note-form-label" for="duedate">Due date:</label>
+                <input
+                  class="note-form-input note-form-duedate note-form-edit"
+                  type="date"
+                  name="duedate"
+                  value=${note.duedate}                           
+                  readonly
+                  
+                  />
+              </div>
+              
+              <div class="note-row row-first">
+                <label class="note-form-label" for="createdate">Create date:</label>
+                <input
+                  class="note-form-input note-form-createdate"
+                  type="date"
+                  name="createdate"
+                  value="${note.createdate}"                
+                  readonly
+                  />   
+              </div>             
+                
+              <div class="note-row row-first">
+                <input type="checkbox" name="complete" id="checkboxid${i}" ${note.completed ? 'checked' : ''} disabled>
+                <label for="checkboxid${i}">Completed</label>
+              </div>
+            
+            </div>  
+  
+            <div class="note-row row-second">
+                <input
+                class="note-form-input note-form-title note-form-edit"
+                type="text"
+                name="title"
+                value = "${note.title}"
+                data-index=${i}
+                readonly
+                />
+  
+                <textarea
+                class="note-form-textarea note-form-edit"
+                name="description"
+                readonly
+                value="${note.description}"
+                >${note.description}</textarea>
+                
+                <div class="rating"> 
+                  <input type="radio" id="light5+${i}" name="rating" value="5" ${note.rating === '5' ? 'checked' : ''} disabled />
+                  <label for="light5+${i}"><i class="ph-lightning"></i></label>
+                  <input type="radio" id="light4+${i}" name="rating" value="4" ${note.rating === '4' ? 'checked' : ''} disabled/>
+                  <label for="light4+${i}"><i class="ph-lightning"></i></label>
+                  <input type="radio" id="light3+${i}" name="rating" value="3" ${note.rating === '3' ? 'checked' : ''} disabled/>
+                  <label for="light3+${i}"><i class="ph-lightning"></i></label>
+                  <input type="radio" id="light2+${i}" name="rating" value="2" ${note.rating === '2' ? 'checked' : ''} disabled/>
+                  <label for="light2+${i}"><i class="ph-lightning"></i></label>
+                  <input type="radio" id="light1+${i}" name="rating" value="1" ${note.rating === '1' ? 'checked' : ''} disabled/>
+                  <label for="light1+${i}"><i class="ph-lightning"></i></label>
+        
+                </div>
+                
+              </div>
+  
+            <div class="note-row row-third">
+              <button class="btn-note btn-edit" type="button" data-action="edit"><i class="ph-pencil"></i> Edit</button>
+              <button class="btn-note btn-delete" type="button" data-action="delete"><i class="ph-x"></i> Delete</button>
+            </div>
+              
+          </form>
+      `)
+      .join('');
+  }
+
+   function renderNotes() {
+    notesListElement.innerHTML = createNoteHtml(noteList.getNotes());
+  }
+
 function deleteNote(e) {
     const form = e.target.parentNode.parentNode;
     const {index} = form.dataset;
@@ -31,25 +115,27 @@ function deleteNote(e) {
     renderNotes();
   }
 
-// controller: sends note to model, part of prepareUpdateNote
-function updateThisNote(index, formArray) {
-  noteList.updateNote(index, formArray);
-  console.log(noteList);
-}
+function getRating() {
+    let rating = [];
+    const radios = document.querySelectorAll('input[type=radio]');
+    radios.forEach((a) => (a.checked ? rating.push(a) : ''));
+    rating = rating[0].value;
+    return rating;
+  }
 
 // view: collect update note from DOM
-function prepareUpdateNote(e) {
+function updateNote(e) {
   const form = e.target.parentNode.parentNode;
   const {index} = form.dataset;
   const formTitle = form.querySelector('.note-form-title').value;
-  const formDuedate = form.querySelector('.note-form-duedate').value;
-  const formCreatedate = form.querySelector('.note-form-createdate').value;
+  const formDue = form.querySelector('.note-form-duedate').value;
+  const formCreate = form.querySelector('.note-form-createdate').value;
   const formDescription = form.querySelector('.note-form-textarea').value;
   const formRating = getRating();
   const formCompleted = form.querySelector('input[type=checkbox]').checked;
   const formArray = [];
-  formArray.push(formTitle, formDescription, formRating, formDuedate, formCreatedate, formCompleted);
-  updateThisNote(index, formArray);
+  formArray.push(formTitle, formDescription, formRating, formDue, formCreate, formCompleted);
+  noteList.updateNote(index, formArray);
   // add class to checkbox for filter on completed
   if (formCompleted) {
     form.classList.add('completed');
@@ -59,100 +145,8 @@ function prepareUpdateNote(e) {
   // update GUI to readonly
   const inputsToUpdate = form.querySelectorAll('.note-form-edit');
   inputsToUpdate.forEach((input) => { input.readOnly = true; });
-  const ratingsToUpdate = form.querySelectorAll('input[type=radio] input[type=checkbox]');
+  const ratingsToUpdate = form.querySelectorAll('input[type=radio], input[type=checkbox]');
   ratingsToUpdate.forEach((rating) => rating.disabled = true);
-}
-
-function getRating() {
-  let rating = [];
-  const radios = document.querySelectorAll('input[type=radio]');
-  radios.forEach((a) => (a.checked ? rating.push(a) : ''));
-  rating = rating[0].value;
-  return rating;
-}
-
-function createNoteHtml(noteList) {
-  return noteList
-    .map((note, i) => `
-  
-  
-        <form class="note ${note.completed ? 'completed' : ''}" data-index=${i}>
-          <div class="note-row row-first">
-            <div>
-              <label class="note-form-label" for="duedate">Due date:</label>
-              <input
-                class="note-form-input note-form-duedate note-form-edit"
-                type="date"
-                name="duedate"
-                value=${note.duedate}                           
-                readonly
-                
-                />
-            </div>
-            
-            <div class="note-row row-first">
-              <label class="note-form-label" for="createdate">Create date:</label>
-              <input
-                class="note-form-input note-form-createdate"
-                type="date"
-                name="createdate"
-                value="${note.createdate}"                
-                readonly
-                />   
-            </div>             
-              
-            <div class="note-row row-first">
-              <input type="checkbox" name="complete" id="checkboxid${i}" ${note.completed ? 'checked' : ''} disabled>
-              <label for="checkboxid${i}">Completed</label>
-            </div>
-          
-          </div>  
-
-          <div class="note-row row-second">
-              <input
-              class="note-form-input note-form-title note-form-edit"
-              type="text"
-              name="title"
-              value = "${note.title}"
-              data-index=${i}
-              readonly
-              />
-
-              <textarea
-              class="note-form-textarea note-form-edit"
-              name="description"
-              readonly
-              value="${note.description}"
-              >${note.description}</textarea>
-              
-              <div class="rating"> 
-                <input type="radio" id="light5+${i}" name="rating" value="5" ${note.rating === '5' ? 'checked' : ''} disabled />
-                <label for="light5+${i}"><i class="ph-lightning"></i></label>
-                <input type="radio" id="light4+${i}" name="rating" value="4" ${note.rating === '4' ? 'checked' : ''} disabled/>
-                <label for="light4+${i}"><i class="ph-lightning"></i></label>
-                <input type="radio" id="light3+${i}" name="rating" value="3" ${note.rating === '3' ? 'checked' : ''} disabled/>
-                <label for="light3+${i}"><i class="ph-lightning"></i></label>
-                <input type="radio" id="light2+${i}" name="rating" value="2" ${note.rating === '2' ? 'checked' : ''} disabled/>
-                <label for="light2+${i}"><i class="ph-lightning"></i></label>
-                <input type="radio" id="light1+${i}" name="rating" value="1" ${note.rating === '1' ? 'checked' : ''} disabled/>
-                <label for="light1+${i}"><i class="ph-lightning"></i></label>
-      
-              </div>
-              
-            </div>
-
-          <div class="note-row row-third">
-            <button class="btn-note btn-edit" type="button" data-action="edit"><i class="ph-pencil"></i> Edit</button>
-            <button class="btn-note btn-delete" type="button" data-action="delete"><i class="ph-x"></i> Delete</button>
-          </div>
-            
-        </form>
-    `)
-    .join('');
-}
-
- function renderNotes() {
-  notesListElement.innerHTML = createNoteHtml(noteList.getNotes());
 }
 
 // register event handler in div #notes-list
@@ -165,7 +159,7 @@ function createNoteHtml(noteList) {
   }
 
   if (e.target.dataset.action === 'save') {
-    prepareUpdateNote(e);
+    updateNote(e);
     e.target.dataset.action = 'edit';
     e.target.innerHTML = '<i class="ph-pencil"></i> Edit';
     return;
