@@ -59,10 +59,6 @@ export default class NoteService {
       this.notes.splice(index, 1);
     }
 
-   /*  getTaskIndex(note) {
-        return this.notes.findIndex((noteItem) => noteItem.id === note.id);
-    }
- */
     sortByCreateDate() {
         const sortedArrayCreateDate = [...this.notes].sort((a, b) => {
         const dateA = new Date(a.createdate);

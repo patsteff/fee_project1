@@ -1,6 +1,6 @@
-// toggleDarkMode on click of button
 import NoteService from './service/note-service.js';
 
+// toggleDarkMode on click of button
 function toggleDarkMode() {
     const element = document.body;
     element.classList.toggle('dark-mode');
@@ -10,7 +10,10 @@ function toggleDarkMode() {
   themeToggle.addEventListener('change', toggleDarkMode);
 
 const formElem = document.querySelector('#form');
+
+// create instance of class
 const noteList = new NoteService();
+// create test data
 noteList.createTestNotes();
 
 const notesListElement = document.querySelector('#notes-list');
@@ -101,11 +104,6 @@ function createNoteHtml(noteList) {
 
 // register event handler in div #notes-list
  document.querySelector('#notes-list').addEventListener('click', (e) => {
-  /* if (e.target.type === 'checkbox') {
-    updateCheckbox(e);
-    return;
-  } */
-
   if (e.target.dataset.action === 'edit') {
     e.target.dataset.action = 'save';
     e.target.innerHTML = '<i class="ph-check"></i> Save';
@@ -134,17 +132,6 @@ function editNoteMode(e) {
   ratingsToUpdate.forEach((rating) => rating.removeAttribute('disabled'));
   }
 
-/* function updateCheckbox(e) {
-    const form = e.target.parentNode.parentNode.parentNode;
-    const {index} = form.dataset;
-    noteList.notes[index].completed = e.target.checked;
-    if (e.target.checked) {
-      form.classList.add('completed');
-    } else {
-    form.classList.remove('completed');
-  }
-} */
-
 function deleteNote(e) {
     const form = e.target.parentNode.parentNode;
     const {index} = form.dataset;
@@ -152,13 +139,13 @@ function deleteNote(e) {
     renderNotes();
   }
 
-// controller send note to model, part of prepareUpdateNote
+// controller: sends note to model, part of prepareUpdateNote
 function updateThisNote(index, formArray) {
   noteList.updateNote(index, formArray);
   console.log(noteList);
 }
 
-// view collect update note
+// view: collect update note from DOM
 function prepareUpdateNote(e) {
   const form = e.target.parentNode.parentNode;
   const {index} = form.dataset;
@@ -171,7 +158,7 @@ function prepareUpdateNote(e) {
   const formArray = [];
   formArray.push(formTitle, formDescription, formRating, formDuedate, formCreatedate, formCompleted);
   updateThisNote(index, formArray);
-  // add class to checkbox for filter
+  // add class to checkbox for filter on completed
   if (formCompleted) {
     form.classList.add('completed');
   } else {
