@@ -16,6 +16,61 @@ noteList.createTestNotes();
 
 const notesListElement = document.querySelector('#notes-list');
 
+function editNoteMode(e) {
+  const form = e.target.parentNode.parentNode;
+  const inputsToUpdate = form.querySelectorAll('.note-form-edit');
+  inputsToUpdate.forEach((input) => input.removeAttribute('readonly'));
+  const ratingsToUpdate = form.querySelectorAll('input[type=radio], input[type=checkbox]');
+  ratingsToUpdate.forEach((rating) => rating.removeAttribute('disabled'));
+  }
+
+function deleteNote(e) {
+    const form = e.target.parentNode.parentNode;
+    const {index} = form.dataset;
+    noteList.deleteNote(index);
+    renderNotes();
+  }
+
+// controller: sends note to model, part of prepareUpdateNote
+function updateThisNote(index, formArray) {
+  noteList.updateNote(index, formArray);
+  console.log(noteList);
+}
+
+// view: collect update note from DOM
+function prepareUpdateNote(e) {
+  const form = e.target.parentNode.parentNode;
+  const {index} = form.dataset;
+  const formTitle = form.querySelector('.note-form-title').value;
+  const formDuedate = form.querySelector('.note-form-duedate').value;
+  const formCreatedate = form.querySelector('.note-form-createdate').value;
+  const formDescription = form.querySelector('.note-form-textarea').value;
+  const formRating = getRating();
+  const formCompleted = form.querySelector('input[type=checkbox]').checked;
+  const formArray = [];
+  formArray.push(formTitle, formDescription, formRating, formDuedate, formCreatedate, formCompleted);
+  updateThisNote(index, formArray);
+  // add class to checkbox for filter on completed
+  if (formCompleted) {
+    form.classList.add('completed');
+  } else {
+  form.classList.remove('completed');
+  }
+  // update GUI to readonly
+  const inputsToUpdate = form.querySelectorAll('.note-form-edit');
+  inputsToUpdate.forEach((input) => { input.readOnly = true; });
+  const ratingsToUpdate = form.querySelectorAll('input[type=radio] input[type=checkbox]');
+  ratingsToUpdate.forEach((rating) => rating.disabled = true);
+}
+
+function getRating() {
+  let rating = [];
+  const radios = document.querySelectorAll('input[type=radio]');
+  radios.forEach((a) => (a.checked ? rating.push(a) : ''));
+  rating = rating[0].value;
+  return rating;
+}
+
 function createNoteHtml(noteList) {
   return noteList
     .map((note, i) => `
@@ -120,62 +175,6 @@ function createNoteHtml(noteList) {
     deleteNote(e);
   }
 });
-
-function editNoteMode(e) {
-  const form = e.target.parentNode.parentNode;
-  const {index} = form.dataset;
-  const inputsToUpdate = form.querySelectorAll('.note-form-edit');
-  inputsToUpdate.forEach((input) => input.removeAttribute('readonly'));
-  const ratingsToUpdate = form.querySelectorAll('input[type=radio], input[type=checkbox]');
-  ratingsToUpdate.forEach((rating) => rating.removeAttribute('disabled'));
-  }
-
-function deleteNote(e) {
-    const form = e.target.parentNode.parentNode;
-    const {index} = form.dataset;
-    noteList.deleteNote(index);
-    renderNotes();
-  }
-
-// controller: sends note to model, part of prepareUpdateNote
-function updateThisNote(index, formArray) {
-  noteList.updateNote(index, formArray);
-  console.log(noteList);
-}
-
-// view: collect update note from DOM
-function prepareUpdateNote(e) {
-  const form = e.target.parentNode.parentNode;
-  const {index} = form.dataset;
-  const formTitle = form.querySelector('.note-form-title').value;
-  const formDuedate = form.querySelector('.note-form-duedate').value;
-  const formCreatedate = form.querySelector('.note-form-createdate').value;
-  const formDescription = form.querySelector('.note-form-textarea').value;
-  const formRating = getRating();
-  const formCompleted = form.querySelector('input[type=checkbox]').checked;
-  const formArray = [];
-  formArray.push(formTitle, formDescription, formRating, formDuedate, formCreatedate, formCompleted);
-  updateThisNote(index, formArray);
-  // add class to checkbox for filter on completed
-  if (formCompleted) {
-    form.classList.add('completed');
-  } else {
-  form.classList.remove('completed');
-  }
-  // update GUI to readonly
-  const inputsToUpdate = form.querySelectorAll('.note-form-edit');
-  inputsToUpdate.forEach((input) => { input.readOnly = true; });
-  const ratingsToUpdate = form.querySelectorAll('input[type=radio]');
-  ratingsToUpdate.forEach((rating) => rating.disabled = true);
-}
-
-function getRating() {
-  let rating = [];
-  const radios = document.querySelectorAll('input[type=radio]');
-  radios.forEach((a) => (a.checked ? rating.push(a) : ''));
-  rating = rating[0].value;
-  return rating;
-}
 
 formElem.addEventListener('submit', async (e) => {
   e.preventDefault();
