@@ -1,4 +1,4 @@
-import NoteService from './service/note-service.js';
+import noteList from './service/note-service.js';
 
 // toggleDarkMode on click of button
 function toggleDarkMode() {
@@ -11,8 +11,6 @@ function toggleDarkMode() {
 
 const formElem = document.querySelector('#form');
 
-// create instance of class
-const noteList = new NoteService();
 // create test data
 noteList.createTestNotes();
 

@@ -22,7 +22,7 @@ function formatDate(date) {
 
   return [year, month, day].join('-');
 }
-export default class NoteService {
+class NoteService {
     constructor() {
         this.notes = [];
     }
@@ -84,3 +84,5 @@ export default class NoteService {
         this.notes = sortedArrayDueDate;
       }
 }
+
+export default new NoteService();
