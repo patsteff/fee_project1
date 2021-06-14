@@ -2,7 +2,7 @@
 addNote(note) // neues Note in den Storage einfügen
 updateNote(note) // Note im Storage aktualiseren
 getNoteById(id)  // Gezielt ein Note aus dem Storage abrufen */
-
+import { httpService } from './http-service.js';
 import Note from './note.js';
 
 const indextitle = 0;
@@ -35,9 +35,9 @@ class NoteService {
         console.log(JSON.stringify(this.notes));
     }
 
-    getNotes() {
-      return this.notes;
-    }
+    async getNotes() {
+      return await httpService.ajax('GET', '/notes/', undefined);
+  }
 
     addNote(title, description, rating, duedate) {
         const createdate = formatDate(new Date());

@@ -5,6 +5,7 @@
   "main": "docs/scripts/main.js",
   "type": "module",
   "scripts": {
+    "dev": "nodemon index.js",
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "stylelint": "stylelint \"**/*.css\"",
@@ -19,11 +20,14 @@
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "html-validator-cli": "^7.0.1",
+    "nodemon": "^2.0.7",
     "stylelint": "^13.12.0",
     "stylelint-config-standard": "^21.0.0"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "nedb": "^1.8.0",
+    "nedb-promise": "^2.0.1"
   },
   "directories": {
     "doc": "docs"
