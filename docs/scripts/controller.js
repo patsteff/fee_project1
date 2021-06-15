@@ -105,7 +105,9 @@ function editNoteMode(e) {
   }
 
    function renderNotes() {
-    notesListElement.innerHTML = createNoteHtml(noteList.getNotes());
+     noteList.getNotes().then((response) => {
+      notesListElement.innerHTML = createNoteHtml(response);
+     });
   }
 
 function deleteNote(e) {

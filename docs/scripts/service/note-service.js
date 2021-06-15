@@ -32,19 +32,25 @@ class NoteService {
         const note2 = new Note('Einkauf erledigen', 'Einkaufsliste schreiben', '1', '2021-07-12', '2021-03-01');
         const note3 = new Note('Kaffee trinken', 'Kaffemachine starten', '5', '2019-07-12', '2008-06-24');
         this.notes.push(note1, note2, note3);
-        console.log(JSON.stringify(this.notes));
     }
 
     async getNotes() {
-      return await httpService.ajax('GET', '/notes/', undefined);
+      return httpService.ajax('GET', '/notes/', undefined);
   }
 
-    addNote(title, description, rating, duedate) {
+/*     addNote(title, description, rating, duedate) {
         const createdate = formatDate(new Date());
         const completed = false;
         const addedNote = new Note(title, description, rating, duedate, createdate, completed);
         this.notes.push(addedNote);
-    }
+    } */
+
+    async addNote(title, description, rating, duedate) {
+      const createdate = formatDate(new Date());
+      const completed = false;
+      const addedNote = new Note(title, description, rating, duedate, createdate, completed);
+      return httpService.ajax('POST', '/notes/', addedNote);
+  }
 
     updateNote(index, formArray) {
       this.notes[index].title = formArray[indextitle];
