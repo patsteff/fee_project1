@@ -5,7 +5,7 @@ const notesDb = new Datastore({ filename: './data/notes.db', autoload: true });
 
 export class notesBackendStoreServiceClass {
     async getAllNotes() {
-        return await notesDb.find({});
+        return await notesDb.cfind({}).sort({ duedate: 1 }).exec();
     }
 
     async getNoteById(idFromRequestParam) {
