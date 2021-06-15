@@ -197,19 +197,19 @@ function showCompleted(e) {
 
 // add event listener to sort buttons
 document.querySelector('#sort-by-prio').addEventListener('click', () => {
-  noteList.sortByRating();
+  noteList.getNotes('rating');
   renderNotes();
 });
 document
   .querySelector('#sort-by-create-date')
   .addEventListener('click', () => {
-    noteList.sortByCreateDate();
+    noteList.getNotes('createdate');
     renderNotes();
   });
 document
   .querySelector('#sort-by-due-date')
   .addEventListener('click', () => {
-    noteList.sortByDueDate();
+    noteList.getNotes('duedate');
     renderNotes();
   });
 

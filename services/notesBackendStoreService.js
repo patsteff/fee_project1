@@ -4,8 +4,21 @@ import Datastore from 'nedb-promise';
 const notesDb = new Datastore({ filename: './data/notes.db', autoload: true });
 
 export class notesBackendStoreServiceClass {
-    async getAllNotes() {
-        return await notesDb.cfind({}).sort({ duedate: 1 }).exec();
+    async getAllNotes(sortbyFromRequestParam) {
+        console.log(sortbyFromRequestParam);
+        switch (sortbyFromRequestParam) {
+            case 'rating':
+                return await notesDb.cfind({}).sort({rating: -1}).exec();
+                break;
+            case 'duedate':
+                return await notesDb.cfind({}).sort({duedate: -1}).exec();
+                break;
+            case 'createdate':
+                return await notesDb.cfind({}).sort({createdate: -1}).exec();
+                break;
+            default:
+                return await notesDb.cfind({}).sort({duedate: -1}).exec();
+        }
     }
 
     async getNoteById(idFromRequestParam) {

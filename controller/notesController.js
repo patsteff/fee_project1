@@ -2,7 +2,7 @@ import {notesBackendStoreService} from '../services/notesBackendStoreService.js'
 
 export class notesControllerClass {
     async getAllNotes(request, response) {
-        response.json((await notesBackendStoreService.getAllNotes() || []));
+        response.json((await notesBackendStoreService.getAllNotes(request.params.sortby) || []));
     }
 
     async getNoteById(request, response) {

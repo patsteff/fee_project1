@@ -6,7 +6,7 @@ import {notesController} from '../controller/notesController.js';
 const router = express.Router();
 
 // GET request for retrieving all Notes
-router.get('/', notesController.getAllNotes.bind(notesController));
+router.get('/sortby/:sortby', notesController.getAllNotes.bind(notesController));
 
 // GET request for retrieving specific Note
 router.get('/:id/', notesController.getNoteById.bind(notesController));

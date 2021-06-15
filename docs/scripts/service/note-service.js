@@ -34,8 +34,8 @@ class NoteService {
         this.notes.push(note1, note2, note3);
     }
 
-    async getNotes() {
-      return httpService.ajax('GET', '/notes/', undefined);
+    async getNotes(sortby = 'duedate') {
+      return httpService.ajax('GET', `/notes/sortyby/${sortby}`, undefined);
   }
 
     async addNote(title, description, rating, duedate) {
@@ -59,31 +59,6 @@ class NoteService {
   async deleteNote(id) {
       return httpService.ajax('DELETE', `/notes/${id}`, undefined);
   }
-
-    sortByCreateDate() {
-        const sortedArrayCreateDate = [...this.notes].sort((a, b) => {
-        const dateA = new Date(a.createdate);
-        const dateB = new Date(b.createdate);
-        return dateA - dateB;
-        });
-        this.notes = sortedArrayCreateDate;
-      }
-
-    sortByRating() {
-        const sortedArrayRating = [...this.notes].sort(
-        (a, b) => Number(a.rating) - Number(b.rating),
-        );
-        this.notes = sortedArrayRating;
-      }
-
-    sortByDueDate() {
-        const sortedArrayDueDate = [...this.notes].sort((a, b) => {
-          const dateA = new Date(a.duedate);
-          const dateB = new Date(b.duedate);
-          return dateA - dateB;
-        });
-        this.notes = sortedArrayDueDate;
-      }
 }
 
 export default new NoteService();
