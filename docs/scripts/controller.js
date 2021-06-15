@@ -137,7 +137,7 @@ function updateNote(e) {
   const formCompleted = form.querySelector('input[type=checkbox]').checked;
   const formArray = [];
   formArray.push(formTitle, formDescription, formRating, formDue, formCreate, formCompleted);
-  noteList.updateNoteById(id, formTitle, formDescription, formRating, formDue, formCreate, formCompleted).then((response) => {
+  noteList.updateNoteById(id, formTitle, formDescription, formRating, formDue, formCreate, formCompleted);
     // add class to checkbox for filter on completed
     if (formCompleted) {
       form.classList.add('completed');
@@ -149,7 +149,6 @@ function updateNote(e) {
     inputsToUpdate.forEach((input) => { input.readOnly = true; });
     const ratingsToUpdate = form.querySelectorAll('input[type=radio], input[type=checkbox]');
     ratingsToUpdate.forEach((rating) => rating.disabled = true);
-  });
 }
 
 // register event handler in div #notes-list

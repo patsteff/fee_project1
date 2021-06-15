@@ -20,9 +20,9 @@ export class notesControllerClass {
     }
 
     async updateNoteById(request, response) {
-        console.log(request.params.id, request.body);
+        console.log('notesController updateNote request id and body', request.params.id, request.body, 'this is the end');
         await notesBackendStoreService.updateNoteById(request.params.id, request.body);
-        response.sendStatus(200);
+        response.status(200);
     }
 }
 

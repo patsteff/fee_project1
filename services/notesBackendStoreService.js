@@ -9,21 +9,18 @@ export class notesBackendStoreServiceClass {
     }
 
     async getNoteById(idFromRequestParam) {
-        return await notesDb.findOne({_id: idFromRequestParam}, (err, docs) => {
-            if (err) { console.log('this is an error'); }
-            console.log(docs);
-    });
-}
+        return await notesDb.findOne({_id: idFromRequestParam});
+    }
 
     async createNote(noteContentFromRequestBody) {
         return await notesDb.insert(noteContentFromRequestBody);
     }
 
     async updateNoteById(idFromRequestParam, newNote) {
-        console.log(newNote);
+        console.log('backendStore newNote', newNote);
 
         const oldNote = await this.getNoteById(idFromRequestParam);
-        console.log(oldNote);
+        console.log('backendStore oldNote', oldNote);
         return await notesDb.update(oldNote, newNote);
     }
 
