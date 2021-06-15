@@ -113,11 +113,8 @@ function editNoteMode(e) {
 function deleteNote(e) {
     const form = e.target.parentNode.parentNode;
     const id = form.dataset.index;
-    console.log('delete ID', id);
-    noteList.deleteNote(id).then((response) => {
-      console.log('deleteNote ', response);
- });
-      // then((response) => renderNotes())});
+    noteList.deleteNote(id);
+    renderNotes();
   }
 
 function getRating() {
@@ -141,7 +138,6 @@ function updateNote(e) {
   const formArray = [];
   formArray.push(formTitle, formDescription, formRating, formDue, formCreate, formCompleted);
   noteList.updateNoteById(id, formTitle, formDescription, formRating, formDue, formCreate, formCompleted).then((response) => {
-    console.log('updateNote', response);
     // add class to checkbox for filter on completed
     if (formCompleted) {
       form.classList.add('completed');

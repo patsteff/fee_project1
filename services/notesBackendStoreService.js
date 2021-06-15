@@ -27,13 +27,8 @@ export class notesBackendStoreServiceClass {
         return await notesDb.update(oldNote, newNote);
     }
 
-    /* async delete(id) {
-        return await notesDb.update({_id: id}, {$set: {state: 'DELETED'}});
-        // return await this.getNoteById(id);
-    } */
-
     async deleteNoteById(idFromRequestParam) {
-        return await notesDb.remove({_id: idFromRequestParam}, (err) => { if (err) { return callback(err); } return callback(null); });
+        return await notesDb.remove({_id: idFromRequestParam});
     }
 }
 

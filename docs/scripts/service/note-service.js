@@ -57,7 +57,6 @@ class NoteService {
     }
 
   async deleteNote(id) {
-      console.log('delete note service', id);
       return httpService.ajax('DELETE', `/notes/${id}`, undefined);
   }
 

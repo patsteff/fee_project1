@@ -15,9 +15,8 @@ export class notesControllerClass {
 
     async deleteNoteById(request, response) {
         console.log(request.params.id);
-
-        response.status(200).json({title: 'test'});
-        // send(await notesBackendStoreService.deleteNoteById(request.params.id));
+        await notesBackendStoreService.deleteNoteById(request.params.id);
+        response.status(200);
     }
 
     async updateNoteById(request, response) {
