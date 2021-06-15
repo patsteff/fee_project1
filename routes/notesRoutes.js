@@ -11,6 +11,9 @@ router.get('/', notesController.getAllNotes.bind(notesController));
 // GET request for retrieving specific Note
 router.get('/:id/', notesController.getNoteById.bind(notesController));
 
+// PUT request for retrieving specific Note
+// router.put('/:id/', notesController.getNoteById.bind(notesController));
+
 // POST request for creating Note
 router.post('/', notesController.createNote.bind(notesController));
 

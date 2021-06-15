@@ -29,7 +29,7 @@ function editNoteMode(e) {
       .map((note, i) => `
     
     
-          <form class="note ${note.completed ? 'completed' : ''}" data-index=${i}>
+          <form class="note ${note.completed ? 'completed' : ''}" data-index=${note._id}>
             <div class="note-row row-first">
               <div>
                 <label class="note-form-label" for="duedate">Due date:</label>
@@ -55,8 +55,8 @@ function editNoteMode(e) {
               </div>             
                 
               <div class="note-row row-first">
-                <input type="checkbox" name="complete" id="checkboxid${i}" ${note.completed ? 'checked' : ''} disabled>
-                <label for="checkboxid${i}">Completed</label>
+                <input type="checkbox" name="complete" id="checkboxid${note._id}" ${note.completed ? 'checked' : ''} disabled>
+                <label for="checkboxid${note._id}">Completed</label>
               </div>
             
             </div>  
@@ -67,7 +67,7 @@ function editNoteMode(e) {
                 type="text"
                 name="title"
                 value = "${note.title}"
-                data-index=${i}
+                data-index=${note._id}
                 readonly
                 />
   
@@ -79,16 +79,16 @@ function editNoteMode(e) {
                 >${note.description}</textarea>
                 
                 <div class="rating"> 
-                  <input type="radio" id="light5+${i}" name="rating" value="5" ${note.rating === '5' ? 'checked' : ''} disabled />
-                  <label for="light5+${i}"><i class="ph-lightning"></i></label>
-                  <input type="radio" id="light4+${i}" name="rating" value="4" ${note.rating === '4' ? 'checked' : ''} disabled/>
-                  <label for="light4+${i}"><i class="ph-lightning"></i></label>
-                  <input type="radio" id="light3+${i}" name="rating" value="3" ${note.rating === '3' ? 'checked' : ''} disabled/>
-                  <label for="light3+${i}"><i class="ph-lightning"></i></label>
-                  <input type="radio" id="light2+${i}" name="rating" value="2" ${note.rating === '2' ? 'checked' : ''} disabled/>
-                  <label for="light2+${i}"><i class="ph-lightning"></i></label>
-                  <input type="radio" id="light1+${i}" name="rating" value="1" ${note.rating === '1' ? 'checked' : ''} disabled/>
-                  <label for="light1+${i}"><i class="ph-lightning"></i></label>
+                  <input type="radio" id="light5+${note._id}" name="rating" value="5" ${note.rating === '5' ? 'checked' : ''} disabled />
+                  <label for="light5+${note._id}"><i class="ph-lightning"></i></label>
+                  <input type="radio" id="light4+${note._id}" name="rating" value="4" ${note.rating === '4' ? 'checked' : ''} disabled/>
+                  <label for="light4+${note._id}"><i class="ph-lightning"></i></label>
+                  <input type="radio" id="light3+${note._id}" name="rating" value="3" ${note.rating === '3' ? 'checked' : ''} disabled/>
+                  <label for="light3+${note._id}"><i class="ph-lightning"></i></label>
+                  <input type="radio" id="light2+${note._id}" name="rating" value="2" ${note.rating === '2' ? 'checked' : ''} disabled/>
+                  <label for="light2+${note._id}"><i class="ph-lightning"></i></label>
+                  <input type="radio" id="light1+${note._id}" name="rating" value="1" ${note.rating === '1' ? 'checked' : ''} disabled/>
+                  <label for="light1+${note._id}"><i class="ph-lightning"></i></label>
         
                 </div>
                 
@@ -112,8 +112,8 @@ function editNoteMode(e) {
 
 function deleteNote(e) {
     const form = e.target.parentNode.parentNode;
-    const {index} = form.dataset;
-    noteList.deleteNote(index);
+    const id = form.dataset.index;
+    noteList.deleteNote(id);
     renderNotes();
   }
 
@@ -128,7 +128,7 @@ function getRating() {
 // view: collect update note from DOM
 function updateNote(e) {
   const form = e.target.parentNode.parentNode;
-  const {index} = form.dataset;
+  const id = form.dataset.index;
   const formTitle = form.querySelector('.note-form-title').value;
   const formDue = form.querySelector('.note-form-duedate').value;
   const formCreate = form.querySelector('.note-form-createdate').value;
@@ -137,7 +137,10 @@ function updateNote(e) {
   const formCompleted = form.querySelector('input[type=checkbox]').checked;
   const formArray = [];
   formArray.push(formTitle, formDescription, formRating, formDue, formCreate, formCompleted);
-  noteList.updateNote(index, formArray);
+  console.log(id);
+  console.log(formArray);
+  noteList.getNoteById(id).then((response) => console.log(response));
+
   // add class to checkbox for filter on completed
   if (formCompleted) {
     form.classList.add('completed');

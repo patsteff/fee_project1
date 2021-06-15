@@ -38,13 +38,6 @@ class NoteService {
       return httpService.ajax('GET', '/notes/', undefined);
   }
 
-/*     addNote(title, description, rating, duedate) {
-        const createdate = formatDate(new Date());
-        const completed = false;
-        const addedNote = new Note(title, description, rating, duedate, createdate, completed);
-        this.notes.push(addedNote);
-    } */
-
     async addNote(title, description, rating, duedate) {
       const createdate = formatDate(new Date());
       const completed = false;
@@ -52,7 +45,21 @@ class NoteService {
       return httpService.ajax('POST', '/notes/', addedNote);
   }
 
-    updateNote(index, formArray) {
+    async getNoteById(id) {
+      return httpService.ajax('GET', `/notes/${id}`, undefined);
+    }
+
+  /* updateNote(index, formArray) {
+      this.notes[index].title = formArray[indextitle];
+      this.notes[index].description = formArray[indexdescription];
+      this.notes[index].rating = formArray[indexrating];
+      this.notes[index].duedate = formArray[indexduedate];
+      this.notes[index].createdate = formArray[indexcreatedate];
+      this.notes[index].completed = formArray[indexcompleted];
+    } */
+
+  async updateNote(id, formArray) {
+      await getNoteById(id);
       this.notes[index].title = formArray[indextitle];
       this.notes[index].description = formArray[indexdescription];
       this.notes[index].rating = formArray[indexrating];
@@ -61,9 +68,9 @@ class NoteService {
       this.notes[index].completed = formArray[indexcompleted];
     }
 
-    deleteNote(index) {
-      this.notes.splice(index, 1);
-    }
+  async deleteNote(id) {
+      return await httpService.ajax('DELETE', `/notes/${id}`, undefined);
+  }
 
     sortByCreateDate() {
         const sortedArrayCreateDate = [...this.notes].sort((a, b) => {
