@@ -9,12 +9,20 @@ export class notesBackendStoreServiceClass {
     }
 
     async getNoteById(idFromRequestParam) {
-        return await notesDb.findOne({_id: idFromRequestParam});
-    }
+        return await notesDb.findOne({_id: idFromRequestParam}, (err, docs) => {
+            if (err) { console.log('this is an error'); }
+            console.log(docs);
+    });
+}
 
     async createNote(noteContentFromRequestBody) {
         return await notesDb.insert(noteContentFromRequestBody);
     }
+
+    /* async delete(id) {
+        return await notesDb.update({_id: id}, {$set: {state: 'DELETED'}});
+        // return await this.getNoteById(id);
+    } */
 
     async deleteNoteById(idFromRequestParam) {
         return await notesDb.remove({_id: idFromRequestParam});

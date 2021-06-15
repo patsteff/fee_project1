@@ -15,7 +15,8 @@ export class notesControllerClass {
     }
 
     async deleteNoteById(request, response) {
-        response.send(await notesBackendStoreService.deleteNoteById(request.params.id));
+        await notesBackendStoreService.deleteNoteById(request.params.id);
+        response.sendStatus(200);
     }
 }
 
