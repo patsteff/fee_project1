@@ -49,27 +49,16 @@ class NoteService {
       return httpService.ajax('GET', `/notes/${id}`, undefined);
     }
 
-  /* updateNote(index, formArray) {
-      this.notes[index].title = formArray[indextitle];
-      this.notes[index].description = formArray[indexdescription];
-      this.notes[index].rating = formArray[indexrating];
-      this.notes[index].duedate = formArray[indexduedate];
-      this.notes[index].createdate = formArray[indexcreatedate];
-      this.notes[index].completed = formArray[indexcompleted];
-    } */
-
-  async updateNote(id, formArray) {
-      await getNoteById(id);
-      this.notes[index].title = formArray[indextitle];
-      this.notes[index].description = formArray[indexdescription];
-      this.notes[index].rating = formArray[indexrating];
-      this.notes[index].duedate = formArray[indexduedate];
-      this.notes[index].createdate = formArray[indexcreatedate];
-      this.notes[index].completed = formArray[indexcompleted];
+  async updateNoteById(id, formTitle, formDescription, formRating, formDue, formCreate, formCompleted) {
+    const updatedNote = await new Note(formTitle, formDescription, formRating, formDue, formCreate, formCompleted);
+    console.log(id);
+    console.log(updatedNote);
+    return httpService.ajax('PUT', `/notes/${id}`, updatedNote);
     }
 
   async deleteNote(id) {
-      return await httpService.ajax('DELETE', `/notes/${id}`, undefined);
+      console.log('delete note service', id);
+      return httpService.ajax('DELETE', `/notes/${id}`, undefined);
   }
 
     sortByCreateDate() {

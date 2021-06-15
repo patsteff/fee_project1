@@ -26,7 +26,7 @@ function editNoteMode(e) {
 
   function createNoteHtml(noteList) {
     return noteList
-      .map((note, i) => `
+      .map((note) => `
     
     
           <form class="note ${note.completed ? 'completed' : ''}" data-index=${note._id}>
@@ -113,8 +113,11 @@ function editNoteMode(e) {
 function deleteNote(e) {
     const form = e.target.parentNode.parentNode;
     const id = form.dataset.index;
-    noteList.deleteNote(id);
-    renderNotes();
+    console.log('delete ID', id);
+    noteList.deleteNote(id).then((response) => {
+      console.log('deleteNote ', response);
+ });
+      // then((response) => renderNotes())});
   }
 
 function getRating() {
@@ -137,21 +140,20 @@ function updateNote(e) {
   const formCompleted = form.querySelector('input[type=checkbox]').checked;
   const formArray = [];
   formArray.push(formTitle, formDescription, formRating, formDue, formCreate, formCompleted);
-  console.log(id);
-  console.log(formArray);
-  noteList.getNoteById(id).then((response) => console.log(response));
-
-  // add class to checkbox for filter on completed
-  if (formCompleted) {
-    form.classList.add('completed');
-  } else {
-  form.classList.remove('completed');
-  }
-  // update GUI to readonly
-  const inputsToUpdate = form.querySelectorAll('.note-form-edit');
-  inputsToUpdate.forEach((input) => { input.readOnly = true; });
-  const ratingsToUpdate = form.querySelectorAll('input[type=radio], input[type=checkbox]');
-  ratingsToUpdate.forEach((rating) => rating.disabled = true);
+  noteList.updateNoteById(id, formTitle, formDescription, formRating, formDue, formCreate, formCompleted).then((response) => {
+    console.log('updateNote', response);
+    // add class to checkbox for filter on completed
+    if (formCompleted) {
+      form.classList.add('completed');
+    } else {
+    form.classList.remove('completed');
+    }
+    // update GUI to readonly
+    const inputsToUpdate = form.querySelectorAll('.note-form-edit');
+    inputsToUpdate.forEach((input) => { input.readOnly = true; });
+    const ratingsToUpdate = form.querySelectorAll('input[type=radio], input[type=checkbox]');
+    ratingsToUpdate.forEach((rating) => rating.disabled = true);
+  });
 }
 
 // register event handler in div #notes-list

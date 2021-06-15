@@ -1,7 +1,6 @@
 import {notesBackendStoreService} from '../services/notesBackendStoreService.js';
 
 export class notesControllerClass {
-    // Handle Author create on POST.
     async getAllNotes(request, response) {
         response.json((await notesBackendStoreService.getAllNotes() || []));
     }
@@ -15,7 +14,15 @@ export class notesControllerClass {
     }
 
     async deleteNoteById(request, response) {
-        await notesBackendStoreService.deleteNoteById(request.params.id);
+        console.log(request.params.id);
+
+        response.status(200).json({title: 'test'});
+        // send(await notesBackendStoreService.deleteNoteById(request.params.id));
+    }
+
+    async updateNoteById(request, response) {
+        console.log(request.params.id, request.body);
+        await notesBackendStoreService.updateNoteById(request.params.id, request.body);
         response.sendStatus(200);
     }
 }
