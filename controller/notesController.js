@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import {notesBackendStoreService} from '../services/notesBackendStoreService.js';
 
 export class notesControllerClass {
@@ -16,11 +17,13 @@ export class notesControllerClass {
     async deleteNoteById(request, response) {
         await notesBackendStoreService.deleteNoteById(request.params.id);
         response.status(200);
+        response.json({msg: 'note deleted'});
     }
 
     async updateNoteById(request, response) {
         await notesBackendStoreService.updateNoteById(request.params.id, request.body);
         response.status(200);
+        response.json({msg: 'note updated'});
     }
 }
 

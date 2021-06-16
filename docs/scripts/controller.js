@@ -22,8 +22,8 @@ function editNoteMode(e) {
   ratingsToUpdate.forEach((rating) => rating.removeAttribute('disabled'));
   }
 
-  function createNoteHtml(noteList) {
-    return noteList
+  function createNoteHtml(someList) {
+    return someList
       .map((note) => `
     
     
@@ -136,8 +136,7 @@ function updateNote(e) {
   const formArray = [];
   formArray.push(formTitle, formDescription, formRating, formDue, formCreate, formCompleted);
   // eslint-disable-next-line max-len
-  noteList.updateNoteById(id, formTitle, formDescription, formRating, formDue, formCreate, formCompleted).then((response) => {
-    console.log(response.status);
+  noteList.updateNoteById(id, formTitle, formDescription, formRating, formDue, formCreate, formCompleted).then(() => {
     if (formCompleted) {
       form.classList.add('completed');
     } else {
@@ -150,7 +149,7 @@ function updateNote(e) {
     ratingsToUpdate.forEach((rating) => rating.disabled = true);
 
     renderNotes('duedate');
-  });
+  }).catch((err) => { console.log(err); });
     // add class to checkbox for filter on completed
 }
 
