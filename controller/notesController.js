@@ -14,13 +14,11 @@ export class notesControllerClass {
     }
 
     async deleteNoteById(request, response) {
-        console.log(request.params.id);
         await notesBackendStoreService.deleteNoteById(request.params.id);
         response.status(200);
     }
 
     async updateNoteById(request, response) {
-        console.log('notesController updateNote request id and body', request.params.id, request.body, 'this is the end');
         await notesBackendStoreService.updateNoteById(request.params.id, request.body);
         response.status(200);
     }

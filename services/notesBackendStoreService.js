@@ -1,45 +1,45 @@
+/* eslint-disable class-methods-use-this */
 import Datastore from 'nedb-promise';
 
 // Persistent datastore with automatic loading
 const notesDb = new Datastore({ filename: './data/notes.db', autoload: true });
 
-export class notesBackendStoreServiceClass {
+export class NotesBackendStoreServiceClass {
     async getAllNotes(sortbyFromRequestParam) {
-        console.log(sortbyFromRequestParam);
         switch (sortbyFromRequestParam) {
             case 'rating':
-                return await notesDb.cfind({}).sort({rating: -1}).exec();
-                break;
+                return notesDb.cfind({}).sort({rating: -1}).exec();
+
             case 'duedate':
-                return await notesDb.cfind({}).sort({duedate: -1}).exec();
-                break;
+                return notesDb.cfind({}).sort({duedate: 1}).exec();
+
             case 'createdate':
-                return await notesDb.cfind({}).sort({createdate: -1}).exec();
-                break;
+                return notesDb.cfind({}).sort({createdate: 1}).exec();
+
             default:
-                return await notesDb.cfind({}).sort({duedate: -1}).exec();
+                return notesDb.cfind({}).sort({duedate: 1}).exec();
         }
     }
 
     async getNoteById(idFromRequestParam) {
-        return await notesDb.findOne({_id: idFromRequestParam});
+        return notesDb.findOne({_id: idFromRequestParam});
     }
 
     async createNote(noteContentFromRequestBody) {
-        return await notesDb.insert(noteContentFromRequestBody);
+        return notesDb.insert(noteContentFromRequestBody);
     }
 
     async updateNoteById(idFromRequestParam, newNote) {
-        console.log('backendStore newNote', newNote);
+        console.log('backendStore newNote');
 
         const oldNote = await this.getNoteById(idFromRequestParam);
-        console.log('backendStore oldNote', oldNote);
-        return await notesDb.update(oldNote, newNote);
+        console.log('backendStore oldNote');
+        return notesDb.update(oldNote, newNote);
     }
 
     async deleteNoteById(idFromRequestParam) {
-        return await notesDb.remove({_id: idFromRequestParam});
+        return notesDb.remove({_id: idFromRequestParam});
     }
 }
 
-export const notesBackendStoreService = new notesBackendStoreServiceClass();
+export const notesBackendStoreService = new NotesBackendStoreServiceClass();

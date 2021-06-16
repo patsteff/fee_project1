@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import noteList from './service/note-service.js';
 
 // toggleDarkMode on click of button
@@ -10,9 +11,6 @@ function toggleDarkMode() {
   themeToggle.addEventListener('change', toggleDarkMode);
 
 const formElem = document.querySelector('#form');
-
-// create test data
-noteList.createTestNotes();
 
 const notesListElement = document.querySelector('#notes-list');
 
@@ -104,8 +102,8 @@ function editNoteMode(e) {
       .join('');
   }
 
-   function renderNotes() {
-     noteList.getNotes().then((response) => {
+   function renderNotes(sortby) {
+     noteList.getNotes(sortby).then((response) => {
       notesListElement.innerHTML = createNoteHtml(response);
      });
   }
@@ -114,7 +112,7 @@ function deleteNote(e) {
     const form = e.target.parentNode.parentNode;
     const id = form.dataset.index;
     noteList.deleteNote(id);
-    renderNotes();
+    renderNotes('duedate');
   }
 
 function getRating() {
@@ -137,8 +135,9 @@ function updateNote(e) {
   const formCompleted = form.querySelector('input[type=checkbox]').checked;
   const formArray = [];
   formArray.push(formTitle, formDescription, formRating, formDue, formCreate, formCompleted);
-  noteList.updateNoteById(id, formTitle, formDescription, formRating, formDue, formCreate, formCompleted);
-    // add class to checkbox for filter on completed
+  // eslint-disable-next-line max-len
+  noteList.updateNoteById(id, formTitle, formDescription, formRating, formDue, formCreate, formCompleted).then((response) => {
+    console.log(response.status);
     if (formCompleted) {
       form.classList.add('completed');
     } else {
@@ -149,6 +148,10 @@ function updateNote(e) {
     inputsToUpdate.forEach((input) => { input.readOnly = true; });
     const ratingsToUpdate = form.querySelectorAll('input[type=radio], input[type=checkbox]');
     ratingsToUpdate.forEach((rating) => rating.disabled = true);
+
+    renderNotes('duedate');
+  });
+    // add class to checkbox for filter on completed
 }
 
 // register event handler in div #notes-list
@@ -181,7 +184,7 @@ formElem.addEventListener('submit', async (e) => {
 
   noteList.addNote(title, description, rating, duedate);
 
-  renderNotes();
+  renderNotes('duedate');
 
 // formElem.reset();
 });
@@ -198,19 +201,19 @@ function showCompleted(e) {
 // add event listener to sort buttons
 document.querySelector('#sort-by-prio').addEventListener('click', () => {
   noteList.getNotes('rating');
-  renderNotes();
+  renderNotes('rating');
 });
 document
   .querySelector('#sort-by-create-date')
   .addEventListener('click', () => {
     noteList.getNotes('createdate');
-    renderNotes();
+    renderNotes('createdate');
   });
 document
   .querySelector('#sort-by-due-date')
   .addEventListener('click', () => {
     noteList.getNotes('duedate');
-    renderNotes();
+    renderNotes('duedate');
   });
 
   document
@@ -228,4 +231,4 @@ document
   .querySelector('#btn-create-note')
   .addEventListener('click', hideNoteSection);
 
-renderNotes();
+renderNotes('duedate');

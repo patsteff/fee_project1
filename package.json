@@ -25,6 +25,7 @@
     "stylelint-config-standard": "^21.0.0"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "nedb": "^1.8.0",
     "nedb-promise": "^2.0.1"
