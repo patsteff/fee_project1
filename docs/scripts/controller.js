@@ -115,23 +115,26 @@ function deleteNote(e) {
     renderNotes('duedate');
   }
 
-function getRating() {
+async function getRating(form) {
     let rating = [];
-    const radios = document.querySelectorAll('input[type=radio]');
+    const radios = form.querySelectorAll('input[type=radio]');
+
     radios.forEach((a) => (a.checked ? rating.push(a) : ''));
     rating = rating[0].value;
+
     return rating;
   }
 
 // view: collect update note from DOM
-function updateNote(e) {
+async function updateNote(e) {
   const form = e.target.parentNode.parentNode;
+
   const id = form.dataset.index;
   const formTitle = form.querySelector('.note-form-title').value;
   const formDue = form.querySelector('.note-form-duedate').value;
   const formCreate = form.querySelector('.note-form-createdate').value;
   const formDescription = form.querySelector('.note-form-textarea').value;
-  const formRating = getRating();
+  const formRating = await getRating(form);
   const formCompleted = form.querySelector('input[type=checkbox]').checked;
   const formArray = [];
   formArray.push(formTitle, formDescription, formRating, formDue, formCreate, formCompleted);
@@ -177,9 +180,11 @@ function updateNote(e) {
 formElem.addEventListener('submit', async (e) => {
   e.preventDefault();
   const title = document.querySelector('#title').value;
+  const form = e.target;
+
   const description = document.querySelector('#description').value;
   const duedate = document.querySelector('#duedate').value;
-  const rating = getRating();
+  const rating = await getRating(form);
 
   noteList.addNote(title, description, rating, duedate);
 
