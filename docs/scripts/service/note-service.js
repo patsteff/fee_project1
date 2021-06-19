@@ -26,9 +26,9 @@ class NoteService {
   }
 
     async addNote(title, description, rating, duedate) {
-      const createdate = formatDate(new Date());
+      // const createdate = formatDate(new Date());
       const completed = false;
-      const addedNote = new Note(title, description, rating, duedate, createdate, completed);
+      const addedNote = new Note(title, description, rating, duedate, completed);
       return httpService.ajax('POST', '/notes/', addedNote);
   }
 

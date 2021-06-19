@@ -1,15 +1,5 @@
-{"title":"tttiiiiiiiiiiiiiii","description":"iiiiiiiiiiii","rating":"4","duedate":"2021-06-13","createdate":"2021-06-18","completed":false,"_id":"5luNxClNbaEsERM5"}
-{"title":"oooooooooooooo","description":"ooooooooo","rating":{},"duedate":"2021-06-20","createdate":"2021-06-18","completed":false,"_id":"ljDfN6AHmIYonjzi"}
-{"title":"Rating fixen","description":"nomal","rating":"4","duedate":"2021-06-26","createdate":"2021-06-18","completed":false,"_id":"nsz1nexx03lNVNyX"}
-{"title":"eeeeee","description":"eeeeeeee","rating":{},"duedate":"2021-06-05","createdate":"2021-06-18","completed":false,"_id":"rtXyPzjyE74a2Iyy"}
-{"title":"Rating fixen","description":"nomal","rating":"2","duedate":"2021-06-26","createdate":"2021-06-18","completed":false,"_id":"xt7IkfWTQzkCJ6Mo"}
-{"title":"uu","description":"uu","rating":{},"duedate":"2021-06-05","createdate":"2021-06-18","completed":false,"_id":"yMoOvP5vQIFFRtW0"}
-{"title":"eee","description":"ee","rating":"1","duedate":"","createdate":"2021-06-18","completed":false,"_id":"TbPuVjiYtQE7KBWc"}
-{"title":"777777777","description":"777777777777777","rating":"4","duedate":"2021-06-04","createdate":"2021-06-18","completed":false,"_id":"rlhSOOtir3PvTLML"}
-{"title":"777777777666","description":"777777777777777","rating":"4","duedate":"2021-06-04","createdate":"2021-06-18","completed":false,"_id":"rlhSOOtir3PvTLML"}
-{"$$deleted":true,"_id":"ljDfN6AHmIYonjzi"}
-{"$$deleted":true,"_id":"rtXyPzjyE74a2Iyy"}
-{"$$deleted":true,"_id":"yMoOvP5vQIFFRtW0"}
-{"$$deleted":true,"_id":"rlhSOOtir3PvTLML"}
-{"title":"eee","description":"ee","rating":"1","duedate":"","createdate":"2021-06-18","completed":true,"_id":"TbPuVjiYtQE7KBWc"}
-{"$$deleted":true,"_id":"nsz1nexx03lNVNyX"}
+{"title":"Silvana","description":"isch in Portugal","rating":"3","duedate":"2021-06-10","completed":"true","createdate":"2021-06-19","_id":"b8lbLJUdRVK1AwO4"}
+{"title":"SilvanaAA","description":"silibilid","rating":"3","duedate":"2021-06-10","completed":"false","createdate":"2021-06-19","_id":"osu06mPSp05CzKvn"}
+{"title":"MAN soll richtig schreiben","description":"adf","rating":"3","duedate":"2021-06-17","completed":"false","createdate":"2021-06-19","_id":"y1nbEAJifLuitCA6"}
+{"title":"Silvana","description":"isch in Portugal","rating":"2","duedate":"2021-06-10","completed":"true","createdate":"2021-06-19","_id":"b8lbLJUdRVK1AwO4"}
+{"title":"MAN soll richtig schreiben","description":"adf","rating":"1","duedate":"2021-06-17","completed":"true","createdate":"2021-06-19","_id":"y1nbEAJifLuitCA6"}

@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import Datastore from 'nedb-promise';
+import moment from 'moment';
 
 // Persistent datastore with automatic loading
 const notesDb = new Datastore({ filename: './data/notes.db', autoload: true });
@@ -26,15 +27,16 @@ export class NotesBackendStoreServiceClass {
     }
 
     async createNote(noteContentFromRequestBody) {
+        noteContentFromRequestBody.createdate = moment().format('YYYY-MM-DD');
         return notesDb.insert(noteContentFromRequestBody);
     }
 
     async updateNoteById(idFromRequestParam, newNote) {
-        console.log('backendStore newNote');
+        console.log('backendStore newNote', newNote);
 
         const oldNote = await this.getNoteById(idFromRequestParam);
-        console.log('backendStore oldNote');
-        return notesDb.update(oldNote, newNote);
+        await notesDb.update(oldNote, {$set: {title: `${newNote.title}`, description: `${newNote.description}`, rating: `${newNote.rating}`, duedate: `${newNote.duedate}`, completed: `${newNote.completed}`}}, {multi: true});
+        return await this.getNoteById(idFromRequestParam);
     }
 
     async deleteNoteById(idFromRequestParam) {

@@ -1,15 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import noteList from './service/note-service.js';
 
-// toggleDarkMode on click of button
-function toggleDarkMode() {
-    const element = document.body;
-    element.classList.toggle('dark-mode');
-  }
-
-  const themeToggle = document.querySelector('.theme-toggle');
-  themeToggle.addEventListener('change', toggleDarkMode);
-
 const formElem = document.querySelector('#form');
 
 const notesListElement = document.querySelector('#notes-list');
@@ -131,15 +122,15 @@ async function updateNote(e) {
 
   const id = form.dataset.index;
   const formTitle = form.querySelector('.note-form-title').value;
-  const formDue = form.querySelector('.note-form-duedate').value;
-  const formCreate = form.querySelector('.note-form-createdate').value;
+  const formDue = moment(form.querySelector('.note-form-duedate').value).format('YYYY-MM-DD');
+  // const formCreate = moment(form.querySelector('.note-form-createdate').value).format('YYYY-MM-DD');
   const formDescription = form.querySelector('.note-form-textarea').value;
   const formRating = await getRating(form);
   const formCompleted = form.querySelector('input[type=checkbox]').checked;
   const formArray = [];
-  formArray.push(formTitle, formDescription, formRating, formDue, formCreate, formCompleted);
+  formArray.push(formTitle, formDescription, formRating, formDue, formCompleted);
   // eslint-disable-next-line max-len
-  noteList.updateNoteById(id, formTitle, formDescription, formRating, formDue, formCreate, formCompleted).then(() => {
+  noteList.updateNoteById(id, formTitle, formDescription, formRating, formDue, formCompleted).then(() => {
     if (formCompleted) {
       form.classList.add('completed');
     } else {
@@ -183,9 +174,9 @@ formElem.addEventListener('submit', async (e) => {
   const form = e.target;
 
   const description = document.querySelector('#description').value;
-  const duedate = document.querySelector('#duedate').value;
-  const rating = await getRating(form);
+  const duedate = moment(document.querySelector('#duedate').value).format('YYYY-MM-DD');
 
+  const rating = await getRating(form);
   noteList.addNote(title, description, rating, duedate);
 
   renderNotes('duedate');

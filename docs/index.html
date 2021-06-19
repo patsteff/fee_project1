@@ -11,9 +11,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles/index.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="module" src="scripts/service/note-service.js" defer></script>
   <script type="module" src="scripts/service/note.js" defer></script>
   <script type="module" src="scripts/controller.js" defer></script>
+  <script type="module" src="scripts/controller_theme.js" defer></script>
+
 
 </head>
 
@@ -70,7 +75,7 @@
         </div>
 
         <label class="create-form-label" for="duedate">Due date: *</label>
-        <input class="create-form-input" id="duedate" type="date" name="duedate" />
+        <input class="create-form-input" id="duedate" type="date" name="duedate" required />
       </div>
 
       <div class="button-display">
