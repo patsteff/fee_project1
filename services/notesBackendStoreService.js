@@ -32,8 +32,6 @@ export class NotesBackendStoreServiceClass {
     }
 
     async updateNoteById(idFromRequestParam, newNote) {
-        console.log('backendStore newNote', newNote);
-
         const oldNote = await this.getNoteById(idFromRequestParam);
         await notesDb.update(oldNote, {$set: {title: `${newNote.title}`, description: `${newNote.description}`, rating: newNote.rating, duedate: `${newNote.duedate}`, completed: newNote.completed}}, {multi: true});
         return await this.getNoteById(idFromRequestParam);

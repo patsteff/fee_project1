@@ -6,18 +6,16 @@
   <title>Note App</title>
   <link rel="icon" type="image/png" href="styles/assets/images/notess.png" />
   <script src="https://unpkg.com/phosphor-icons@1.2.0"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
-    integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles/index.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
     integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script type="module" src="scripts/service/note-service.js" defer></script>
-  <script type="module" src="scripts/service/note.js" defer></script>
-  <script type="module" src="scripts/controller.js" defer></script>
-  <script type="module" src="scripts/controller_theme.js" defer></script>
+  <script type="module" src="scripts/service/note-service.js"></script>
+  <script type="module" src="scripts/service/note.js"></script>
+  <script type="module" src="scripts/controller.js"></script>
+  <script type="module" src="scripts/controller_theme.js"></script>
 
 
 </head>
@@ -25,7 +23,7 @@
 <body class="showCompleted">
   <h1>My Note App Project</h1>
   <section class="options">
-    <h2>Option Section</h2>
+    <h2>Options</h2>
     <div class="actions">
       <button class="btn btn-top" id="btn-create-note">
         Create new note
@@ -51,7 +49,7 @@
   </section>
 
   <section class="create-new-note" id="create-new-note" hidden>
-    <h2>Create New Note</h2>
+    <h2>Create new note</h2>
     <form class="create-form" id="form">
       <div class="form-display">
         <label class="create-form-label" for="title">Title: *</label>
@@ -61,7 +59,7 @@
         <textarea class="create-form-textarea" id="description" name="description"></textarea>
 
         <div class="create-form-label">Priortiy Rating</div>
-        <div class="rating">
+        <div class="rating rating-create">
           <input type="radio" id="light5" name="rating" value="5" />
           <label for="light5"><i class="ph-lightning"></i></label>
           <input type="radio" id="light4" name="rating" value="4" />
@@ -88,17 +86,15 @@
   </section>
 
   <section>
+    <h2>Open notes</h2>
     <div class="notes-list-section" id="notes-list">
-      You don't have any notes yet
+      Notes not found.
     </div>
   </section>
 
+
   <footer>&copy; Patricia Steffen - OST CAS FEE 2021 - Project 1</footer>
 
-
-
-
-  <!--  type="module"  -->
 </body>
 
 </html>

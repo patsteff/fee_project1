@@ -1,16 +1,10 @@
 :root {
-  --grayblue: #6b6b83;
-  --bluegreen: #3b8d99;
-  --rosered: #aa4b6b;
+  --lightergradient: rgba(62, 161, 219, 1);
+  --darkergradient: rgba(93, 52, 236, 1);
   --buttoncolor: white;
-  --buttonfontcolor: black;
-  --notesbackgroundcolor: rgba(255, 255, 255, 0.2);
-  --notebackgroundcolor: rgba(255, 255, 255, 0.6);
-  --notefontcolor: black;
+  --fontcolor: black;
   --formbackgroundcolor: white;
-  --formfontcolor: black;
-  --standardmargin: 15px;
-  --createbuttoncolor: #d3d3d3;
+  --standard: 15px;
   --standardfontsize: 1.1rem;
 }
 
@@ -19,12 +13,10 @@
 }
 
 body {
-  /* wes bos 02 test von grid */
   background-image:
     url("./assets/images/topography.svg"),
-    linear-gradient(110deg, var(--rosered), var(--grayblue), var(--bluegreen));
+    linear-gradient(45deg, var(--lightergradient) 1%, var(--darkergradient) 100%);
   background-size: 340px, auto;
-  min-height: calc(100vh - 100px);
   margin: 50px;
   background-attachment: fixed;
   letter-spacing: -1px;
@@ -40,27 +32,26 @@ h2,
 h3 {
   font-weight: 400;
   font-size: 24px;
+  color: var(--fontcolor);
+}
+
+h1 {
+  color: var(--fontcolor);
 }
 
 body.dark-mode {
-  --grayblue: #202027;
-  --bluegreen: #23545b;
-  --rosered: #441e2a;
-  --buttoncolor: black;
-  --buttonfontcolor: white;
-  --notesbackgroundcolor: rgba(111, 111, 111, 0.2);
-  --notebackgroundcolor: rgba(111, 111, 111, 0.2);
-  --notefontcolor: white;
-  --formbackgroundcolor: black;
-  --formfontcolor: white;
-  --createbuttoncolor: #717171;
+  --lightergradient: #537895;
+  --darkergradient: #09203f;
+  --buttoncolor: #717171;
+  --fontcolor: white;
+  --formbackgroundcolor: #09203f;
 }
 
 .btn {
   height: 100%;
   width: 250px;
   background-color: var(--buttoncolor);
-  color: var(--buttonfontcolor);
+  color: var(--fontcolor);
   border-radius: 10px;
   border: none;
   padding: 15px 32px;
@@ -74,14 +65,14 @@ body.dark-mode {
 /* top menu */
 .actions {
   display: flex;
-  margin-bottom: var(--standardmargin);
+  margin-bottom: var(--standard);
   justify-content: space-between;
   flex-wrap: wrap;
 }
 
 .sort {
   display: flex;
-  margin-bottom: var(--standardmargin);
+  margin-bottom: var(--standard);
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
@@ -90,7 +81,6 @@ body.dark-mode {
 /* note section */
 .notes-list-section {
   font-size: var(--standardfontsize);
-  background-color: var(--notesbackgroundcolor);
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -99,13 +89,13 @@ body.dark-mode {
 
 .note {
   flex: 0 0 100%;
-  background-color: var(--notebackgroundcolor);
+  background-color: rgba(255, 255, 255, 0.2);
   display: flex;
-  margin-bottom: var(--standardmargin);
-  padding-left: var(--standardmargin);
-  padding-top: var(--standardmargin);
+  margin-bottom: var(--standard);
+  padding: var(--standard) 0 var(--standard) var(--standard);
   font-size: var(--standardfontsize);
-  color: var(--notefontcolor);
+  color: var(--fontcolor);
+  min-height: 250px;
 }
 
 .note-row {
@@ -114,27 +104,43 @@ body.dark-mode {
   flex-wrap: wrap;
 }
 
-.row-first {
-  flex: 0 0 20%;
+.note-stars {
+  display: flex;
+  height: 70px;
+  flex-wrap: wrap;
   justify-content: space-between;
+  align-items: flex-start;
+}
+
+.row-first {
+  flex: 1 1 20%;
+  display: flex;
 }
 
 .row-second {
-  flex: 0 0 60%;
-  justify-content: space-between;
+  flex: 2 2 60%;
+  justify-content: flex-start;
 }
 
 .row-third {
-  flex: 0 0 20%;
+  flex: 1 1 20%;
   justify-content: center;
   align-items: center;
 }
 
-.note-form-textarea {
-  margin-top: 15px;
+.embedded {
+  margin: 0;
+  padding: 0;
 }
 
-/* layout */
+.first-line {
+  height: 70px;
+}
+
+textarea {
+  height: 70px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
 
 /* create new note */
 .note-form-label,
@@ -155,18 +161,20 @@ body.dark-mode {
   color: inherit;
 }
 
-/* layout */
+.note-form-title {
+  font-size: 24px;
+}
 
+/* layout create form */
 .create-form {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-top: var(--standardmargin);
-  margin-bottom: var(--standardmargin);
-  padding-left: var(--standardmargin);
-  padding-top: var(--standardmargin);
+  margin-top: var(--standard);
+  margin-bottom: var(--standard);
+  padding: var(--standard) 0 var(--standard) var(--standard);
   background-color: var(--formbackgroundcolor);
-  color: var(--formfontcolor);
+  color: var(--fontcolor);
   font-size: var(--standardfontsize);
   font-family: inherit;
 }
@@ -194,10 +202,10 @@ body.dark-mode {
 
 .create-form-input,
 .create-form-textarea,
-.create-form-select, 
-.rating {
+.create-form-select,
+.rating-create {
   flex: 0 0 75%;
-  margin-bottom: var(--standardmargin);
+  margin-bottom: var(--standard);
   font-family: inherit;
 }
 
@@ -206,9 +214,9 @@ body.dark-mode {
   width: 150px;
   height: 60px;
   padding: 10px;
-  margin-bottom: var(--standardmargin);
-  background-color: var(--createbuttoncolor);
-  color: var(--formfontcolor);
+  margin-bottom: var(--standard);
+  background-color: var(--lightergradient);
+  color: var(--fontcolor);
   border-radius: 10px;
   border: none;
   text-align: center;
@@ -222,9 +230,9 @@ body.dark-mode {
   width: 150px;
   height: 60px;
   padding: 10px;
-  margin-bottom: var(--standardmargin);
-  background-color: var(--rosered);
-  color: var(--formfontcolor);
+  margin-bottom: var(--standard);
+  background-color: var(--buttoncolor);
+  color: var(--fontcolor);
   border-radius: 10px;
   border: none;
   text-align: center;
@@ -233,9 +241,14 @@ body.dark-mode {
   cursor: pointer;
 }
 
+.btn-delete {
+  margin-bottom: 0;
+}
+
 .btn:hover,
 .btn-small:hover,
-.btn-form:hover {
+.btn-form:hover,
+.btn-note:hover {
   font-weight: 700;
 }
 
@@ -248,49 +261,14 @@ input[type=radio] {
   display: none;
 }
 
-.rating > input[type=radio]:checked ~ label {
-  color: #eda62b;
-  
-}
 .rating label {
   font-size: 30px;
-  
 }
 
-/* styling star rating *//* 
-
-.rating > input {
-  display: none;
+.rating > input[type=radio]:checked ~ label {
+  color: #ddbc4f;
 }
-
-.rating > label::before {
-  content: "\f005";
-  font-family: "Font Awesome 5 Free", sans-serif;
-  margin: 5px;
-  font-size: 1.5rem;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.rating > label {
-  color: #ddd;
-  float: right;
-  cursor: pointer;
-}
-
-.rating > input:checked ~ label,
-.rating:not(:checked) > label:hover,
-.rating:not(:checked) > label:hover ~ label {
-  color: #fec821;
-}
-
-.rating > input:checked + label:hover,
-.rating > input:checked ~ label:hover,
-.rating > label:hover ~ input:checked ~ label,
-.rating > input:checked ~ label:hover ~ label {
-  color: #fec821;
-} */
 
 footer {
-  margin: var(--standardmargin) 0;
+  margin: var(--standard) 0;
 }

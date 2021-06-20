@@ -1,6 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 import noteList from './service/note-service.js';
 
+localStorage.setItem('filter', 'duedate');
+
 const formElem = document.querySelector('#form');
 
 const notesListElement = document.querySelector('#notes-list');
@@ -20,9 +22,9 @@ function editNoteMode(e) {
     
           <form class="note ${note.completed ? 'completed' : ''}" data-index=${note._id}>
             <div class="note-row row-first">
-              <div>
-                <label class="note-form-label" for="duedate">Due date:</label>
-                <input
+              <div class="embedded first-line">
+              <label for="duedate">Due date:</label>
+              <input
                   class="note-form-input note-form-duedate note-form-edit"
                   type="date"
                   name="duedate"
@@ -30,20 +32,23 @@ function editNoteMode(e) {
                   readonly
                   
                   />
+              <p class="note-form-label embedded">That's ${moment(note.duedate, 'YYYY-MM-DD').fromNow()}</p>
+                  
               </div>
               
-              <div class="note-row row-first">
-                <label class="note-form-label" for="createdate">Create date:</label>
+              <div class="first-line">
+                <label for="createdate">Create date:</label>
                 <input
-                  class="note-form-input note-form-createdate"
+                  class="note-form-input"
                   type="date"
                   name="createdate"
                   value="${note.createdate}"                
                   readonly
                   />   
+              
               </div>             
                 
-              <div class="note-row row-first">
+              <div class="first-line">
                 <input type="checkbox" name="complete" id="checkboxid${note._id}" ${note.completed ? 'checked' : ''} disabled>
                 <label for="checkboxid${note._id}">Completed</label>
               </div>
@@ -51,23 +56,17 @@ function editNoteMode(e) {
             </div>  
   
             <div class="note-row row-second">
-                <input
-                class="note-form-input note-form-title note-form-edit"
-                type="text"
-                name="title"
-                value = "${note.title}"
-                data-index=${note._id}
-                readonly
-                />
-  
-                <textarea
-                class="note-form-textarea note-form-edit"
-                name="description"
-                readonly
-                value="${note.description}"
-                >${note.description}</textarea>
-                
-                <div class="rating"> 
+                <div class="note-stars">
+                  <input
+                  class="note-form-input note-form-title note-form-edit"
+                  type="text"
+                  name="title"
+                  value = "${note.title}"
+                  data-index=${note._id}
+                  readonly
+                  />   
+                  
+                  <div class="rating embedded"> 
                   <input type="radio" id="light5+${note._id}" name="rating" value="5" ${note.rating === '5' ? 'checked' : ''} disabled />
                   <label for="light5+${note._id}"><i class="ph-lightning"></i></label>
                   <input type="radio" id="light4+${note._id}" name="rating" value="4" ${note.rating === '4' ? 'checked' : ''} disabled/>
@@ -80,6 +79,17 @@ function editNoteMode(e) {
                   <label for="light1+${note._id}"><i class="ph-lightning"></i></label>
         
                 </div>
+                
+                </div>
+                  
+                <textarea
+                class="note-form-textarea note-form-edit"
+                name="description"
+                readonly
+                value="${note.description}"
+                >${note.description}</textarea>
+                
+                
                 
               </div>
   
@@ -123,7 +133,6 @@ async function updateNote(e) {
   const id = form.dataset.index;
   const formTitle = form.querySelector('.note-form-title').value;
   const formDue = moment(form.querySelector('.note-form-duedate').value).format('YYYY-MM-DD');
-  // const formCreate = moment(form.querySelector('.note-form-createdate').value).format('YYYY-MM-DD');
   const formDescription = form.querySelector('.note-form-textarea').value;
   const formRating = await getRating(form);
   const formCompleted = form.querySelector('input[type=checkbox]').checked;
@@ -168,6 +177,12 @@ async function updateNote(e) {
   }
 });
 
+// hide create note
+const createSection = document.querySelector('#create-new-note');
+function hideNoteSection() {
+  createSection.hidden = !createSection.hidden;
+}
+
 formElem.addEventListener('submit', async (e) => {
   e.preventDefault();
   const title = document.querySelector('#title').value;
@@ -181,7 +196,9 @@ formElem.addEventListener('submit', async (e) => {
 
   renderNotes('duedate');
 
-// formElem.reset();
+  formElem.reset();
+
+  hideNoteSection();
 });
 
 function showCompleted(e) {
@@ -214,12 +231,6 @@ document
   document
   .querySelector('#finisheditems')
   .addEventListener('click', showCompleted);
-
-// hide create note
-const createSection = document.querySelector('#create-new-note');
-function hideNoteSection() {
-  createSection.hidden = !createSection.hidden;
-}
 
 // event listener to button create note
 document
