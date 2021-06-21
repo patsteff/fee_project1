@@ -81,6 +81,7 @@ body.dark-mode {
 /* note section */
 .notes-list-section {
   font-size: var(--standardfontsize);
+  color: var(--fontcolor);
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -139,6 +140,9 @@ body.dark-mode {
 
 textarea {
   height: 70px;
+}
+
+.note-form-textarea {
   background-color: rgba(255, 255, 255, 0.4);
 }
 
@@ -271,4 +275,5 @@ input[type=radio] {
 
 footer {
   margin: var(--standard) 0;
+  color: var(--fontcolor);
 }

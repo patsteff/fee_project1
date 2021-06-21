@@ -1,6 +1,7 @@
 {"title":"Patricia","description":"Animation","rating":"1","duedate":"2021-06-03","completed":false,"createdate":"2021-06-20","_id":"DybJUBR6pB0nYQVT"}
 {"title":"Silvana","description":"Hallo there","rating":"5","duedate":"2021-04-07","completed":false,"createdate":"2021-06-19","_id":"b8lbLJUdRVK1AwO4"}
 {"title":"Noch ein Test","description":"irgendwasadfjkasdf\naksdlfjöasldkfj","rating":"4","duedate":"2021-07-18","completed":false,"createdate":"2021-06-19","_id":"dV0HMXZxbEVdttAL"}
+{"title":"test","description":"test","rating":"5","duedate":"2021-10-01","completed":false,"createdate":"2021-06-20","_id":"eMcwxdhdtxmvFWUu"}
 {"title":"Das ist eine neue Notiz","description":"Blabla","rating":"3","duedate":"2021-06-10","completed":false,"createdate":"2021-06-20","_id":"gBODL3GW7JPP0ieh"}
 {"title":"Ursina","description":"Isch in Züri","rating":"3","duedate":"2021-08-10","completed":false,"createdate":"2021-06-19","_id":"osu06mPSp05CzKvn"}
-{"title":"test","description":"test","rating":"5","duedate":"2021-10-01","completed":false,"createdate":"2021-06-20","_id":"eMcwxdhdtxmvFWUu"}
+{"title":"Silvana","description":"Hallo there","rating":"5","duedate":"2021-04-07","completed":true,"createdate":"2021-06-19","_id":"b8lbLJUdRVK1AwO4"}
