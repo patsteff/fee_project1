@@ -127,7 +127,7 @@ async function getRating(form) {
 // view: collect update note from DOM
 async function updateNote(e) {
   const id = e.target.dataset.index;
-  const form = document.querySelector(`form[data-index=${id}]`);
+  const form = document.querySelector(`form.${id}`);
   const formTitle = form.querySelector('.note-form-title').value;
   const formDue = moment(form.querySelector('.note-form-duedate').value).format('YYYY-MM-DD');
   const formDescription = form.querySelector('.note-form-textarea').value;
@@ -149,7 +149,7 @@ async function updateNote(e) {
     ratingsToUpdate.forEach((rating) => rating.disabled = true);
 
     renderNotes('duedate');
-  }).catch((err) => { console.log(err); });
+  });
     // add class to checkbox for filter on completed
 }
 
