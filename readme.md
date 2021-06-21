@@ -1,22 +1,14 @@
-Github Pages für eine Demo: https://patsteff.github.io/fee_project1/
+Github Pages FE Demo: https://patsteff.github.io/fee_project1/
 
-Die Vorlage beinhaltet CSS/HTML/JS-Linter. Diese sind konfiguriert. 
+Features
+- Create, display, edit and delete notes
+- Sort notes with duedate, createdate, priority
+- Filter completed notes
+- Toggle theme (dark / light)
+- Conditional coloring if note is not completed and less than 3 days until due date
+- Backend with nedb
 
-Getting Started
-1. Entzippen von der Vorlage.
-2. Installieren Sie die Dependencies der Vorlage
-   - Console/Terminal: «npm install» im Root vom Projekt
-3. Testen Sie, ob alles richtig installiert wurde
-   - Console: «npm run all» im Root vom Projekt
-   - Erwarte Ausgabe: 1 Warnungen und «npm run all completed»
-4. Woche 1
-   - HTML Gerüst erstellen für die Wireframes und Beginn CSS:
-      - /public/index.html
-      - /public/styles/index.css
-   - Webstorm:
-      - /public/index.html "ausführen".
-   - Visual Studio Code:
-      - Live Server nutzen: https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer    
+ESLINT:
 
 Folgende Befehle sind dann möglich
 

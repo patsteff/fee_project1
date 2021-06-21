@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
 import noteList from './service/note-service.js';
 
@@ -118,10 +119,8 @@ function deleteNote(e) {
 async function getRating(form) {
     let rating = [];
     const radios = form.querySelectorAll('input[type=radio]');
-
     radios.forEach((a) => (a.checked ? rating.push(a) : ''));
     rating = rating[0].value;
-
     return rating;
   }
 
@@ -129,7 +128,6 @@ async function getRating(form) {
 async function updateNote(e) {
   const id = e.target.dataset.index;
   const form = document.querySelector(`form[data-index=${id}]`);
-  console.log(form);
   const formTitle = form.querySelector('.note-form-title').value;
   const formDue = moment(form.querySelector('.note-form-duedate').value).format('YYYY-MM-DD');
   const formDescription = form.querySelector('.note-form-textarea').value;
