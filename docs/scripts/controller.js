@@ -20,7 +20,7 @@ function editNoteMode(e) {
       .map((note) => `
     
     
-          <form class="note ${note.completed ? 'completed' : ''}" data-index=${note._id}>
+          <form class="note ${note.completed ? 'completed' : ''} ${note._id}" data-index=${note._id}>
             <div class="note-row row-first">
               <div class="embedded first-line">
               <label for="duedate">Due date:</label>
@@ -32,7 +32,7 @@ function editNoteMode(e) {
                   readonly
                   
                   />
-              <p class="note-form-label embedded">That's ${moment(note.duedate, 'YYYY-MM-DD').fromNow()}</p>
+              <p class="note-form-label embedded ${moment().diff(moment(note.duedate), 'days') >= -3 && !note.completed ? 'highlight' : 'no-light'}">${moment(note.duedate, 'YYYY-MM-DD').fromNow()}</p>
                   
               </div>
               
@@ -94,8 +94,8 @@ function editNoteMode(e) {
               </div>
   
             <div class="note-row row-third">
-              <button class="btn-note btn-edit" type="button" data-action="edit"><i class="ph-pencil"></i> Edit</button>
-              <button class="btn-note btn-delete" type="button" data-action="delete"><i class="ph-x"></i> Delete</button>
+              <button class="btn-note btn-edit" type="button" data-action="edit" data-index=${note._id}><i class="ph-pencil"></i> Edit</button>
+              <button class="btn-note btn-delete" type="button" data-action="delete" data-index=${note._id}><i class="ph-x"></i> Delete</button>
             </div>
               
           </form>
@@ -110,8 +110,7 @@ function editNoteMode(e) {
   }
 
 function deleteNote(e) {
-    const form = e.target.parentNode.parentNode;
-    const id = form.dataset.index;
+    const id = e.target.dataset.index;
     noteList.deleteNote(id);
     renderNotes('duedate');
   }
@@ -128,9 +127,9 @@ async function getRating(form) {
 
 // view: collect update note from DOM
 async function updateNote(e) {
-  const form = e.target.parentNode.parentNode;
-
-  const id = form.dataset.index;
+  const id = e.target.dataset.index;
+  const form = document.querySelector(`form[data-index=${id}]`);
+  console.log(form);
   const formTitle = form.querySelector('.note-form-title').value;
   const formDue = moment(form.querySelector('.note-form-duedate').value).format('YYYY-MM-DD');
   const formDescription = form.querySelector('.note-form-textarea').value;
