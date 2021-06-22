@@ -1,6 +1,6 @@
 :root {
-  --lightergradient: rgba(62, 161, 219, 1);
-  --darkergradient: rgba(93, 52, 236, 1);
+  --lightergradient: #5D9FFF;
+  --darkergradient: #B8DCFF;
   --buttoncolor: white;
   --fontcolor: black;
   --formbackgroundcolor: white;

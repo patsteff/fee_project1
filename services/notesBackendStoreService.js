@@ -2,7 +2,6 @@
 import Datastore from 'nedb-promise';
 import moment from 'moment';
 
-// Persistent datastore with automatic loading
 const notesDb = new Datastore({ filename: './data/notes.db', autoload: true });
 
 export class NotesBackendStoreServiceClass {

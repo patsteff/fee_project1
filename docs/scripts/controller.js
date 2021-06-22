@@ -142,7 +142,7 @@ async function updateNote(e) {
     } else {
     form.classList.remove('completed');
     }
-    // update GUI to readonly
+
     const inputsToUpdate = form.querySelectorAll('.note-form-edit');
     inputsToUpdate.forEach((input) => { input.readOnly = true; });
     const ratingsToUpdate = form.querySelectorAll('input[type=radio], input[type=checkbox]');
@@ -150,7 +150,6 @@ async function updateNote(e) {
 
     renderNotes('duedate');
   });
-    // add class to checkbox for filter on completed
 }
 
 // register event handler in div #notes-list
