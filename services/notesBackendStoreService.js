@@ -27,6 +27,7 @@ export class NotesBackendStoreServiceClass {
     }
 
     async createNote(noteContentFromRequestBody) {
+        // eslint-disable-next-line no-param-reassign
         noteContentFromRequestBody.createdate = moment().format('YYYY-MM-DD');
         return notesDb.insert(noteContentFromRequestBody);
     }
@@ -34,7 +35,7 @@ export class NotesBackendStoreServiceClass {
     async updateNoteById(idFromRequestParam, newNote) {
         const oldNote = await this.getNoteById(idFromRequestParam);
         await notesDb.update(oldNote, {$set: {title: `${newNote.title}`, description: `${newNote.description}`, rating: newNote.rating, duedate: `${newNote.duedate}`, completed: newNote.completed}}, {multi: true});
-        return await this.getNoteById(idFromRequestParam);
+        return this.getNoteById(idFromRequestParam);
     }
 
     async deleteNoteById(idFromRequestParam) {
