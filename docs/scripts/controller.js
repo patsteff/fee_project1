@@ -127,12 +127,12 @@ async function getRating(form) {
 // view: collect update note from DOM
 async function updateNote(e) {
   const id = e.target.dataset.index;
-  const form = document.querySelector(`form.${id}`);
-  const formTitle = form.querySelector('.note-form-title').value;
-  const formDue = moment(form.querySelector('.note-form-duedate').value).format('YYYY-MM-DD');
-  const formDescription = form.querySelector('.note-form-textarea').value;
-  const formRating = await getRating(form);
-  const formCompleted = form.querySelector('input[type=checkbox]').checked;
+  const formUp = e.target.closest('form');
+  const formTitle = formUp.querySelector('.note-form-title').value;
+  const formDue = moment(formUp.querySelector('.note-form-duedate').value).format('YYYY-MM-DD');
+  const formDescription = formUp.querySelector('.note-form-textarea').value;
+  const formRating = await getRating(formUp);
+  const formCompleted = formUp.querySelector('input[type=checkbox]').checked;
   const formArray = [];
   formArray.push(formTitle, formDescription, formRating, formDue, formCompleted);
   // eslint-disable-next-line max-len
