@@ -9,10 +9,10 @@ const formElem = document.querySelector('#form');
 const notesListElement = document.querySelector('#notes-list');
 
 function editNoteMode(e) {
-  const form = e.target.parentNode.parentNode;
-  const inputsToUpdate = form.querySelectorAll('.note-form-edit');
+  const formUp = e.target.closest('form');
+  const inputsToUpdate = formUp.querySelectorAll('.note-form-edit');
   inputsToUpdate.forEach((input) => input.removeAttribute('readonly'));
-  const ratingsToUpdate = form.querySelectorAll('input[type=radio], input[type=checkbox]');
+  const ratingsToUpdate = formUp.querySelectorAll('input[type=radio], input[type=checkbox]');
   ratingsToUpdate.forEach((rating) => rating.removeAttribute('disabled'));
   }
 
@@ -183,10 +183,8 @@ formElem.addEventListener('submit', async (e) => {
   e.preventDefault();
   const title = document.querySelector('#title').value;
   const form = e.target;
-
   const description = document.querySelector('#description').value;
   const duedate = moment(document.querySelector('#duedate').value).format('YYYY-MM-DD');
-
   const rating = await getRating(form);
   noteList.addNote(title, description, rating, duedate);
 
