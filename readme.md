@@ -5,6 +5,7 @@ Features
 - Sort notes with duedate, createdate, priority
 - Filter completed notes
 - Toggle theme (dark / light)
+- Keep filter criteria in local storage
 - Conditional coloring if note is not completed and less than 3 days until due date
 - Backend with nedb
 
