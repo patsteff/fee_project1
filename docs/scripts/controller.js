@@ -36,7 +36,7 @@ function editNoteMode(e) {
                   readonly
                   
                   />
-              <p class="note-form-label embedded ${moment().diff(moment(note.duedate), 'days') >= -3 && !note.completed ? 'highlight' : 'no-light'}">${moment(note.duedate, 'YYYY-MM-DD').fromNow()}</p>
+              <p class="note-form-label embedded ${moment().diff(moment(note.duedate), 'days') >= -3 && !note.completed ? 'highlight' : ''}">${moment(note.duedate, 'YYYY-MM-DD').fromNow()}</p>
                   
               </div>
               
