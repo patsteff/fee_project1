@@ -128,7 +128,6 @@ async function getRating(form) {
     return rating;
   }
 
-// view: collect update note from DOM
 async function updateNote(e) {
   const id = e.target.dataset.index;
   const formUp = e.target.closest('form');
@@ -156,7 +155,6 @@ async function updateNote(e) {
   });
 }
 
-// register event handler in div #notes-list
  document.querySelector('#notes-list').addEventListener('click', (e) => {
   if (e.target.dataset.action === 'edit') {
     e.target.dataset.action = 'save';
@@ -177,7 +175,6 @@ async function updateNote(e) {
   }
 });
 
-// hide create note
 const createSection = document.querySelector('#create-new-note');
 function hideNoteSection() {
   createSection.hidden = !createSection.hidden;
@@ -208,7 +205,6 @@ function showCompleted(e) {
     }
   }
 
-// add event listener to sort buttons
 document.querySelector('#sort-by-prio').addEventListener('click', (e) => {
   const oldSort = localStorage.getItem('button');
   document.querySelector(`#${oldSort}`).classList.remove('addBorder');
@@ -242,9 +238,8 @@ document
   .querySelector('#finisheditems')
   .addEventListener('click', showCompleted);
 
-// event listener to button create note
 document
   .querySelector('#btn-create-note')
   .addEventListener('click', hideNoteSection);
 
-renderNotes('duedate');
+renderNotes();
