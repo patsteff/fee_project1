@@ -6,6 +6,8 @@
   --formbackgroundcolor: white;
   --standard: 15px;
   --standardfontsize: 1.1rem;
+  --highlightcolor: #c99f3a
+  ;
 }
 
 * {
@@ -48,7 +50,7 @@ body.dark-mode {
 }
 
 .highlight {
-  color: #ddbc4f;
+  color: var(--highlightcolor);
 }
 
 .btn {
@@ -274,10 +276,14 @@ input[type=radio] {
 }
 
 .rating > input[type=radio]:checked ~ label {
-  color: #ddbc4f;
+  color: var(--highlightcolor);
 }
 
 footer {
   margin: var(--standard) 0;
   color: var(--fontcolor);
+}
+
+.addBorder {
+  border: 2px solid var(--highlightcolor);
 }

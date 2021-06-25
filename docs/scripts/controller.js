@@ -1,8 +1,11 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
 import noteList from './service/note-service.js';
 
 localStorage.setItem('filter', 'duedate');
+localStorage.setItem('button', 'sort-by-due-date');
 
 const formElem = document.querySelector('#form');
 
@@ -104,7 +107,8 @@ function editNoteMode(e) {
       .join('');
   }
 
-   function renderNotes(sortby) {
+   function renderNotes() {
+    const sortby = localStorage.getItem('filter');
      noteList.getNotes(sortby).then((response) => {
       notesListElement.innerHTML = createNoteHtml(response);
      });
@@ -113,7 +117,7 @@ function editNoteMode(e) {
 function deleteNote(e) {
     const id = e.target.dataset.index;
     noteList.deleteNote(id);
-    renderNotes('duedate');
+    renderNotes();
   }
 
 async function getRating(form) {
@@ -148,7 +152,7 @@ async function updateNote(e) {
     const ratingsToUpdate = form.querySelectorAll('input[type=radio], input[type=checkbox]');
     ratingsToUpdate.forEach((rating) => rating.disabled = true);
 
-    renderNotes('duedate');
+    renderNotes();
   });
 }
 
@@ -188,7 +192,7 @@ formElem.addEventListener('submit', async (e) => {
   const rating = await getRating(form);
   noteList.addNote(title, description, rating, duedate);
 
-  renderNotes('duedate');
+  renderNotes();
 
   formElem.reset();
 
@@ -205,21 +209,33 @@ function showCompleted(e) {
   }
 
 // add event listener to sort buttons
-document.querySelector('#sort-by-prio').addEventListener('click', () => {
-  noteList.getNotes('rating');
-  renderNotes('rating');
+document.querySelector('#sort-by-prio').addEventListener('click', (e) => {
+  const oldSort = localStorage.getItem('button');
+  document.querySelector(`#${oldSort}`).classList.remove('addBorder');
+  e.target.classList.add('addBorder');
+  localStorage.setItem('filter', 'rating');
+  localStorage.setItem('button', 'sort-by-prio');
+  renderNotes();
 });
 document
   .querySelector('#sort-by-create-date')
-  .addEventListener('click', () => {
-    noteList.getNotes('createdate');
-    renderNotes('createdate');
+  .addEventListener('click', (e) => {
+    const oldSort = localStorage.getItem('button');
+    document.querySelector(`#${oldSort}`).classList.remove('addBorder');
+    e.target.classList.add('addBorder');
+    localStorage.setItem('filter', 'createdate');
+    localStorage.setItem('button', 'sort-by-create-date');
+    renderNotes();
   });
 document
   .querySelector('#sort-by-due-date')
-  .addEventListener('click', () => {
-    noteList.getNotes('duedate');
-    renderNotes('duedate');
+  .addEventListener('click', (e) => {
+    const oldSort = localStorage.getItem('button');
+    document.querySelector(`#${oldSort}`).classList.remove('addBorder');
+    e.target.classList.add('addBorder');
+    localStorage.setItem('filter', 'duedate');
+    localStorage.setItem('button', 'sort-by-due-date');
+    renderNotes();
   });
 
   document
