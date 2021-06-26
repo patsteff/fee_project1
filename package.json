@@ -1,7 +1,7 @@
 {
   "name": "cas-fee-projekt-1-starter-template",
   "version": "1.0.0",
-  "description": "Testat template",
+  "description": "starter course template",
   "main": "docs/scripts/main.js",
   "type": "module",
   "scripts": {
