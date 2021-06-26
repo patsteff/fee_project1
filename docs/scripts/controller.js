@@ -143,11 +143,17 @@ async function updateNote(e) {
     form.classList.remove('completed');
     }
 
-    const inputsToUpdate = form.querySelectorAll('.note-form-edit');
-    inputsToUpdate.forEach((input) => { input.readOnly = true; });
+    /* const inputsToUpdate = form.querySelectorAll('.note-form-edit');
+    inputsToUpdate.forEach((input) => {
+      input.setAttribute('readonly', true);
+    });
+    console.log('inputstoUpate ', inputsToUpdate);
     const ratingsToUpdate = form.querySelectorAll('input[type=radio], input[type=checkbox]');
-    ratingsToUpdate.forEach((rating) => rating.disabled = true);
-
+    console.log('ratingstoUpate ', ratingsToUpdate);
+    ratingsToUpdate.forEach((rating) => {
+      rating.setAttribute('disabled', true);
+    });
+ */
     renderNotes();
   });
 }
