@@ -1,5 +1,3 @@
-/* eslint-disable no-return-assign */
-/* eslint-disable no-param-reassign */
 /* eslint-disable no-undef */
 /* eslint-disable no-underscore-dangle */
 import noteList from './service/note-service.js';
@@ -131,16 +129,15 @@ async function getRating(form) {
 async function updateNote(e) {
   const id = e.target.dataset.index;
   const formUp = e.target.closest('form');
-  const formTitle = formUp.querySelector('.note-form-title').value;
-  const formDue = moment(formUp.querySelector('.note-form-duedate').value).format('YYYY-MM-DD');
-  const formDescription = formUp.querySelector('.note-form-textarea').value;
-  const formRating = await getRating(formUp);
-  const formCompleted = formUp.querySelector('input[type=checkbox]').checked;
+  const fTitle = formUp.querySelector('.note-form-title').value;
+  const fDue = moment(formUp.querySelector('.note-form-duedate').value).format('YYYY-MM-DD');
+  const fDescription = formUp.querySelector('.note-form-textarea').value;
+  const fRating = await getRating(formUp);
+  const fCompleted = formUp.querySelector('input[type=checkbox]').checked;
   const formArray = [];
-  formArray.push(formTitle, formDescription, formRating, formDue, formCompleted);
-  // eslint-disable-next-line max-len
-  noteList.updateNoteById(id, formTitle, formDescription, formRating, formDue, formCompleted).then(() => {
-    if (formCompleted) {
+  formArray.push(fTitle, fDescription, fRating, fDue, fCompleted);
+  noteList.updateNoteById(id, fTitle, fDescription, fRating, fDue, fCompleted).then(() => {
+    if (fCompleted) {
       form.classList.add('completed');
     } else {
     form.classList.remove('completed');

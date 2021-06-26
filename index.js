@@ -3,7 +3,7 @@ import express from 'express';
 
 import bodyParser from 'body-parser';
 
-import {notesRoutes} from './routes/notesRoutes.js';
+import notesRoutes from './routes/notesRoutes.js';
 
 // Creates an Express application using the top-level function
 const app = express();

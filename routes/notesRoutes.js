@@ -20,4 +20,5 @@ router.post('/', notesController.createNote.bind(notesController));
 router.delete('/:id/', notesController.deleteNoteById.bind(notesController));
 
 // export to use in notesController
-export const notesRoutes = router;
+const notesRoutes = router;
+export default notesRoutes;

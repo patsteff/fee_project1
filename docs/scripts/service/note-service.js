@@ -21,10 +21,8 @@ class NoteService {
       return httpService.ajax('GET', `/notes/${id}`, undefined);
     }
 
-  // eslint-disable-next-line max-len
-  async updateNoteById(id, formTitle, formDescription, formRating, formDue, formCreate, formCompleted) {
-    // eslint-disable-next-line max-len
-    const updatedNote = await new Note(formTitle, formDescription, formRating, formDue, formCreate, formCompleted);
+  async updateNoteById(id, fTitle, fDescription, fRating, fDue, fCreate, fCompleted) {
+    const updatedNote = await new Note(fTitle, fDescription, fRating, fDue, fCreate, fCompleted);
 
     return httpService.ajax('PUT', `/notes/${id}`, updatedNote);
     }
