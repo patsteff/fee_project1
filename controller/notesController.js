@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import {notesBackendStoreService} from '../services/notesBackendStoreService.js';
 
-export class notesControllerClass {
+export class NotesControllerClass {
     async getAllNotes(request, response) {
         response.json((await notesBackendStoreService.getAllNotes(request.params.sortby) || []));
     }
@@ -27,4 +27,4 @@ export class notesControllerClass {
     }
 }
 
-export const notesController = new notesControllerClass();
+export const notesController = new NotesControllerClass();
